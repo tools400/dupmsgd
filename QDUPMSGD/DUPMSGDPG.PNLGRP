@@ -1,0 +1,293 @@
+.*=====================================================================*
+.*                                                                     *
+.*  Kurzdokumentation :                                                *
+.*                                                                     *
+.*  Bereich . . . : DUPMSGD                                            *
+.*  Objekt  . . . : DUPMSGDP                                           *
+.*  Beschreibung  : Tool: DUPMSGD    (Duplicate MessageD ) Ger         *
+.*  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      *
+.*  Datum . . . . : ?                                                  *
+.*                                                                     *
+.*=====================================================================*
+.*                                                                     *
+.*  This software is free software, you can redistribute it and/or     *
+.*  modify it under the terms of the GNU General Public License (GPL)  *
+.*  as published by the Free Software Foundation.                      *
+.*                                                                     *
+.*  See GNU General Public License for details.                        *
+.*          http://www.opensource.org                                  *
+.*          http://www.opensource.org/licenses/gpl-license.html        *
+.*                                                                     *
+.*=====================================================================*
+.*  History:                                                           *
+.*                                                                     *
+.*  Datum       Name          Änderung                                 *
+.*  ----------  ------------  ---------------------------------------  *
+.*                                                                     *
+.*=====================================================================*
+.* >>PRE-COMPILER<<                                                    *
+.*                                                                     *
+.*   >>CRTCMD<< CRTPNLGRP    PNLGRP(&LI/&OB) +                         *
+.*                           SRCFILE(&SL/&SF) +                        *
+.*                           SRCMBR(&SM);                              *
+.*                                                                     *
+.*   >>COMPILE<<                                                       *
+.*   >>END-COMPILE<<                                                   *
+.*                                                                     *
+.*   >>EXECUTE<<                                                       *
+.*                                                                     *
+.* >>END-PRE-COMPILER<<                                                *
+.*=====================================================================*
+:PNLGRP.
+.*
+:HELP name='DUPMSGD/ALL'.
+:IMHELP name=DUPMSGD.
+:IMHELP name='DUPMSGD/RANGE     '.
+:IMHELP name='DUPMSGD/FROMMSGF  '.
+:IMHELP name='DUPMSGD/TOMSGID   '.
+:IMHELP name='DUPMSGD/TOMSGF    '.
+:IMHELP name='DUPMSGD/REPLACE   '.
+:EHELP.
+.*--------------------------------------------------------------------
+.* Hilfetext für den Befehl
+.*--------------------------------------------------------------------
+:HELP NAME='DUPMSGD'.
+Nachrichtenbeschr. duplizieren (DUPMSGD) - Hilfe
+:P.
+Der Befehl DUPMSGD dupliziert Nachrichtenbeschreibungen. Hierbei
+werden eine Vielzahl der vorhandenen Parameter übernommen. Leider
+können nicht alle Parameter eine Nachrichtenbeschreibung über die
+API abgerufen werden.
+:P.
+Folgende Parameter der Nachrichtenbeschreibung werden kopiert:
+:P.
+:LINES.
+- Nachrichtentext der 1. Ebene (Parameter MSG)
+- Nachrichtentext der 2. Ebene (Parameter SECLVL)
+- Bewertungscode               (Parameter SEV)
+- Nachrichtenvariablen         (Parameter FMT)
+- Alert-Angaben                (Parameter ALROPT)
+- Standardantwortwert          (parameter DFT)
+- Problem protokollieren       (Parameter LOGPRB)
+- Zeichensatz-ID               (Parameter CCSID)
+:ELINES.
+.*
+:EHELP.
+.*
+.*--------------------------------------------------------------------
+.* Hilfetext für Schlüsselwort RANGE
+.*--------------------------------------------------------------------
+:HELP name='DUPMSGD/RANGE     '.
+Bereich der Nachrichten-IDs - Hilfe
+:XH3.Bereich der Nachrichten-IDs (RANGE)
+:P.
+Gibt den Bereich der Nachrichten-IDs in der angegebenen Nachrichtendatei
+an, die verarbeitet werden. Alle Nachrichtenbeschreibungen
+in der bei :HP2.Nachrichtendatei:EHP2. (Parameter FROMMSGF)
+angebenen Nachrichtendatei können durch die Angabe *ALL bei
+diesem Parameter verarbeitet werden.
+:P.
+Ist keine Anfangsnachrichten-ID angegeben, beginnt die Verarbeitung
+mit der ersten Nachricht in der angegebenen Nachrichtendatei. Ist
+keine Endnachrichten-ID angegeben, wird der Standardwert *ONLY verwendet,
+und es wird nur die Anfangsnachrichten-ID verarbeitet.
+.*
+:IMHELP name='COM/OPTPARM'.
+.*
+:XH3.Anfangsnachrichten-ID
+:P.
+Der erste der zwei Werte in diesem Parameter (die Anfangsnachrichten-ID
+genannt) gibt die Nachrichten-ID der Nachrichtenbeschreibung an, die
+zuerst verarbeitet werden soll.
+:P.
+:PARML.
+:PT.:PK DEF.*FIRST:EPK.
+:PD.Die Beschreibung der ersten Nachricht in der bei :HP2.Nachrichtendatei:EHP2.
+(Parameter FROMMSGF) angegebenen Datei soll zuerst verarbeitet werden.
+:PT.:PV.Unterer Wert:EPV.
+:PD.Die ID (7 Zeichen) der Nachrichtenbeschreibung angeben, die zuerst
+verarbeitet werden soll.
+:EPARML.
+:P.
+:XH3.ID der letzten Nachricht
+:P.
+Der zweite der beiden Werte (Endenachrichten-ID genannt) gibt die
+Nachrichten-ID der Nachrichtenbeschreibung an, die zuletzt
+verarbeitet werden soll.
+:P.
+:PARML.
+:PT.:PK DEF.*ONLY:EPK.
+:PD.Nur die Beschreibung der Nachrichten-ID wird verarbeitet, die als
+Anfangsnachrichten-ID angegeben wurde.
+:PT.:PV.*LAST:EPV.
+:PD.Die Beschreibung der letzten Nachricht in der Datei wird zuletzt
+verarbeitet.
+:PT.:PV.Oberer Wert:EPV.
+:PD.Die ID (7 Zeichen) der Nachrichtenbeschreibung angeben, die zuletzt
+verarbeitet werden soll.
+:EPARML.
+:P.
+:XH3.Weitere Einzelwerte:
+:P.
+:PARML.
+:PT.:PV.*ALL:EPV.
+:PD.Alle Nachrichtenbeschreibungen in der angegebenen Nachrichtendatei
+werden verarbeitet. Dieser Wert kann nur im ersten Element dieses
+Parameters angegeben werden.
+:EPARML.
+.*
+:EHELP.
+.*
+.*--------------------------------------------------------------------
+.* Hilfetext für Schlüsselwort FROMMSGF
+.*--------------------------------------------------------------------
+:HELP name='DUPMSGD/FROMMSGF'.
+Von Nachrichtendatei - Hilfe
+:XH3.Von Nachrichtendatei (FROMMSGF)
+:P.
+Gibt den Namen und die Bibliothek der Nachrichtendatei an, aus der die
+Nachrichtenbeschreibungen stammen.
+.*
+:IMHELP name='COM/OPTPARM'.
+.*
+:PARML.
+:PT.:PK DEF.QCPFMSG:EPK.
+:PD.Die Nachrichtenbeschreibungen stammen aus der Systemnachrichtendatei
+QCPFMSG.
+:PT.:PV.Nachrichtendateiname:EPV.
+:PD.Den Namen der Nachrichtendatei angeben, aus der die
+Nachrichtenbeschreibungen stammen.
+:EPARML.
+:P.
+Gültige Bibliothekswerte sind:
+:P.
+:PARML.
+:PT.:PK DEF.*LIBL:EPK.
+:PD.Alle Bibliotheken in der Bibliotheksliste des Jobs werden
+durchsucht, bis die erste Übereinstimmung gefunden wird.
+:PT.:PV.*CURLIB:EPV.
+:PD.Die Nachrichtendatei wird in der aktuellen Bibliothek für den Job
+gesucht. Enthält die Bibliotheksliste keinen aktuellen
+Bibliothekseintrag, wird QGPL benutzt.
+:PT.:PV.Bibliotheksname:EPV.
+:PD.Bibliothek angeben, in der sich die Nachrichtendatei befindet.
+:EPARML.
+.*
+:EHELP.
+.*
+.*--------------------------------------------------------------------
+.* Hilfetext für Schlüsselwort TOMSGID
+.*--------------------------------------------------------------------
+:HELP name='DUPMSGD/TOMSGID'.
+Nach Nachrichten-ID - Hilfe
+:XH3.Nach Nachrichten-ID (TOMSGID)
+:P.
+Gibt die Nachrichten-ID der neuen Nachrichtenbeschreibung an.
+.*
+:IMHELP name='COM/OPTPARM'.
+.*
+:PARML.
+:PT.:PK DEF.*FROMID:EPK.
+:PD.Die neue Nachrichtenbeschreibung erhält die gleiche Nachrichten-ID
+wie die Von-Nachrichtenbeschreibung. *FROMID kann nur dann angegeben werden,
+wenn für :HP2.Nach Nachrichtendatei:EHP2. (Parameter TOMSGF) nicht *FROMMSGF
+angegeben wird.
+:PT.:PV.Name der Nachrichtendatei:EPV.
+:PD.Angeben, in welche Nachrichtendatei die Nachrichten-ID kopiert werden soll.
+:EPARML.
+.*
+:EHELP.
+.*
+.*--------------------------------------------------------------------
+.* Hilfetext für Schlüsselwort TOMSGF
+.*--------------------------------------------------------------------
+:HELP name='DUPMSGD/TOMSGF'.
+Nach Nachrichtendatei - Hilfe
+:XH3.Nach Nachrichtendatei (TOMSGF)
+:P.
+Gibt den Namen und die Bibliothek der Nachrichtendatei an, in welche die
+neue Nachrichtenbeschreibungen kopiert werden sollen.
+.*
+:IMHELP name='COM/OPTPARM'.
+.*
+:PARML.
+:PT.:PK DEF.*FROMMSGF:EPK.
+:PD.Die Nachrichtenbeschreibungen werden in die unter
+:HP2.Von Nachrichtendatei:EHP2. (Parameter FROMMSGF) angegebenen
+Nachrichtendatei kopiert.
+:PT.:PV.Nachrichtendateiname:EPV.
+:PD.Den Namen der Nachrichtendatei angeben, in welche die
+Nachrichtenbeschreibungen kopiert werden sollen.
+:EPARML.
+:P.
+Gültige Bibliothekswerte sind:
+:P.
+:PARML.
+:PT.:PK DEF.*LIBL:EPK.
+:PD.Alle Bibliotheken in der Bibliotheksliste des Jobs werden
+durchsucht, bis die erste Übereinstimmung gefunden wird.
+:PT.:PV.*CURLIB:EPV.
+:PD.Die Nachrichtendatei wird in der aktuellen Bibliothek für den Job
+gesucht. Enthält die Bibliotheksliste keinen aktuellen
+Bibliothekseintrag, wird QGPL benutzt.
+:PT.:PV.Bibliotheksname:EPV.
+:PD.Bibliothek angeben, in der sich die Nachrichtendatei befindet.
+:EPARML.
+.*
+:EHELP.
+.*
+.*--------------------------------------------------------------------
+.* Hilfetext für Schlüsselwort REPLACE
+.*--------------------------------------------------------------------
+:HELP name='DUPMSGD/REPLACE'.
+Nachrichtenbeschr. ersetzen - Hilfe
+:XH3.Nachrichtenbeschr. ersetzen (REPLACE)
+:P.
+Angeben, ob eine bestehende Nachrichtenbeschreibung ersetzt werden soll.
+.*
+:IMHELP name='COM/OPTPARM'.
+.*
+:PARML.
+:PT.:PK DEF.*NO:EPK.
+:PD.Eine bestehende Nachrichtenbeschreibung wird nicht ersetzt.
+:PT.:PV.*YES:EPV.
+:PD.Eine bestehende Nachrichtenbeschreibung wird ersetzt, wenn sie bereits
+vorhanden ist.
+:EPARML.
+.*
+:EHELP.
+.*
+.*====================================================================
+.*  Textbausteine, die an mehreren Stellen im Hilfetext
+.*  verwendet werden.
+.*====================================================================
+
+.*=====================================
+.*  Erforderlicher Parameter
+.*=====================================
+:HELP NAME='COM/REQPARM'.
+:P.
+Dieser Parameter ist erforderlich.
+:P.
+:IMHELP name='COM/VALUES'.
+:EHELP.
+
+.*=====================================
+.*  Optionaler Parameter
+.*=====================================
+:HELP NAME='COM/OPTPARM'.
+:P.
+Dieser Parameter ist optional.
+:P.
+:IMHELP name='COM/VALUES'.
+:EHELP.
+
+.*=====================================
+.*  Werteliste
+.*=====================================
+:HELP NAME='COM/VALUES'.
+:P.
+Mögliche Werte sind:
+:EHELP.
+.*
+:EPNLGRP.

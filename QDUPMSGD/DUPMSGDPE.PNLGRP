@@ -1,0 +1,297 @@
+.*=====================================================================*
+.*                                                                     *
+.*  Kurzdokumentation :                                                *
+.*                                                                     *
+.*  Bereich . . . : DUPMSGD                                            *
+.*  Objekt  . . . : DUPMSGDPE                                          *
+.*  Beschreibung  : Tool: DUPMSGD    (Duplicate MessageD ) Eng         *
+.*  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      *
+.*  Datum . . . . : 03.06.2002                                         *
+.*                                                                     *
+.*=====================================================================*
+.*                                                                     *
+.*  This software is free software, you can redistribute it and/or     *
+.*  modify it under the terms of the GNU General Public License (GPL)  *
+.*  as published by the Free Software Foundation.                      *
+.*                                                                     *
+.*  See GNU General Public License for details.                        *
+.*          http://www.opensource.org                                  *
+.*          http://www.opensource.org/licenses/gpl-license.html        *
+.*                                                                     *
+.*=====================================================================*
+.*  History:                                                           *
+.*                                                                     *
+.*  Datum       Name          Änderung                                 *
+.*  ----------  ------------  ---------------------------------------  *
+.*                                                                     *
+.*=====================================================================*
+.* >>PRE-COMPILER<<                                                    *
+.*                                                                     *
+.*   >>CRTCMD<< CRTPNLGRP    PNLGRP(&LI/&OB) +                         *
+.*                           SRCFILE(&SL/&SF) +                        *
+.*                           SRCMBR(&SM);                              *
+.*                                                                     *
+.*   >>COMPILE<<                                                       *
+.*   >>END-COMPILE<<                                                   *
+.*                                                                     *
+.*   >>EXECUTE<<                                                       *
+.*                                                                     *
+.* >>END-PRE-COMPILER<<                                                *
+.*=====================================================================*
+:PNLGRP.
+.*
+:HELP name='DUPMSGD/ALL'.
+:IMHELP name=DUPMSGD.
+:IMHELP name='DUPMSGD/RANGE     '.
+:IMHELP name='DUPMSGD/FROMMSGF  '.
+:IMHELP name='DUPMSGD/TOMSGID   '.
+:IMHELP name='DUPMSGD/TOMSGF    '.
+:IMHELP name='DUPMSGD/REPLACE   '.
+:EHELP.
+.*--------------------------------------------------------------------
+.* Hilfetext für den Befehl
+.*--------------------------------------------------------------------
+:HELP NAME='DUPMSGD'.
+Duplicate Message Description (DUPMSGD) - Help
+:P.
+The DUPMSGD command is used to duplicate a message description. The
+DUPMSGD command carries over lots of parameters of a message
+description but unfortunately it can not carry over all parameters
+due to the restriction of the API used.
+:P.
+The following parameters are carried over:
+:P.
+:LINES.
+- Message text                 (parameter MSG)
+- Second level text            (parameter SECLVL)
+- Severity                     (parameter SEV)
+- Message data fields          (parameter FMT)
+- Alert options                (parameter ALROPT)
+- Default reply value          (parameter DFT)
+- Log problem                  (parameter LOGPRB)
+- Coded character set ID       (parameter CCSID)
+:ELINES.
+.*
+:EHELP.
+.*
+.*--------------------------------------------------------------------
+.* Hilfetext für Schlüsselwort RANGE
+.*--------------------------------------------------------------------
+:HELP name='DUPMSGD/RANGE     '.
+Range of message identifiers - Help
+:XH3.Range of message identifiers (RANGE)
+:P.
+Specifies the range of message identifiers in the
+specified message file which are processed by the command. All
+message descriptions in the message file specified on the
+:HP2.Message:EHP2. file prompt (MSGF parameter) can be processed
+by specifying *ALL on this parameter.
+:P.
+If the starting message identifier is not specified, the
+message descriptions begin with the first message in the
+specified message file.  If the ending message identifier
+is not specified, the default value, *ONLY, is used, and
+only the description of the starting message identifier is
+processed.
+.*
+:IMHELP name='COM/OPTPARM'.
+.*
+:XH3.Starting Message Identifier
+:P.
+The first of the two values in this parameter, called the
+starting message identifier, specifies the message
+identifier of the first message description to be processed.
+:P.
+:PARML.
+:PT.:PK DEF.*FIRST:EPK.
+:PD.The first message in the file specified on the :HP2.Message
+file:EHP2. prompt (MSGF parameter) is the first message
+whose description is processed.
+:PT.:PV.lower-value:EPV.
+:PD.Specify the 7-character identifier of the first
+message description to be processed.
+:EPARML.
+:P.
+:XH3.Ending Message Identifier
+:P.
+The second of the two values, called the ending message
+identifier, specifies the message identifier for the last
+message description to be processed.
+:P.
+:PARML.
+:PT.:PK DEF.*ONLY:EPK.
+:PD.Only the message identifier specified as a starting
+message identifier is processed.
+:PT.:PV.*LAST:EPV.
+:PD.The last message in the file is the last message whose
+description is processed.
+:PT.:PV.upper-value:EPV.
+:PD.Specify the 7-character identifier of the last message
+description to be processed.
+:EPARML.
+:P.
+:XH3.Other Single Values:
+:P.
+:PARML.
+:PT.:PV.*ALL:EPV.
+:PD.All message descriptions in the message file specified
+are processed.  This value can only be specified in the first
+element of this parameter.
+:EPARML.
+.*
+:EHELP.
+.*
+.*--------------------------------------------------------------------
+.* Hilfetext für Schlüsselwort FROMMSGF
+.*--------------------------------------------------------------------
+:HELP name='DUPMSGD/FROMMSGF'.
+From message file - Help
+:XH3.From message file (FROMMSGF)
+:P.
+Specifies the name an library of the source message file.
+.*
+:IMHELP name='COM/OPTPARM'.
+.*
+:PARML.
+:PT.:PK DEF.QCPFMSG:EPK.
+:PD.Message descriptions are taken from the system message
+file, QCPFMSG.
+:PT.:PV.source-message-file-name:EPV.
+:PD.Specify the name of the message file from which the
+message descriptions are taken.
+:EPARML.
+:P.
+The possible library values are:
+:P.
+:PARML.
+:PT.:PK DEF.*LIBL:EPK.
+:PD.All libraries in the job's library list are searched
+until the first match is found.
+:PT.:PV.*CURLIB:EPV.
+:PD.The current library for the job is used to locate the
+message file.  If no current library entry exists in
+the library list, QGPL is used.
+:PT.:PV.library-name:EPV.
+:PD.Specify the library where the message file is located.
+:EPARML.
+.*
+:EHELP.
+.*
+.*--------------------------------------------------------------------
+.* Hilfetext für Schlüsselwort TOMSGID
+.*--------------------------------------------------------------------
+:HELP name='DUPMSGD/TOMSGID'.
+To message description - Help
+:XH3.To message description (TOMSGID)
+:P.
+Specifies the target message identifier. The source message description is
+added with that message identifier to the target message file.
+.*
+:IMHELP name='COM/OPTPARM'.
+.*
+:PARML.
+:PT.:PK DEF.*FROMID:EPK.
+:PD.The new message description gets the same identifier as the old
+message description. *FROMID can only be specified, if
+:HP2.To message file:EHP2. (parameter TOMSGF) is set to a value
+other than *FROMMSGF.
+:PT.:PV.target-message-identifier:EPV.
+:PD.Specify the message identifier that is used for the target
+message description.
+:EPARML.
+.*
+:EHELP.
+.*
+.*--------------------------------------------------------------------
+.* Hilfetext für Schlüsselwort TOMSGF
+.*--------------------------------------------------------------------
+:HELP name='DUPMSGD/TOMSGF'.
+To message file - Help
+:XH3.To message file (TOMSGF)
+:P.
+Specifies the name an library of the target message file.
+.*
+:IMHELP name='COM/OPTPARM'.
+.*
+:PARML.
+:PT.:PK DEF.*FROMMSGF:EPK.
+:PD.The target messsage file is the message file specified
+on the :HP2.From message file:EHP2. (parameter FROMMSGF) parameter.
+:PT.:PV.target-message-file-name:EPV.
+:PD.Specify the name of the message file to that the message
+descriptions are added.
+:EPARML.
+:P.
+The possible library values are:
+:P.
+:PARML.
+:PT.:PK DEF.*LIBL:EPK.
+:PD.All libraries in the job's library list are searched
+until the first match is found.
+:PT.:PV.*CURLIB:EPV.
+:PD.The current library for the job is used to locate the
+message file.  If no current library entry exists in
+the library list, QGPL is used.
+:PT.:PV.library-name:EPV.
+:PD.Specify the library where the message file is located.
+:EPARML.
+.*
+:EHELP.
+.*
+.*--------------------------------------------------------------------
+.* Hilfetext für Schlüsselwort REPLACE
+.*--------------------------------------------------------------------
+:HELP name='DUPMSGD/REPLACE'.
+Replace message description - Help
+:XH3.Replace message description (REPLACE)
+:P.
+Specifies whether an existing message description is allowed to be
+replaced or not.
+.*
+:IMHELP name='COM/OPTPARM'.
+.*
+:PARML.
+:PT.:PK DEF.*NO:EPK.
+:PD.An existing message description is not replaced. An error message
+is issued by the command instead.
+:PT.:PV.*YES:EPV.
+:PD.An exisiting message description is replaced  by the message
+description duplicated.
+:EPARML.
+.*
+:EHELP.
+.*
+.*====================================================================
+.*  Textbausteine, die an mehreren Stellen im Hilfetext
+.*  verwendet werden.
+.*====================================================================
+
+.*=====================================
+.*  Erforderlicher Parameter
+.*=====================================
+:HELP NAME='COM/REQPARM'.
+:P.
+This is a required parameter.
+:P.
+:IMHELP name='COM/VALUES'.
+:EHELP.
+
+.*=====================================
+.*  Optionaler Parameter
+.*=====================================
+:HELP NAME='COM/OPTPARM'.
+:P.
+This is an optional parameter.
+:P.
+:IMHELP name='COM/VALUES'.
+:EHELP.
+
+.*=====================================
+.*  Werteliste
+.*=====================================
+:HELP NAME='COM/VALUES'.
+:P.
+The possible values are:
+:EHELP.
+.*
+:EPNLGRP.

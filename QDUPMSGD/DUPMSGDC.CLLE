@@ -1,0 +1,331 @@
+/* =================================================================== */
+/*                                                                     */
+/*  Kurzdokumentation :                                                */
+/*                                                                     */
+/*  Bereich . . . : DUPMSGD                                            */
+/*  Objekt  . . . : DUPMSGDC                                           */
+/*  Beschreibung  : Tool: DUPMSGD    (Duplicate MessageD ) CPP         */
+/*  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      */
+/*  Datum . . . . : ?                                                  */
+/*                                                                     */
+/* =================================================================== */
+/*                                                                     */
+/*  This software is free software, you can redistribute it and/or     */
+/*  modify it under the terms of the GNU General Public License (GPL)  */
+/*  as published by the Free Software Foundation.                      */
+/*                                                                     */
+/*  See GNU General Public License for details.                        */
+/*          http://www.opensource.org                                  */
+/*          http://www.opensource.org/licenses/gpl-license.html        */
+/*                                                                     */
+/* =================================================================== */
+/*  History:                                                           */
+/*                                                                     */
+/*  Datum       Name          Änderung                                 */
+/*  ----------  ------------  ---------------------------------------  */
+/*                                                                     */
+/* =================================================================== */
+/* >>PRE-COMPILER<<                                                    */
+/*   >>CRTCMD<< CRTBNDCL     PGM(&LI/&OB) +                            */
+/*                           SRCFILE(&SL/&SF) SRCMBR(&SM);             */
+/*   >>IMPORTANT<<                                                     */
+/*     >>PARM<< DBGVIEW(*LIST);                                        */
+/*     >>PARM<< DFTACTGRP(*NO);                                        */
+/*     >>PARM<< ACTGRP(*NEW);                                          */
+/*     >>PARM<< OPTION(*EVENTF);                                       */
+/*   >>END-IMPORTANT<<                                                 */
+/*   >>EXECUTE<<                                                       */
+/* >>END-PRE-COMPILER<<                                                */
+/* =================================================================== */
+             PGM        PARM(&RFROMID    +
+                             &QFROMFILE  +
+                             &TOID       +
+                             &QTOFILE    +
+                             &REPLACE    +
+                             &I_MSGF     )
+
+/*  Parameter  */
+             /*  Input      */
+             DCL        VAR(&RFROMID     ) TYPE(*CHAR) LEN( 40  )
+             DCL        VAR(&QFROMFILE   ) TYPE(*CHAR) LEN( 20  )
+             DCL        VAR(&TOID        ) TYPE(*CHAR) LEN(  7  )
+             DCL        VAR(&QTOFILE     ) TYPE(*CHAR) LEN( 20  )
+             DCL        VAR(&REPLACE     ) TYPE(*CHAR) LEN(  1  )
+             DCL        VAR(&I_MSGF      ) TYPE(*CHAR) LEN( 10  )
+
+/* interne Felder       */
+             DCL        VAR(&FROMIDLOW   ) TYPE(*CHAR) LEN(  7  )
+             DCL        VAR(&FROMIDHIGH  ) TYPE(*CHAR) LEN(  7  )
+             DCL        VAR(&FROMFILE    ) TYPE(*CHAR) LEN( 10  )
+             DCL        VAR(&FROMLIB     ) TYPE(*CHAR) LEN( 10  )
+             DCL        VAR(&TOFILE      ) TYPE(*CHAR) LEN( 10  )
+             DCL        VAR(&TOLIB       ) TYPE(*CHAR) LEN( 10  )
+             DCL        VAR(&TOID_WRK    ) TYPE(*CHAR) LEN(  7  )
+             DCL        VAR(&CMD         ) TYPE(*CHAR) LEN(2048 )
+             DCL        VAR(&CMDLEN      ) TYPE(*DEC ) LEN(15 5 ) +
+                                           VALUE(2048)
+
+             DCL        VAR(&MSGID       ) TYPE(*CHAR) LEN(  7  )
+             DCL        VAR(&RETRIEVEOP  ) TYPE(*CHAR) LEN(  7  )
+             DCL        VAR(&ERRID       ) TYPE(*CHAR) LEN(  7  )
+             DCL        VAR(&ERRDT       ) TYPE(*CHAR) LEN( 80  )
+
+/* Fehlerbehandlung     */
+             DCL        VAR(&ERROR)      TYPE(*LGL) +
+                          VALUE('0')
+             DCL        VAR(&TRUE)       TYPE(*LGL) +
+                          VALUE('1')
+             DCL        VAR(&FALSE)      TYPE(*LGL) +
+                          VALUE('0')
+             DCL        VAR(&ERRMSGKEY)  TYPE(*CHAR) LEN(4)
+
+             DCL        VAR(&ERRMSGTYP)  TYPE(*CHAR) LEN(10) +
+                          VALUE('*DIAG')
+             DCL        VAR(&ERRNBRTYP)  TYPE(*CHAR) LEN(4) +
+                          VALUE(X'00000001')
+             DCL        VAR(&ERRPGMMSGQ) TYPE(*CHAR) LEN(10) +
+                          VALUE('*')
+             DCL        VAR(&ERRSTKCTR)  TYPE(*CHAR) LEN(4) +
+                          VALUE(X'00000001')
+             DCL        VAR(&ERRCODE  )  TYPE(*CHAR) LEN(4) +
+                          VALUE(X'00000000')
+
+/* Sende alle Fehler zur Error Handling Routine */
+             MONMSG     MSGID(CPF0000) EXEC(GOTO CMDLBL(ERROR))
+
+             CHGVAR     VAR(&ERROR    ) VALUE(&FALSE)
+
+ /* -------------------------------------------------------------- */
+ /*  Los geht's                                                    */
+ /* -------------------------------------------------------------- */
+
+/* ---------------------------- */
+/* Ermitteln der VON und BIS    */
+/* MSG-ID                       */
+/* ---------------------------- */
+             CHGVAR     VAR(&FROMIDLOW ) VALUE(%SST(&RFROMID  3 7))
+             CHGVAR     VAR(&FROMIDHIGH) VALUE(%SST(&RFROMID 10 7))
+
+/* ---------------------------- */
+/* MSGF zerlegen in Lib         */
+/* und File                     */
+/* ---------------------------- */
+             CHGVAR     VAR(&FROMLIB   ) VALUE(%SST(&QFROMFILE 11 10))
+             CHGVAR     VAR(&FROMFILE  ) VALUE(%SST(&QFROMFILE  1 10))
+             CHGVAR     VAR(&TOLIB     ) VALUE(%SST(&QTOFILE   11 10))
+             CHGVAR     VAR(&TOFILE    ) VALUE(%SST(&QTOFILE    1 10))
+
+/* ---------------------------- */
+/* Wenn VON-ID  =  *ALL         */
+/* dann VON-ID  =  *FIRST       */
+/* und  BIS-ID  =  *LAST        */
+/* ---------------------------- */
+               IF         COND(&FROMIDLOW *EQ '*ALL') THEN(DO)
+                 CHGVAR     VAR(&FROMIDLOW ) VALUE('*FIRST')
+                 CHGVAR     VAR(&FROMIDHIGH) VALUE('*LAST')
+               ENDDO
+
+/* ---------------------------- */
+/* Prüfen der Sonderwerte       */
+/* ---------------------------- */
+             IF         COND(&FROMIDHIGH *NE '*ONLY'     +
+                        *AND &TOID       *NE '*FROMID')  THEN(DO)
+               SNDPGMMSG  MSGID(USR0001) MSGF(&I_MSGF) +
+                          TOPGMQ(*PRV (*PGMBDY)) +
+                          MSGTYPE(*ESCAPE)
+               GOTO       CMDLBL(ERROR)
+             ENDDO
+
+             IF         COND(&TOID   *EQ '*FROMID'    +
+                        *AND &TOFILE *EQ '*FROMMSGF') THEN(DO)
+               SNDPGMMSG  MSGID(USR0002) MSGF(&I_MSGF) +
+                          TOPGMQ(*PRV (*PGMBDY)) +
+                          MSGTYPE(*ESCAPE)
+               GOTO       CMDLBL(ERROR)
+             ENDDO
+
+/* ---------------------------- */
+/* Ersetzen der Sonderwerte     */
+/* ---------------------------- */
+
+/* ... Ersetzen *FIRST      */
+/*     durch Msg-ID         */
+             IF         COND(&FROMIDLOW *EQ '*FIRST') THEN(DO)
+               CHGVAR     VAR(&MSGID     ) VALUE('       ')
+               CHGVAR     VAR(&RETRIEVEOP) VALUE('*FIRST ')
+               CALL       PGM(DUPMSGDR2) PARM(&FROMLIB    +
+                                              &FROMFILE   +
+                                              &MSGID      +
+                                              &RETRIEVEOP +
+                                              &FROMIDLOW  +
+                                              &ERRID      +
+                                              &ERRDT      )
+             ENDDO
+
+/* ... Ersetzen "von-ID"    */
+/*     durch gültige Msg-ID */
+             IF         COND(&FROMIDLOW *NE '       ') THEN(DO)
+               RTVMSG     MSGID(&FROMIDLOW) MSGF(&FROMLIB/&FROMFILE)
+               MONMSG     MSGID(CPF2419) EXEC(DO)
+                 CHGVAR     VAR(&MSGID     ) VALUE(&FROMIDLOW)
+                 CHGVAR     VAR(&RETRIEVEOP) VALUE('*NEXT  ')
+                 CALL       PGM(DUPMSGDR2) PARM(&FROMLIB    +
+                                                &FROMFILE   +
+                                                &MSGID      +
+                                                &RETRIEVEOP +
+                                                &FROMIDLOW  +
+                                                &ERRID      +
+                                                &ERRDT      )
+               ENDDO
+             ENDDO
+
+/* ... Ersetzen *ONLY       */
+/*     durch Msg-ID         */
+             IF         COND(&FROMIDHIGH *EQ '*ONLY') THEN(DO)
+               CHGVAR     VAR(&FROMIDHIGH) VALUE(&FROMIDLOW)
+             ENDDO
+
+/* ... Ersetzen *LAST       */
+/*     durch Maximalwert    */
+             IF         COND(&FROMIDHIGH *EQ '*LAST') THEN(DO)
+               CHGVAR     VAR(&FROMIDHIGH) VALUE('ZZZFFFF')
+             ENDDO
+
+/* ... Ersetzen *FROMMSGF   */
+             IF         COND(&TOFILE *EQ '*FROMMSGF') THEN(DO)
+               CHGVAR     VAR(&TOFILE) VALUE(&FROMFILE)
+               CHGVAR     VAR(&TOLIB ) VALUE(&FROMLIB )
+             ENDDO
+
+/* ---------------------------- */
+/* prüfen, Msg Datei vorhanden  */
+/* ---------------------------- */
+             CHKOBJ     OBJ(&FROMLIB/&FROMFILE) OBJTYPE(*MSGF)
+             CHKOBJ     OBJ(&TOLIB/&TOFILE    ) OBJTYPE(*MSGF)
+
+/* ---------------------------- */
+/* Lib durch qual. Namen        */
+/* ersetzen                     */
+/* ---------------------------- */
+             RTVOBJD    OBJ(&FROMLIB/&FROMFILE) OBJTYPE(*MSGF) +
+                          RTNLIB(&FROMLIB)
+             RTVOBJD    OBJ(&TOLIB/&TOFILE) OBJTYPE(*MSGF) +
+                          RTNLIB(&TOLIB)
+
+/* ---------------------------- */
+/* Schleifenbeginn.             */
+/* ---------------------------- */
+LOOP:
+
+/* ... prüfen Schleifenende */
+               IF         COND(&FROMIDLOW *NE ' ') THEN(DO)
+                 IF         COND(&FROMIDLOW *GT &FROMIDHIGH) THEN(DO)
+                   CHGVAR     VAR(&FROMIDLOW) VALUE(' ')
+                 ENDDO
+               ENDDO
+
+               IF         COND(&FROMIDLOW *EQ ' ') THEN(DO)
+                 GOTO ENDE
+               ENDDO
+
+               IF         COND(&TOID *EQ '*FROMID') THEN(DO)
+                 CHGVAR     VAR(&TOID_WRK) VALUE(&FROMIDLOW)
+               ENDDO
+               ELSE       CMD(DO)
+                 CHGVAR     VAR(&TOID_WRK) VALUE(&TOID     )
+               ENDDO
+
+/* ... aufrufen             */
+/*     Generierungsfunktion */
+               CALL       PGM(DUPMSGDR1) PARM(&FROMLIB   +
+                                              &FROMFILE  +
+                                              &FROMIDLOW +
+                                              &TOLIB     +
+                                              &TOFILE    +
+                                              &TOID_WRK  +
+                                              &CMD       +
+                                              &ERRID     +
+                                              &ERRDT     )
+
+/* ... prüfen auf Fehler    */
+               IF         COND(&ERRID    *NE ' '     ) THEN(DO)
+                 SNDPGMMSG  MSGID(&ERRID) MSGF(QCPFMSG) MSGDTA(&ERRDT) +
+                            TOPGMQ(*PRV (*PGMBDY)) +
+                            MSGTYPE(*ESCAPE)
+               ENDDO
+               ELSE       CMD(DO)
+/* ... eintragen neue MsgD  */
+                 IF         COND(&REPLACE *EQ 'Y') THEN(DO)
+                   RMVMSGD    MSGID(&TOID_WRK) MSGF(&TOLIB/&TOFILE)
+                   MONMSG     MSGID(CPF2419)    /* Msg-ID not found */
+                 ENDDO
+                 CALL       PGM(QCMDEXC) PARM(&CMD     +
+                                              &CMDLEN  )
+                 MONMSG     MSGID(CPF2412) EXEC(DO)
+                   SNDPGMMSG  MSGID(USR0003) MSGF(*LIBL/&I_MSGF) +
+                              MSGDTA(&TOFILE *CAT +
+                                     &TOLIB  *CAT +
+                                     &TOID_WRK    ) +
+                              TOPGMQ(*PRV (*PGMBDY)) +
+                              MSGTYPE(*INFO)
+                   GOTO       CMDLBL(DUPERR)
+                 ENDDO
+
+/* ... Fertigmeldung!       */
+                   SNDPGMMSG  MSGID(USR0004) MSGF(*LIBL/&I_MSGF) +
+                              MSGDTA(&TOFILE *CAT +
+                                     &TOLIB  *CAT +
+                                     &TOID_WRK    ) +
+                            TOPGMQ(*PRV (*PGMBDY)) +
+                            MSGTYPE(*INFO)
+ DUPERR:
+               ENDDO
+
+/* ... nächste MsgID        */
+               CHGVAR     VAR(&MSGID     ) VALUE(&FROMIDLOW)
+               CHGVAR     VAR(&RETRIEVEOP) VALUE('*NEXT  ')
+               CALL       PGM(DUPMSGDR2) PARM(&FROMLIB    +
+                                              &FROMFILE   +
+                                              &MSGID      +
+                                              &RETRIEVEOP +
+                                              &FROMIDLOW  +
+                                              &ERRID      +
+                                              &ERRDT      )
+
+             GOTO       CMDLBL(LOOP)
+
+ /* -------------------------------------------------------------- */
+ /*  Programm beenden                                              */
+ /* -------------------------------------------------------------- */
+
+ENDE:
+             RCLRSC     LVL(*)
+
+/* -------------------------------------------------------------- */
+/*    Fehler aufgetreten ?                                        */
+/* -------------------------------------------------------------- */
+
+             IF         COND(&ERROR) THEN(DO)
+               /* Sende letzte *ESCAPE nochmals   */
+               CALL       PGM(QMHRSNEM) PARM(&ERRMSGKEY &ERRCODE)
+             ENDDO
+
+             RETURN
+
+/* ---------------- */
+/* Nachrichten      */
+/* weiterreichen    */
+/* ---------------- */
+
+ ERROR:
+             IF         COND(&ERROR) THEN(GOTO CMDLBL(ENDE))
+             ELSE       CHGVAR     VAR(&ERROR) VALUE(&TRUE)
+
+/* Verschiebe alle *DIAG Nachrichten zur             */
+/* vorangegangenen Programmwarteschlange             */
+             CALL       PGM(QMHMOVPM) PARM(&ERRMSGKEY &ERRMSGTYP +
+                          &ERRNBRTYP &ERRPGMMSGQ &ERRSTKCTR &ERRCODE)
+
+             GOTO       CMDLBL(ENDE)
+
+             ENDPGM

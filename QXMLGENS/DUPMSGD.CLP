@@ -43,6 +43,11 @@
                           XTOSRCF(QDUPMSGD  ) XOBJTYPE(*MODULE) +
                           XGENCRT(*NO ) XPARAM(*BLANK)
 
+             XMLGENMBR  XMBR(DUPMSGD   ) XMBRATR(MAKPGM) +
+                          XFROMSRCF(QDUPMSGD  ) XFROMSRCL(TOOLS400) +
+                          XTOSRCF(QDUPMSGD  ) XOBJTYPE(*MODULE) +
+                          XGENCRT(*NO ) XPARAM(*BLANK)
+
              XMLGENMBR  XMBR(DUPMSGDC  ) XMBRATR(CLLE  ) +
                           XFROMSRCF(QDUPMSGD  ) XFROMSRCL(TOOLS400) +
                           XTOSRCF(QDUPMSGD  ) XOBJTYPE(*PGM   ) +

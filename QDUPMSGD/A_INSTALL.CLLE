@@ -60,13 +60,16 @@
              DLTCMD     CMD(&TOLIB/DUPMSGD)
              MONMSG     MSGID(CPF2105)
 
-             DLTPGM     PGM(&TOLIB/DUPMSGDC)
+             DLTPGM     PGM(&TOLIB/DUPMSGD)
              MONMSG     MSGID(CPF2105)
 
-             DLTPGM     PGM(&TOLIB/DUPMSGDR1)
+             DLTMOD     MODULE(&TOLIB/DUPMSGDC)
              MONMSG     MSGID(CPF2105)
 
-             DLTPGM     PGM(&TOLIB/DUPMSGDR2)
+             DLTMOD     MODULE(&TOLIB/DUPMSGDR1)
+             MONMSG     MSGID(CPF2105)
+
+             DLTMOD     MODULE(&TOLIB/DUPMSGDR2)
              MONMSG     MSGID(CPF2105)
 
              DLTPNLGRP  PNLGRP(&TOLIB/DUPMSGD)
@@ -105,28 +108,38 @@
              DLTPGM     PGM(QTEMP/&CRTMSGF)
 
      /* -------------------------------- */
-     /*  Create programs                 */
+     /*  Create modules                  */
      /* -------------------------------- */
-             CRTBNDCL   PGM(&TOLIB/DUPMSGDC ) +
-                          SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(*PGM) +
+             CRTCLMOD   MODULE(&TOLIB/DUPMSGDC ) +
+                          SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(*MODULE) +
                           DBGVIEW(*LIST) +
-                          DFTACTGRP(*NO) ACTGRP(*NEW) +
                           TGTRLS(&TGTRLS)
              DLTSPLF    FILE(DUPMSGDC ) JOB(*) SPLNBR(*LAST)
              MONMSG     MSGID(CPF0000)
 
-             CRTBNDRPG  PGM(&TOLIB/DUPMSGDR1) +
-                          SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(*PGM) +
+             CRTRPGMOD  MODULE(&TOLIB/DUPMSGDR1) +
+                          SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(*MODULE) +
                           DBGVIEW(*LIST) TRUNCNBR(*NO) +
-                          DFTACTGRP(*NO) ACTGRP(*CALLER) +
                           TGTRLS(&TGTRLS)
              DLTSPLF    FILE(DUPMSGDR1) JOB(*) SPLNBR(*LAST)
              MONMSG     MSGID(CPF0000)
 
-             CRTBNDRPG  PGM(&TOLIB/DUPMSGDR2) +
-                          SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(*PGM) +
+             CRTRPGMOD  MODULE(&TOLIB/DUPMSGDR2) +
+                          SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(*MODULE) +
                           DBGVIEW(*LIST) TRUNCNBR(*NO) +
-                          DFTACTGRP(*NO) ACTGRP(*CALLER) +
+                          TGTRLS(&TGTRLS)
+             DLTSPLF    FILE(DUPMSGDR2) JOB(*) SPLNBR(*LAST)
+             MONMSG     MSGID(CPF0000)
+
+     /* -------------------------------- */
+     /*  Create programs                 */
+     /* -------------------------------- */
+             CRTPGM       PGM(&TOLIB/DUPMSGD) +
+                          MODULE(&TOLIB/DUPMSGDC   +
+                                 &TOLIB/DUPMSGDR1  +
+                                 &TOLIB/DUPMSGDR2) +
+                          ACTGRP(*NEW) +
+                          DETAIL(*BASIC) +
                           TGTRLS(&TGTRLS)
              DLTSPLF    FILE(DUPMSGDR2) JOB(*) SPLNBR(*LAST)
              MONMSG     MSGID(CPF0000)
@@ -144,16 +157,18 @@
      /* -------------------------------- */
              CRTCMD     CMD(&TOLIB/DUPMSGD   )                   +
                           SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(&CMD) +
-                          PGM(&TOLIB/DUPMSGDC)                   +
+                          PGM(&TOLIB/DUPMSGD)                    +
                           HLPSCHIDX(*NONE)                       +
-                          HLPPNLGRP(*LIBL/DUPMSGD   )            +
-                          HLPID(DUPMSGD   )                      +
-                          PRDLIB(&TOLIB)
+                          HLPPNLGRP(&TOLIB/DUPMSGD   )           +
+                          HLPID(DUPMSGD   )
              DLTSPLF    FILE(&CMD) JOB(*) SPLNBR(*LAST)
              MONMSG     MSGID(CPF0000)
 
      /* -------------------------------- */
      /*  Delete obsolete objects         */
      /* -------------------------------- */
+             DLTMOD     MODULE(&TOLIB/DUPMSGDC)
+             DLTMOD     MODULE(&TOLIB/DUPMSGDR1)
+             DLTMOD     MODULE(&TOLIB/DUPMSGDR2)
 
              ENDPGM

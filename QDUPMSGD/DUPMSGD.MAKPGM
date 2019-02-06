@@ -1,0 +1,38 @@
+/* =================================================================== */
+/*                                                                     */
+/*  Kurzdokumentation :                                                */
+/*                                                                     */
+/*  Bereich . . . : DUPMSGD                                            */
+/*  Objekt  . . . : DUPMSGD                                            */
+/*  Beschreibung  : Tool: DUPMSGD    (Duplicate MessageD ) CPP         */
+/*  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      */
+/*  Datum . . . . : 06.02.2019                                         */
+/*                                                                     */
+/* =================================================================== */
+/*                                                                     */
+/*  This software is free software, you can redistribute it and/or     */
+/*  modify it under the terms of the GNU General Public License (GPL)  */
+/*  as published by the Free Software Foundation.                      */
+/*                                                                     */
+/*  See GNU General Public License for details.                        */
+/*          http://www.opensource.org                                  */
+/*          http://www.opensource.org/licenses/gpl-license.html        */
+/*                                                                     */
+/* =================================================================== */
+/*  History:                                                           */
+/*                                                                     */
+/*  Datum       Name          Änderung                                 */
+/*  ----------  ------------  ---------------------------------------  */
+/*                                                                     */
+/* =================================================================== */
+/* >>PRE-COMPILER<<                                                    */
+/*   >>CRTCMD<<  CRTPGM PGM(&LI/&OB);                                  */
+/*   >>IMPORTANT<<                                                     */
+/*     >>PARM<<  MODULE(&LI/DUPMSGDC &LI/DUPMSGDR1 &LI/DUPMSGDR2);     */
+/*     >>PARM<<  ACTGRP(*NEW);                                         */
+/*     >>PARM<<  DETAIL(*BASIC);                                       */
+/*   >>END-IMPORTANT<<                                                 */
+/*   >>EXECUTE<<                                                       */
+/* >>END-PRE-COMPILER<<                                                */
+/* =================================================================== */
+

@@ -26,20 +26,14 @@
 /*                                                                     */
 /* =================================================================== */
 /* >>PRE-COMPILER<<                                                    */
-/*                                                                     */
-/*   >>CRTCMD<< CRTCMD       CMD(&LI/&OB) +                            */
-/*                           SRCFILE(&SL/&SF) +                        */
-/*                           SRCMBR(&SM);                              */
-/*                                                                     */
-/*   >>COMPILE<<                                                       */
-/*     >>PARM<< PGM(*LIBL/DUPMSGDC);                                   */
-/*     >>PARM<< HLPPNLGRP(*LIBL/DUPMSGDPE);                            */
+/*   >>CRTCMD<< CRTCMD       CMD(&LI/DUPMSGD) +                        */
+/*                           SRCFILE(&SL/&SF) SRCMBR(&SM);             */
+/*   >>IMPORTANT<<                                                     */
+/*     >>PARM<< PGM(&LI/DUPMSGD);                                      */
+/*     >>PARM<< HLPPNLGRP(&LI/DUPMSGD);                                */
 /*     >>PARM<< HLPID(DUPMSGD);                                        */
-/*     >>PARM<< PRDLIB(&LI);                                           */
-/*   >>END-COMPILE<<                                                   */
-/*                                                                     */
+/*   >>END-IMPORTANT<<                                                 */
 /*   >>EXECUTE<<                                                       */
-/*                                                                     */
 /* >>END-PRE-COMPILER<<                                                */
 /* =================================================================== */
 
@@ -76,10 +70,6 @@
                         SPCVAL((*YES Y)                        +
                                (*NO  N))                       +
                         PROMPT('Replace message description')
-
-             PARM       KWD(MSGFLNG   ) TYPE(*CHAR)        +
-                          LEN(10)                          +
-                          CONSTANT(DUPMSGDE )
 
 QMSGR:       ELEM       TYPE(*NAME) +
                         LEN(7) +

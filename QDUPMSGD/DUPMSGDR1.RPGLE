@@ -35,13 +35,11 @@
        //                                                                     *
        // =================================================================== *
        // >>PRE-COMPILER<<                                                    *
-       //   >>CRTCMD<< CRTBNDRPG    PGM(&LI/&OB) +                            *
+       //   >>CRTCMD<< CRTRPGMOD    MODULE(&LI/&OB) +                         *
        //                           SRCFILE(&SL/&SF) SRCMBR(&SM);             *
        //   >>IMPORTANT<<                                                     *
        //     >>PARM<< DBGVIEW(*LIST);                                        *
        //     >>PARM<< TRUNCNBR(*NO);                                         *
-       //     >>PARM<< DFTACTGRP(*NO);                                        *
-       //     >>PARM<< ACTGRP(*NEW);                                          *
        //     >>PARM<< OPTION(*EVENTF);                                       *
        //   >>END-IMPORTANT<<                                                 *
        //   >>EXECUTE<<                                                       *
@@ -86,8 +84,8 @@
      D dateISO         s               d   inz
      D dateJob         s             10a   inz
 
-     D tempText        ds          1024
-     D text            ds          1024
+     D tempText        ds         16384
+     D text            ds         16384
 
        //  Program information data structure
      D sds            sds                  qualified
@@ -106,7 +104,7 @@
      D  i_toLib                      10a   const
      D  i_toMsgF                     10a   const
      D  i_toMsgId                     7a   const
-     D  o_cmd                      2048a
+     D  o_cmd                     16384a
      D  o_errId                       7a
      D  o_errData                    80a
 
@@ -118,7 +116,7 @@
      D  i_toLib                      10a   const
      D  i_toMsgF                     10a   const
      D  i_toMsgId                     7a   const
-     D  o_cmd                      2048a
+     D  o_cmd                     16384a
      D  o_errId                       7a
      D  o_errData                    80a
       /free
@@ -136,12 +134,18 @@
                         : i_frmMsgId: qMsgF: '': 0: '*NO': '*NO': errCode);
 
        if (%error());
-          o_errId = 'CPF9897';
-          o_errData = 'QMHRTVM returned an error';
+          o_errId = 'USR0006'; // Unexpected error in QMHRTVM API. Check job log.
+          o_errData = '*N';
        else;
           if (errCode.bytAvl > *zero);
-             o_errId = errCode.excID;
-             o_errData = errCode.excDta;
+             qMsgF.name = 'QCPFMSG';
+             qMsgF.lib = '*LIBL';
+             QMHRTVM(rtvm0400: %size(rtvm0400): 'RTVM0400'
+                     : errCode.excID: qMsgF
+                     : errCode.excDta: %len(%trimr(errCode.excDta))
+                     : '*YES': '*NO': errCode);
+             o_errId = 'USR0007'; // QMHRTVM API ended with error: &1
+             o_errData = %subst(rtvm0400: rtvm0400.ofsMsg+1: rtvm0400.lenMsgR);
           else;
              exsr prdCmd;
           endif;
@@ -178,6 +182,10 @@
              text = %subst(rtvm0400: rtvm0400.OFSMSG + 1: rtvm0400.lenMsgR);
 
              exsr rplhpn;
+             if (o_errId <> '');
+                leavesr;
+             endif;
+
              text = '''' + %trimr(text) + '''';
 
              o_cmd = %trimr(o_cmd) + text;
@@ -191,6 +199,10 @@
 
              text = %subst(rtvm0400: rtvm0400.ofsMsgHlp+1: rtvm0400.lenMsgHlpR);
              exsr rplhpn;
+             if (o_errId <> '');
+                leavesr;
+             endif;
+
              text = '''' + %trimr(text) + '''';
 
              o_cmd = %trimr(o_cmd) + text;
@@ -344,23 +356,25 @@
              if (i > 0);
 
                 i = i + 1;
-                if (i <= 1024);
+                if (i <= %size(tempText));
                    tempText = %subst(text: i);
                 else;
                    //  "ASSERT"
-                   sds.msgId = 'CPF9897';
-                   sds.msgDta = 'i > 1024';
-                   exsr *pssr;
+                   o_errId = 'USR0008'; // Buffer overflow for field: &1
+                   o_errData = 'tempText (' +
+                               %char(i) + ' > ' + %char(%size(tempText)) + ')';
+                   leavesr;
                 endif;
 
                 %subst(text: i: 1) = '''';
-                if (i <= 1024);
+                if (i <= %size(text));
                    text = %subst(text: 1: i) + tempText;
                 else;
                    //  "ASSERT"
-                   sds.msgId = 'CPF9897';
-                   sds.msgDta = 'i > 1024';
-                   exsr *pssr;
+                   o_errId = 'USR0008'; // Buffer overflow for field: &1
+                   o_errData = 'text (' +
+                               %char(i) + ' > ' + %char(%size(text)) + ')';
+                   leavesr;
                 endif;
 
                 i = i + 1;
@@ -400,9 +414,8 @@
              substVar.type <> '*CHAR'  and
              substVar.type <> '*DEC'  and
              substVar.type <> '*HEX');
-             o_errId = 'CPF9897';
-             o_errData = 'MSG-ID: ' + rtvm0400.MSGID + 'Unerlaubter Typ: ' +
-                         substVar.type;
+             o_errId = 'USR0005';
+             o_errData = substVar.type;
           endif;
 
        endsr;

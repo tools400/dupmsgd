@@ -26,12 +26,10 @@
 /*                                                                     */
 /* =================================================================== */
 /* >>PRE-COMPILER<<                                                    */
-/*   >>CRTCMD<< CRTBNDCL     PGM(&LI/&OB) +                            */
+/*   >>CRTCMD<< CRTCLMOD     MODULE(&LI/&OB) +                         */
 /*                           SRCFILE(&SL/&SF) SRCMBR(&SM);             */
 /*   >>IMPORTANT<<                                                     */
 /*     >>PARM<< DBGVIEW(*LIST);                                        */
-/*     >>PARM<< DFTACTGRP(*NO);                                        */
-/*     >>PARM<< ACTGRP(*NEW);                                          */
 /*     >>PARM<< OPTION(*EVENTF);                                       */
 /*   >>END-IMPORTANT<<                                                 */
 /*   >>EXECUTE<<                                                       */
@@ -41,8 +39,7 @@
                              &QFROMFILE  +
                              &TOID       +
                              &QTOFILE    +
-                             &REPLACE    +
-                             &I_MSGF     )
+                             &REPLACE)
 
 /*  Parameter  */
              /*  Input      */
@@ -51,7 +48,6 @@
              DCL        VAR(&TOID        ) TYPE(*CHAR) LEN(  7  )
              DCL        VAR(&QTOFILE     ) TYPE(*CHAR) LEN( 20  )
              DCL        VAR(&REPLACE     ) TYPE(*CHAR) LEN(  1  )
-             DCL        VAR(&I_MSGF      ) TYPE(*CHAR) LEN( 10  )
 
 /* interne Felder       */
              DCL        VAR(&FROMIDLOW   ) TYPE(*CHAR) LEN(  7  )
@@ -61,9 +57,9 @@
              DCL        VAR(&TOFILE      ) TYPE(*CHAR) LEN( 10  )
              DCL        VAR(&TOLIB       ) TYPE(*CHAR) LEN( 10  )
              DCL        VAR(&TOID_WRK    ) TYPE(*CHAR) LEN(  7  )
-             DCL        VAR(&CMD         ) TYPE(*CHAR) LEN(2048 )
-             DCL        VAR(&CMDLEN      ) TYPE(*DEC ) LEN(15 5 ) +
-                                           VALUE(2048)
+             DCL        VAR(&CMD         ) TYPE(*CHAR) LEN(16384)
+             DCL        VAR(&CMDLEN      ) TYPE(*DEC ) LEN(15 5 ) VALUE(2048)
+             DCL        VAR(&MSGF        ) TYPE(*CHAR) LEN( 10  ) VALUE('DUPMSGD')
 
              DCL        VAR(&MSGID       ) TYPE(*CHAR) LEN(  7  )
              DCL        VAR(&RETRIEVEOP  ) TYPE(*CHAR) LEN(  7  )
@@ -130,7 +126,7 @@
 /* ---------------------------- */
              IF         COND(&FROMIDHIGH *NE '*ONLY'     +
                         *AND &TOID       *NE '*FROMID')  THEN(DO)
-               SNDPGMMSG  MSGID(USR0001) MSGF(&I_MSGF) +
+               SNDPGMMSG  MSGID(USR0001) MSGF(&MSGF) +
                           TOPGMQ(*PRV (*PGMBDY)) +
                           MSGTYPE(*ESCAPE)
                GOTO       CMDLBL(ERROR)
@@ -138,7 +134,7 @@
 
              IF         COND(&TOID   *EQ '*FROMID'    +
                         *AND &TOFILE *EQ '*FROMMSGF') THEN(DO)
-               SNDPGMMSG  MSGID(USR0002) MSGF(&I_MSGF) +
+               SNDPGMMSG  MSGID(USR0002) MSGF(&MSGF) +
                           TOPGMQ(*PRV (*PGMBDY)) +
                           MSGTYPE(*ESCAPE)
                GOTO       CMDLBL(ERROR)
@@ -153,7 +149,7 @@
              IF         COND(&FROMIDLOW *EQ '*FIRST') THEN(DO)
                CHGVAR     VAR(&MSGID     ) VALUE('       ')
                CHGVAR     VAR(&RETRIEVEOP) VALUE('*FIRST ')
-               CALL       PGM(DUPMSGDR2) PARM(&FROMLIB    +
+               CALLPRC    PRC(DUPMSGDR2) PARM(&FROMLIB    +
                                               &FROMFILE   +
                                               &MSGID      +
                                               &RETRIEVEOP +
@@ -169,7 +165,7 @@
                MONMSG     MSGID(CPF2419) EXEC(DO)
                  CHGVAR     VAR(&MSGID     ) VALUE(&FROMIDLOW)
                  CHGVAR     VAR(&RETRIEVEOP) VALUE('*NEXT  ')
-                 CALL       PGM(DUPMSGDR2) PARM(&FROMLIB    +
+                 CALLPRC    PRC(DUPMSGDR2) PARM(&FROMLIB    +
                                                 &FROMFILE   +
                                                 &MSGID      +
                                                 &RETRIEVEOP +
@@ -177,6 +173,13 @@
                                                 &ERRID      +
                                                 &ERRDT      )
                ENDDO
+             ENDDO
+
+/* ... prüfen auf Fehler    */
+             IF         COND(&ERRID *NE ' ') THEN(DO)
+               SNDPGMMSG  MSGID(&ERRID) MSGF(&MSGF) MSGDTA(&ERRDT) +
+                          TOPGMQ(*PRV (*PGMBDY)) +
+                          MSGTYPE(*ESCAPE)
              ENDDO
 
 /* ... Ersetzen *ONLY       */
@@ -237,7 +240,7 @@ LOOP:
 
 /* ... aufrufen             */
 /*     Generierungsfunktion */
-               CALL       PGM(DUPMSGDR1) PARM(&FROMLIB   +
+               CALLPRC    PRC(DUPMSGDR1) PARM(&FROMLIB   +
                                               &FROMFILE  +
                                               &FROMIDLOW +
                                               &TOLIB     +
@@ -248,8 +251,8 @@ LOOP:
                                               &ERRDT     )
 
 /* ... prüfen auf Fehler    */
-               IF         COND(&ERRID    *NE ' '     ) THEN(DO)
-                 SNDPGMMSG  MSGID(&ERRID) MSGF(QCPFMSG) MSGDTA(&ERRDT) +
+               IF         COND(&ERRID *NE ' ') THEN(DO)
+                 SNDPGMMSG  MSGID(&ERRID) MSGF(&MSGF) MSGDTA(&ERRDT) +
                             TOPGMQ(*PRV (*PGMBDY)) +
                             MSGTYPE(*ESCAPE)
                ENDDO
@@ -262,7 +265,7 @@ LOOP:
                  CALL       PGM(QCMDEXC) PARM(&CMD     +
                                               &CMDLEN  )
                  MONMSG     MSGID(CPF2412) EXEC(DO)
-                   SNDPGMMSG  MSGID(USR0003) MSGF(*LIBL/&I_MSGF) +
+                   SNDPGMMSG  MSGID(USR0003) MSGF(*LIBL/DUPMSGD) +
                               MSGDTA(&TOFILE *CAT +
                                      &TOLIB  *CAT +
                                      &TOID_WRK    ) +
@@ -272,7 +275,7 @@ LOOP:
                  ENDDO
 
 /* ... Fertigmeldung!       */
-                   SNDPGMMSG  MSGID(USR0004) MSGF(*LIBL/&I_MSGF) +
+                   SNDPGMMSG  MSGID(USR0004) MSGF(&MSGF) +
                               MSGDTA(&TOFILE *CAT +
                                      &TOLIB  *CAT +
                                      &TOID_WRK    ) +
@@ -284,13 +287,20 @@ LOOP:
 /* ... nächste MsgID        */
                CHGVAR     VAR(&MSGID     ) VALUE(&FROMIDLOW)
                CHGVAR     VAR(&RETRIEVEOP) VALUE('*NEXT  ')
-               CALL       PGM(DUPMSGDR2) PARM(&FROMLIB    +
+               CALLPRC    PRC(DUPMSGDR2) PARM(&FROMLIB    +
                                               &FROMFILE   +
                                               &MSGID      +
                                               &RETRIEVEOP +
                                               &FROMIDLOW  +
                                               &ERRID      +
                                               &ERRDT      )
+
+/* ... prüfen auf Fehler    */
+               IF         COND(&ERRID *NE ' ') THEN(DO)
+                 SNDPGMMSG  MSGID(&ERRID) MSGF(&MSGF) MSGDTA(&ERRDT) +
+                            TOPGMQ(*PRV (*PGMBDY)) +
+                            MSGTYPE(*ESCAPE)
+               ENDDO
 
              GOTO       CMDLBL(LOOP)
 

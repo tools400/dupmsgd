@@ -31,13 +31,11 @@
        //                                                                     *
        // =================================================================== *
        // >>PRE-COMPILER<<                                                    *
-       //   >>CRTCMD<< CRTBNDRPG    PGM(&LI/&OB) +                            *
+       //   >>CRTCMD<< CRTRPGMOD    MODULE(&LI/&OB) +                         *
        //                           SRCFILE(&SL/&SF) SRCMBR(&SM);             *
        //   >>IMPORTANT<<                                                     *
        //     >>PARM<< DBGVIEW(*LIST);                                        *
        //     >>PARM<< TRUNCNBR(*NO);                                         *
-       //     >>PARM<< DFTACTGRP(*NO);                                        *
-       //     >>PARM<< ACTGRP(*NEW);                                          *
        //     >>PARM<< OPTION(*EVENTF);                                       *
        //   >>END-IMPORTANT<<                                                 *
        //   >>EXECUTE<<                                                       *
@@ -50,7 +48,7 @@
       /copy qdupmsgd,qmhrtvm
       /copy qdupmsgd,fderrcode
 
-     D rtvm0300        DS                  likeds(rtvm0300_t) inz
+     D rtvm0400        DS                  likeds(rtvm0400_t) inz
 
      D qMsgF           DS                  qualified
      D name                          10a   inz
@@ -89,19 +87,25 @@
        clear errCode;
        errCode.bytPrv = %size(errCode);
 
-       Callp(e) QMHRTVM(rtvm0300: %size(rtvm0300): 'RTVM0300': i_msgId
+       Callp(e) QMHRTVM(rtvm0400: %size(rtvm0400): 'RTVM0400': i_msgId
                         : qMsgF: '': 0: '*NO': '*NO': errCode
                         : i_rtvOpt: 0: 0);
 
        if (%error());
-          o_errId = 'CPF9897';
-          o_errData = 'QMHRTVM returned an error';
+          o_errId = 'USR0006'; // Unexpected error in QMHRTVM API. Check job log.
+          o_errData = '*N';
        else;
-          if (errCode.bytAvl > 0);
-             o_errId = errCode.excId;
-             o_errData = errCode.excDta;
+          if (errCode.bytAvl > *zero);
+             qMsgF.name = 'QCPFMSG';
+             qMsgF.lib = '*LIBL';
+             QMHRTVM(rtvm0400: %size(rtvm0400): 'RTVM0400'
+                     : errCode.excID: qMsgF
+                     : errCode.excDta: %len(%trimr(errCode.excDta))
+                     : '*YES': '*NO': errCode);
+             o_errId = 'USR0007'; // QMHRTVM API ended with error: &1
+             o_errData = %subst(rtvm0400: rtvm0400.ofsMsg+1: rtvm0400.lenMsgR);
           else;
-             o_rtnMsgId = rtvm0300.msgId;
+             o_rtnMsgId = rtvm0400.msgId;
           endif;
        endif;
 

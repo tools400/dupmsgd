@@ -26,16 +26,10 @@
 .*                                                                     *
 .*=====================================================================*
 .* >>PRE-COMPILER<<                                                    *
-.*                                                                     *
-.*   >>CRTCMD<< CRTPNLGRP    PNLGRP(&LI/&OB) +                         *
+.*   >>CRTCMD<< CRTPNLGRP    PNLGRP(&LI/DUPMSGD) +                     *
 .*                           SRCFILE(&SL/&SF) +                        *
 .*                           SRCMBR(&SM);                              *
-.*                                                                     *
-.*   >>COMPILE<<                                                       *
-.*   >>END-COMPILE<<                                                   *
-.*                                                                     *
 .*   >>EXECUTE<<                                                       *
-.*                                                                     *
 .* >>END-PRE-COMPILER<<                                                *
 .*=====================================================================*
 :PNLGRP.

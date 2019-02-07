@@ -51,7 +51,7 @@
       appblddate CDATA #REQUIRED
      >
      ]>
-<upload  appname="DUPMSGD"  appauthor="Thomas Raddatz"  appblddate=" 2/06/2019">
+<upload  appname="DUPMSGD"  appauthor="Thomas Raddatz"  appblddate=" 2/07/2019">
 <install_instructions><![CDATA[
      *----------------------------------------------------------------      ------
      *  1. Upload entire XML to your AS/400 to a source file 112 long, into any mbr
@@ -1348,11 +1348,8 @@ srccssid=  "00273">
              CHGVAR     VAR(&SRCLIB) VALUE(&TOLIB   )
 
      /* -------------------------------- */
-     /*  Delete old objects              */
+     /*  Delete old objects (prior v1.2) */
      /* -------------------------------- */
-             DLTCMD     CMD(&TOLIB/DUPMSGD)
-             MONMSG     MSGID(CPF2105)
-
              DLTPGM     PGM(&TOLIB/DUPMSGDC)
              MONMSG     MSGID(CPF2105)
 
@@ -1360,6 +1357,36 @@ srccssid=  "00273">
              MONMSG     MSGID(CPF2105)
 
              DLTPGM     PGM(&TOLIB/DUPMSGDR2)
+             MONMSG     MSGID(CPF2105)
+
+             DLTMSGF    MSGF(&TOLIB/DUPMSGD)
+             MONMSG     MSGID(CPF2105)
+
+             DLTMSGF    MSGF(&TOLIB/DUPMSGDE)
+             MONMSG     MSGID(CPF2105)
+
+             DLTPNLGRP  PNLGRP(&TOLIB/DUPMSGDP)
+             MONMSG     MSGID(CPF2105)
+
+             DLTPNLGRP  PNLGRP(&TOLIB/DUPMSGDPE)
+             MONMSG     MSGID(CPF2105)
+
+     /* -------------------------------- */
+     /*  Delete old objects              */
+     /* -------------------------------- */
+             DLTCMD     CMD(&TOLIB/DUPMSGD)
+             MONMSG     MSGID(CPF2105)
+
+             DLTPGM     PGM(&TOLIB/DUPMSGD)
+             MONMSG     MSGID(CPF2105)
+
+             DLTMOD     MODULE(&TOLIB/DUPMSGDC)
+             MONMSG     MSGID(CPF2105)
+
+             DLTMOD     MODULE(&TOLIB/DUPMSGDR1)
+             MONMSG     MSGID(CPF2105)
+
+             DLTMOD     MODULE(&TOLIB/DUPMSGDR2)
              MONMSG     MSGID(CPF2105)
 
              DLTPNLGRP  PNLGRP(&TOLIB/DUPMSGD)
@@ -1398,28 +1425,38 @@ srccssid=  "00273">
              DLTPGM     PGM(QTEMP/&CRTMSGF)
 
      /* -------------------------------- */
-     /*  Create programs                 */
+     /*  Create modules                  */
      /* -------------------------------- */
-             CRTBNDCL   PGM(&TOLIB/DUPMSGDC ) +
-                          SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(*PGM) +
+             CRTCLMOD   MODULE(&TOLIB/DUPMSGDC ) +
+                          SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(*MODULE) +
                           DBGVIEW(*LIST) +
-                          DFTACTGRP(*NO) ACTGRP(*NEW) +
                           TGTRLS(&TGTRLS)
              DLTSPLF    FILE(DUPMSGDC ) JOB(*) SPLNBR(*LAST)
              MONMSG     MSGID(CPF0000)
 
-             CRTBNDRPG  PGM(&TOLIB/DUPMSGDR1) +
-                          SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(*PGM) +
+             CRTRPGMOD  MODULE(&TOLIB/DUPMSGDR1) +
+                          SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(*MODULE) +
                           DBGVIEW(*LIST) TRUNCNBR(*NO) +
-                          DFTACTGRP(*NO) ACTGRP(*CALLER) +
                           TGTRLS(&TGTRLS)
              DLTSPLF    FILE(DUPMSGDR1) JOB(*) SPLNBR(*LAST)
              MONMSG     MSGID(CPF0000)
 
-             CRTBNDRPG  PGM(&TOLIB/DUPMSGDR2) +
-                          SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(*PGM) +
+             CRTRPGMOD  MODULE(&TOLIB/DUPMSGDR2) +
+                          SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(*MODULE) +
                           DBGVIEW(*LIST) TRUNCNBR(*NO) +
-                          DFTACTGRP(*NO) ACTGRP(*CALLER) +
+                          TGTRLS(&TGTRLS)
+             DLTSPLF    FILE(DUPMSGDR2) JOB(*) SPLNBR(*LAST)
+             MONMSG     MSGID(CPF0000)
+
+     /* -------------------------------- */
+     /*  Create programs                 */
+     /* -------------------------------- */
+             CRTPGM       PGM(&TOLIB/DUPMSGD) +
+                          MODULE(&TOLIB/DUPMSGDC   +
+                                 &TOLIB/DUPMSGDR1  +
+                                 &TOLIB/DUPMSGDR2) +
+                          ACTGRP(*NEW) +
+                          DETAIL(*BASIC) +
                           TGTRLS(&TGTRLS)
              DLTSPLF    FILE(DUPMSGDR2) JOB(*) SPLNBR(*LAST)
              MONMSG     MSGID(CPF0000)
@@ -1437,17 +1474,19 @@ srccssid=  "00273">
      /* -------------------------------- */
              CRTCMD     CMD(&TOLIB/DUPMSGD   )                   +
                           SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(&CMD) +
-                          PGM(&TOLIB/DUPMSGDC)                   +
+                          PGM(&TOLIB/DUPMSGD)                    +
                           HLPSCHIDX(*NONE)                       +
-                          HLPPNLGRP(*LIBL/DUPMSGD   )            +
-                          HLPID(DUPMSGD   )                      +
-                          PRDLIB(&TOLIB)
+                          HLPPNLGRP(&TOLIB/DUPMSGD   )           +
+                          HLPID(DUPMSGD   )
              DLTSPLF    FILE(&CMD) JOB(*) SPLNBR(*LAST)
              MONMSG     MSGID(CPF0000)
 
      /* -------------------------------- */
      /*  Delete obsolete objects         */
      /* -------------------------------- */
+             DLTMOD     MODULE(&TOLIB/DUPMSGDC)
+             DLTMOD     MODULE(&TOLIB/DUPMSGDR1)
+             DLTMOD     MODULE(&TOLIB/DUPMSGDR2)
 
              ENDPGM
 ]]>  </copysrc>
@@ -1552,6 +1591,92 @@ srccssid=  "00273">
                     (*CHAR  10) +
                     (*CHAR  10) +
                     (*CHAR   7) +
+                ) +
+                ALROPT(*NO) +
+                CCSID( 65535) +
+                /*  -EOF-  */
+
+     /* ----------------------------------------------------------- */
+     /*   Cmd-ADDMSGD für Message-ID :   USR0005                    */
+     /* Data type not supported: &1                                 */
+     /* ----------------------------------------------------------- */
+
+             RMVMSGD MSGID(USR0005) MSGF(&LI/DUPMSGD )
+             MONMSG  MSGID(CPF2419)     /* MsgID nicht gefunden */
+
+             ADDMSGD +
+                MSGID(USR0005) +
+                MSGF(&LI/DUPMSGD ) +
+                MSG(+
+'Data type not supported: &1'                                         +
+                ) +
+                SEV(00) +
+                FMT( +
+                    (*CHAR  10) +
+                ) +
+                ALROPT(*NO) +
+                CCSID( 65535) +
+                /*  -EOF-  */
+
+     /* ----------------------------------------------------------- */
+     /*   Cmd-ADDMSGD für Message-ID :   USR0006                    */
+     /* Unexpected error in QMHRTVM API. Check job log.             */
+     /* ----------------------------------------------------------- */
+
+             RMVMSGD MSGID(USR0006) MSGF(&LI/DUPMSGD )
+             MONMSG  MSGID(CPF2419)     /* MsgID nicht gefunden */
+
+             ADDMSGD +
+                MSGID(USR0006) +
+                MSGF(&LI/DUPMSGD ) +
+                MSG(+
+'Unexpected error in QMHRTVM API. Check job log.'                     +
+                ) +
+                SEV(00) +
+     /*   Keine Ersatzvariablen definiert!                          */ +
+                ALROPT(*NO) +
+                CCSID( 65535) +
+                /*  -EOF-  */
+
+     /* ----------------------------------------------------------- */
+     /*   Cmd-ADDMSGD für Message-ID :   USR0007                    */
+     /* QMHRTVM API ended with error: &1                            */
+     /* ----------------------------------------------------------- */
+
+             RMVMSGD MSGID(USR0007) MSGF(&LI/DUPMSGD )
+             MONMSG  MSGID(CPF2419)     /* MsgID nicht gefunden */
+
+             ADDMSGD +
+                MSGID(USR0007) +
+                MSGF(&LI/DUPMSGD ) +
+                MSG(+
+'QMHRTVM API ended with error: &1'                                    +
+                ) +
+                SEV(00) +
+                FMT( +
+                    (*CHAR  200) +
+                ) +
+                ALROPT(*NO) +
+                CCSID( 65535) +
+                /*  -EOF-  */
+
+     /* ----------------------------------------------------------- */
+     /*   Cmd-ADDMSGD für Message-ID :   USR0008                    */
+     /* Buffer overflow for field: &1                               */
+     /* ----------------------------------------------------------- */
+
+             RMVMSGD MSGID(USR0008) MSGF(&LI/DUPMSGD )
+             MONMSG  MSGID(CPF2419)     /* MsgID nicht gefunden */
+
+             ADDMSGD +
+                MSGID(USR0008) +
+                MSGF(&LI/DUPMSGD ) +
+                MSG(+
+'Buffer overflow for field: &1'                                       +
+                ) +
+                SEV(00) +
+                FMT( +
+                    (*CHAR  32) +
                 ) +
                 ALROPT(*NO) +
                 CCSID( 65535) +
@@ -1665,6 +1790,92 @@ srccssid=  "00273">
                 CCSID( 65535) +
                 /*  -EOF-  */
 
+     /* ----------------------------------------------------------- */
+     /*   Cmd-ADDMSGD für Message-ID :   USR0005                    */
+     /* Nicht unterstützter Datentyp: &1                            */
+     /* ----------------------------------------------------------- */
+
+             RMVMSGD MSGID(USR0005) MSGF(&LI/DUPMSGD )
+             MONMSG  MSGID(CPF2419)     /* MsgID nicht gefunden */
+
+             ADDMSGD +
+                MSGID(USR0005) +
+                MSGF(&LI/DUPMSGD ) +
+                MSG(+
+'Nicht unterstützter Datentyp: &1'                                    +
+                ) +
+                SEV(00) +
+                FMT( +
+                    (*CHAR  10) +
+                ) +
+                ALROPT(*NO) +
+                CCSID( 65535) +
+                /*  -EOF-  */
+
+     /* ----------------------------------------------------------- */
+     /*   Cmd-ADDMSGD für Message-ID :   USR0006                    */
+     /* Unerwarterer Fehler in der QMHRTVM API. Jobprotokoll prüfen.*/
+     /* ----------------------------------------------------------- */
+
+             RMVMSGD MSGID(USR0006) MSGF(&LI/DUPMSGD )
+             MONMSG  MSGID(CPF2419)     /* MsgID nicht gefunden */
+
+             ADDMSGD +
+                MSGID(USR0006) +
+                MSGF(&LI/DUPMSGD ) +
+                MSG(+
+'Unerwarterer Fehler in der QMHRTVM API.job log. Jobprotokoll prüfen.'+
+                ) +
+                SEV(00) +
+     /*   Keine Ersatzvariablen definiert!                          */ +
+                ALROPT(*NO) +
+                CCSID( 65535) +
+                /*  -EOF-  */
+
+     /* ----------------------------------------------------------- */
+     /*   Cmd-ADDMSGD für Message-ID :   USR0007                    */
+     /* QMHRTVM API fehlerhaft beendet: &1                          */
+     /* ----------------------------------------------------------- */
+
+             RMVMSGD MSGID(USR0007) MSGF(&LI/DUPMSGD )
+             MONMSG  MSGID(CPF2419)     /* MsgID nicht gefunden */
+
+             ADDMSGD +
+                MSGID(USR0007) +
+                MSGF(&LI/DUPMSGD ) +
+                MSG(+
+'QMHRTVM API fehlerhaft beender: &1'                                  +
+                ) +
+                SEV(00) +
+                FMT( +
+                    (*CHAR  200) +
+                ) +
+                ALROPT(*NO) +
+                CCSID( 65535) +
+                /*  -EOF-  */
+
+     /* ----------------------------------------------------------- */
+     /*   Cmd-ADDMSGD für Message-ID :   USR0008                    */
+     /* Feldüberlauf für Feld: &1                                   */
+     /* ----------------------------------------------------------- */
+
+             RMVMSGD MSGID(USR0008) MSGF(&LI/DUPMSGD )
+             MONMSG  MSGID(CPF2419)     /* MsgID nicht gefunden */
+
+             ADDMSGD +
+                MSGID(USR0008) +
+                MSGF(&LI/DUPMSGD ) +
+                MSG(+
+'Feldüberlauf für Feld: &1'                                           +
+                ) +
+                SEV(00) +
+                FMT( +
+                    (*CHAR  32) +
+                ) +
+                ALROPT(*NO) +
+                CCSID( 65535) +
+                /*  -EOF-  */
+
              ENDPGM
 ]]>  </copysrc>
 </mbr>
@@ -1729,6 +1940,59 @@ srccssid=  "00273">
 ]]>  </copysrc>
 </mbr>
 <sendmsg  sendmsgid="CPF9897" sendmsgtype = "*STATUS   "><![CDATA[
+Installing DUPMSGD  type MAKPGM - in progress.
+]]>  </sendmsg>
+<!-- START OF MEMBER  -->
+<mbr
+mbrname =  "DUPMSGD   "
+mbrtype =  "MAKPGM    "
+mbrtext =  "Tool: DUPMSGD (Duplicate Message Description) CPP "
+srcfile =  "QDUPMSGD  "
+srclib  =  "selected  "
+srclen  =  "00112"
+srccssid=  "00273">
+<copysrc><![CDATA[
+/* =================================================================== */
+/*                                                                     */
+/*  Kurzdokumentation :                                                */
+/*                                                                     */
+/*  Bereich . . . : DUPMSGD                                            */
+/*  Objekt  . . . : DUPMSGD                                            */
+/*  Beschreibung  : Tool: DUPMSGD    (Duplicate MessageD ) CPP         */
+/*  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      */
+/*  Datum . . . . : 06.02.2019                                         */
+/*                                                                     */
+/* =================================================================== */
+/*                                                                     */
+/*  This software is free software, you can redistribute it and/or     */
+/*  modify it under the terms of the GNU General Public License (GPL)  */
+/*  as published by the Free Software Foundation.                      */
+/*                                                                     */
+/*  See GNU General Public License for details.                        */
+/*          http://www.opensource.org                                  */
+/*          http://www.opensource.org/licenses/gpl-license.html        */
+/*                                                                     */
+/* =================================================================== */
+/*  History:                                                           */
+/*                                                                     */
+/*  Datum       Name          Änderung                                 */
+/*  ----------  ------------  ---------------------------------------  */
+/*                                                                     */
+/* =================================================================== */
+/* >>PRE-COMPILER<<                                                    */
+/*   >>CRTCMD<<  CRTPGM PGM(&LI/&OB);                                  */
+/*   >>IMPORTANT<<                                                     */
+/*     >>PARM<<  MODULE(&LI/DUPMSGDC &LI/DUPMSGDR1 &LI/DUPMSGDR2);     */
+/*     >>PARM<<  ACTGRP(*NEW);                                         */
+/*     >>PARM<<  DETAIL(*BASIC);                                       */
+/*   >>END-IMPORTANT<<                                                 */
+/*   >>EXECUTE<<                                                       */
+/* >>END-PRE-COMPILER<<                                                */
+/* =================================================================== */
+
+]]>  </copysrc>
+</mbr>
+<sendmsg  sendmsgid="CPF9897" sendmsgtype = "*STATUS   "><![CDATA[
 Installing DUPMSGDC  type CLLE - in progress.
 ]]>  </sendmsg>
 <!-- START OF MEMBER  -->
@@ -1769,12 +2033,10 @@ srccssid=  "00273">
 /*                                                                     */
 /* =================================================================== */
 /* >>PRE-COMPILER<<                                                    */
-/*   >>CRTCMD<< CRTBNDCL     PGM(&LI/&OB) +                            */
+/*   >>CRTCMD<< CRTCLMOD     MODULE(&LI/&OB) +                         */
 /*                           SRCFILE(&SL/&SF) SRCMBR(&SM);             */
 /*   >>IMPORTANT<<                                                     */
 /*     >>PARM<< DBGVIEW(*LIST);                                        */
-/*     >>PARM<< DFTACTGRP(*NO);                                        */
-/*     >>PARM<< ACTGRP(*NEW);                                          */
 /*     >>PARM<< OPTION(*EVENTF);                                       */
 /*   >>END-IMPORTANT<<                                                 */
 /*   >>EXECUTE<<                                                       */
@@ -1784,8 +2046,7 @@ srccssid=  "00273">
                              &QFROMFILE  +
                              &TOID       +
                              &QTOFILE    +
-                             &REPLACE    +
-                             &I_MSGF     )
+                             &REPLACE)
 
 /*  Parameter  */
              /*  Input      */
@@ -1794,7 +2055,6 @@ srccssid=  "00273">
              DCL        VAR(&TOID        ) TYPE(*CHAR) LEN(  7  )
              DCL        VAR(&QTOFILE     ) TYPE(*CHAR) LEN( 20  )
              DCL        VAR(&REPLACE     ) TYPE(*CHAR) LEN(  1  )
-             DCL        VAR(&I_MSGF      ) TYPE(*CHAR) LEN( 10  )
 
 /* interne Felder       */
              DCL        VAR(&FROMIDLOW   ) TYPE(*CHAR) LEN(  7  )
@@ -1804,9 +2064,9 @@ srccssid=  "00273">
              DCL        VAR(&TOFILE      ) TYPE(*CHAR) LEN( 10  )
              DCL        VAR(&TOLIB       ) TYPE(*CHAR) LEN( 10  )
              DCL        VAR(&TOID_WRK    ) TYPE(*CHAR) LEN(  7  )
-             DCL        VAR(&CMD         ) TYPE(*CHAR) LEN(2048 )
-             DCL        VAR(&CMDLEN      ) TYPE(*DEC ) LEN(15 5 ) +
-                                           VALUE(2048)
+             DCL        VAR(&CMD         ) TYPE(*CHAR) LEN(16384)
+             DCL        VAR(&CMDLEN      ) TYPE(*DEC ) LEN(15 5 ) VALUE(2048)
+             DCL        VAR(&MSGF        ) TYPE(*CHAR) LEN( 10  ) VALUE('DUPMSGD')
 
              DCL        VAR(&MSGID       ) TYPE(*CHAR) LEN(  7  )
              DCL        VAR(&RETRIEVEOP  ) TYPE(*CHAR) LEN(  7  )
@@ -1873,7 +2133,7 @@ srccssid=  "00273">
 /* ---------------------------- */
              IF         COND(&FROMIDHIGH *NE '*ONLY'     +
                         *AND &TOID       *NE '*FROMID')  THEN(DO)
-               SNDPGMMSG  MSGID(USR0001) MSGF(&I_MSGF) +
+               SNDPGMMSG  MSGID(USR0001) MSGF(&MSGF) +
                           TOPGMQ(*PRV (*PGMBDY)) +
                           MSGTYPE(*ESCAPE)
                GOTO       CMDLBL(ERROR)
@@ -1881,7 +2141,7 @@ srccssid=  "00273">
 
              IF         COND(&TOID   *EQ '*FROMID'    +
                         *AND &TOFILE *EQ '*FROMMSGF') THEN(DO)
-               SNDPGMMSG  MSGID(USR0002) MSGF(&I_MSGF) +
+               SNDPGMMSG  MSGID(USR0002) MSGF(&MSGF) +
                           TOPGMQ(*PRV (*PGMBDY)) +
                           MSGTYPE(*ESCAPE)
                GOTO       CMDLBL(ERROR)
@@ -1896,7 +2156,7 @@ srccssid=  "00273">
              IF         COND(&FROMIDLOW *EQ '*FIRST') THEN(DO)
                CHGVAR     VAR(&MSGID     ) VALUE('       ')
                CHGVAR     VAR(&RETRIEVEOP) VALUE('*FIRST ')
-               CALL       PGM(DUPMSGDR2) PARM(&FROMLIB    +
+               CALLPRC    PRC(DUPMSGDR2) PARM(&FROMLIB    +
                                               &FROMFILE   +
                                               &MSGID      +
                                               &RETRIEVEOP +
@@ -1912,7 +2172,7 @@ srccssid=  "00273">
                MONMSG     MSGID(CPF2419) EXEC(DO)
                  CHGVAR     VAR(&MSGID     ) VALUE(&FROMIDLOW)
                  CHGVAR     VAR(&RETRIEVEOP) VALUE('*NEXT  ')
-                 CALL       PGM(DUPMSGDR2) PARM(&FROMLIB    +
+                 CALLPRC    PRC(DUPMSGDR2) PARM(&FROMLIB    +
                                                 &FROMFILE   +
                                                 &MSGID      +
                                                 &RETRIEVEOP +
@@ -1920,6 +2180,13 @@ srccssid=  "00273">
                                                 &ERRID      +
                                                 &ERRDT      )
                ENDDO
+             ENDDO
+
+/* ... prüfen auf Fehler    */
+             IF         COND(&ERRID *NE ' ') THEN(DO)
+               SNDPGMMSG  MSGID(&ERRID) MSGF(&MSGF) MSGDTA(&ERRDT) +
+                          TOPGMQ(*PRV (*PGMBDY)) +
+                          MSGTYPE(*ESCAPE)
              ENDDO
 
 /* ... Ersetzen *ONLY       */
@@ -1980,7 +2247,7 @@ LOOP:
 
 /* ... aufrufen             */
 /*     Generierungsfunktion */
-               CALL       PGM(DUPMSGDR1) PARM(&FROMLIB   +
+               CALLPRC    PRC(DUPMSGDR1) PARM(&FROMLIB   +
                                               &FROMFILE  +
                                               &FROMIDLOW +
                                               &TOLIB     +
@@ -1991,8 +2258,8 @@ LOOP:
                                               &ERRDT     )
 
 /* ... prüfen auf Fehler    */
-               IF         COND(&ERRID    *NE ' '     ) THEN(DO)
-                 SNDPGMMSG  MSGID(&ERRID) MSGF(QCPFMSG) MSGDTA(&ERRDT) +
+               IF         COND(&ERRID *NE ' ') THEN(DO)
+                 SNDPGMMSG  MSGID(&ERRID) MSGF(&MSGF) MSGDTA(&ERRDT) +
                             TOPGMQ(*PRV (*PGMBDY)) +
                             MSGTYPE(*ESCAPE)
                ENDDO
@@ -2005,7 +2272,7 @@ LOOP:
                  CALL       PGM(QCMDEXC) PARM(&CMD     +
                                               &CMDLEN  )
                  MONMSG     MSGID(CPF2412) EXEC(DO)
-                   SNDPGMMSG  MSGID(USR0003) MSGF(*LIBL/&I_MSGF) +
+                   SNDPGMMSG  MSGID(USR0003) MSGF(*LIBL/DUPMSGD) +
                               MSGDTA(&TOFILE *CAT +
                                      &TOLIB  *CAT +
                                      &TOID_WRK    ) +
@@ -2015,7 +2282,7 @@ LOOP:
                  ENDDO
 
 /* ... Fertigmeldung!       */
-                   SNDPGMMSG  MSGID(USR0004) MSGF(*LIBL/&I_MSGF) +
+                   SNDPGMMSG  MSGID(USR0004) MSGF(&MSGF) +
                               MSGDTA(&TOFILE *CAT +
                                      &TOLIB  *CAT +
                                      &TOID_WRK    ) +
@@ -2027,13 +2294,20 @@ LOOP:
 /* ... nächste MsgID        */
                CHGVAR     VAR(&MSGID     ) VALUE(&FROMIDLOW)
                CHGVAR     VAR(&RETRIEVEOP) VALUE('*NEXT  ')
-               CALL       PGM(DUPMSGDR2) PARM(&FROMLIB    +
+               CALLPRC    PRC(DUPMSGDR2) PARM(&FROMLIB    +
                                               &FROMFILE   +
                                               &MSGID      +
                                               &RETRIEVEOP +
                                               &FROMIDLOW  +
                                               &ERRID      +
                                               &ERRDT      )
+
+/* ... prüfen auf Fehler    */
+               IF         COND(&ERRID *NE ' ') THEN(DO)
+                 SNDPGMMSG  MSGID(&ERRID) MSGF(&MSGF) MSGDTA(&ERRDT) +
+                            TOPGMQ(*PRV (*PGMBDY)) +
+                            MSGTYPE(*ESCAPE)
+               ENDDO
 
              GOTO       CMDLBL(LOOP)
 
@@ -2115,20 +2389,14 @@ srccssid=  "00273">
 /*                                                                     */
 /* =================================================================== */
 /* >>PRE-COMPILER<<                                                    */
-/*                                                                     */
-/*   >>CRTCMD<< CRTCMD       CMD(&LI/&OB) +                            */
-/*                           SRCFILE(&SL/&SF) +                        */
-/*                           SRCMBR(&SM);                              */
-/*                                                                     */
-/*   >>COMPILE<<                                                       */
-/*     >>PARM<< PGM(*LIBL/DUPMSGDC);                                   */
-/*     >>PARM<< HLPPNLGRP(*LIBL/DUPMSGDPE);                            */
+/*   >>CRTCMD<< CRTCMD       CMD(&LI/DUPMSGD) +                        */
+/*                           SRCFILE(&SL/&SF) SRCMBR(&SM);             */
+/*   >>IMPORTANT<<                                                     */
+/*     >>PARM<< PGM(&LI/DUPMSGD);                                      */
+/*     >>PARM<< HLPPNLGRP(&LI/DUPMSGD);                                */
 /*     >>PARM<< HLPID(DUPMSGD);                                        */
-/*     >>PARM<< PRDLIB(&LI);                                           */
-/*   >>END-COMPILE<<                                                   */
-/*                                                                     */
+/*   >>END-IMPORTANT<<                                                 */
 /*   >>EXECUTE<<                                                       */
-/*                                                                     */
 /* >>END-PRE-COMPILER<<                                                */
 /* =================================================================== */
 
@@ -2165,10 +2433,6 @@ srccssid=  "00273">
                         SPCVAL((*YES Y)                        +
                                (*NO  N))                       +
                         PROMPT('Replace message description')
-
-             PARM       KWD(MSGFLNG   ) TYPE(*CHAR)        +
-                          LEN(10)                          +
-                          CONSTANT(DUPMSGDE )
 
 QMSGR:       ELEM       TYPE(*NAME) +
                         LEN(7) +
@@ -2251,20 +2515,14 @@ srccssid=  "00273">
 /*                                                                     */
 /* =================================================================== */
 /* >>PRE-COMPILER<<                                                    */
-/*                                                                     */
-/*   >>CRTCMD<< CRTCMD       CMD(&LI/&OB) +                            */
-/*                           SRCFILE(&SL/&SF) +                        */
-/*                           SRCMBR(&SM);                              */
-/*                                                                     */
-/*   >>COMPILE<<                                                       */
-/*     >>PARM<< PGM(*LIBL/DUPMSGDC);                                   */
-/*     >>PARM<< HLPPNLGRP(*LIBL/DUPMSGDP);                             */
+/*   >>CRTCMD<< CRTCMD       CMD(&LI/DUPMSGD) +                        */
+/*                           SRCFILE(&SL/&SF) SRCMBR(&SM);             */
+/*   >>IMPORTANT<<                                                     */
+/*     >>PARM<< PGM(&LI/DUPMSGD);                                      */
+/*     >>PARM<< HLPPNLGRP(&LI/DUPMSGD);                                */
 /*     >>PARM<< HLPID(DUPMSGD);                                        */
-/*     >>PARM<< PRDLIB(&LI);                                           */
-/*   >>END-COMPILE<<                                                   */
-/*                                                                     */
+/*   >>END-IMPORTANT<<                                                 */
 /*   >>EXECUTE<<                                                       */
-/*                                                                     */
 /* >>END-PRE-COMPILER<<                                                */
 /* =================================================================== */
 
@@ -2301,10 +2559,6 @@ srccssid=  "00273">
                         SPCVAL((*YES Y)                        +
                                (*NO  N))                       +
                         PROMPT('Nachrichtenbeschr. ersetzen')
-
-             PARM       KWD(MSGFLNG   ) TYPE(*CHAR)        +
-                          LEN(10)                          +
-                          CONSTANT(DUPMSGD  )
 
 QMSGR:       ELEM       TYPE(*NAME) +
                         LEN(7) +
@@ -2387,16 +2641,10 @@ srccssid=  "00273">
 .*                                                                     *
 .*=====================================================================*
 .* >>PRE-COMPILER<<                                                    *
-.*                                                                     *
-.*   >>CRTCMD<< CRTPNLGRP    PNLGRP(&LI/&OB) +                         *
+.*   >>CRTCMD<< CRTPNLGRP    PNLGRP(&LI/DUPMSGD) +                     *
 .*                           SRCFILE(&SL/&SF) +                        *
 .*                           SRCMBR(&SM);                              *
-.*                                                                     *
-.*   >>COMPILE<<                                                       *
-.*   >>END-COMPILE<<                                                   *
-.*                                                                     *
 .*   >>EXECUTE<<                                                       *
-.*                                                                     *
 .* >>END-PRE-COMPILER<<                                                *
 .*=====================================================================*
 :PNLGRP.
@@ -2699,16 +2947,10 @@ srccssid=  "00273">
 .*                                                                     *
 .*=====================================================================*
 .* >>PRE-COMPILER<<                                                    *
-.*                                                                     *
-.*   >>CRTCMD<< CRTPNLGRP    PNLGRP(&LI/&OB) +                         *
+.*   >>CRTCMD<< CRTPNLGRP    PNLGRP(&LI/DUPMSGD) +                     *
 .*                           SRCFILE(&SL/&SF) +                        *
 .*                           SRCMBR(&SM);                              *
-.*                                                                     *
-.*   >>COMPILE<<                                                       *
-.*   >>END-COMPILE<<                                                   *
-.*                                                                     *
 .*   >>EXECUTE<<                                                       *
-.*                                                                     *
 .* >>END-PRE-COMPILER<<                                                *
 .*=====================================================================*
 :PNLGRP.
@@ -3016,13 +3258,11 @@ srccssid=  "00273">
        //                                                                     *
        // =================================================================== *
        // >>PRE-COMPILER<<                                                    *
-       //   >>CRTCMD<< CRTBNDRPG    PGM(&LI/&OB) +                            *
+       //   >>CRTCMD<< CRTRPGMOD    MODULE(&LI/&OB) +                         *
        //                           SRCFILE(&SL/&SF) SRCMBR(&SM);             *
        //   >>IMPORTANT<<                                                     *
        //     >>PARM<< DBGVIEW(*LIST);                                        *
        //     >>PARM<< TRUNCNBR(*NO);                                         *
-       //     >>PARM<< DFTACTGRP(*NO);                                        *
-       //     >>PARM<< ACTGRP(*NEW);                                          *
        //     >>PARM<< OPTION(*EVENTF);                                       *
        //   >>END-IMPORTANT<<                                                 *
        //   >>EXECUTE<<                                                       *
@@ -3067,17 +3307,17 @@ srccssid=  "00273">
      D dateISO         s               d   inz
      D dateJob         s             10a   inz
 
-     D tempText        ds          1024
-     D text            ds          1024
+     D tempText        ds         16384
+     D text            ds         16384
 
        //  Program information data structure
      D sds            sds                  qualified
      D msgId                  40     46
      D msgDta                 91    170
 
-     D i               S             10i 0
-     D x               S             10i 0
-     D numVars         S             10i 0
+     D i               s             10i 0
+     D x               s             10i 0
+     D numVars         s             10i 0
 
      D DUPMSGDR2...
      D                 pr                  extpgm('DUPMSGDR1')
@@ -3087,7 +3327,7 @@ srccssid=  "00273">
      D  i_toLib                      10a   const
      D  i_toMsgF                     10a   const
      D  i_toMsgId                     7a   const
-     D  o_cmd                      2048a
+     D  o_cmd                     16384a
      D  o_errId                       7a
      D  o_errData                    80a
 
@@ -3099,7 +3339,7 @@ srccssid=  "00273">
      D  i_toLib                      10a   const
      D  i_toMsgF                     10a   const
      D  i_toMsgId                     7a   const
-     D  o_cmd                      2048a
+     D  o_cmd                     16384a
      D  o_errId                       7a
      D  o_errData                    80a
       /free
@@ -3117,12 +3357,18 @@ srccssid=  "00273">
                         : i_frmMsgId: qMsgF: '': 0: '*NO': '*NO': errCode);
 
        if (%error());
-          o_errId = 'CPF9897';
-          o_errData = 'QMHRTVM returned an error';
+          o_errId = 'USR0006'; // Unexpected error in QMHRTVM API. Check job log.
+          o_errData = '*N';
        else;
           if (errCode.bytAvl > *zero);
-             o_errId = errCode.excID;
-             o_errData = errCode.excDta;
+             qMsgF.name = 'QCPFMSG';
+             qMsgF.lib = '*LIBL';
+             QMHRTVM(rtvm0400: %size(rtvm0400): 'RTVM0400'
+                     : errCode.excID: qMsgF
+                     : errCode.excDta: %len(%trimr(errCode.excDta))
+                     : '*YES': '*NO': errCode);
+             o_errId = 'USR0007'; // QMHRTVM API ended with error: &1
+             o_errData = %subst(rtvm0400: rtvm0400.ofsMsg+1: rtvm0400.lenMsgR);
           else;
              exsr prdCmd;
           endif;
@@ -3159,6 +3405,10 @@ srccssid=  "00273">
              text = %subst(rtvm0400: rtvm0400.OFSMSG + 1: rtvm0400.lenMsgR);
 
              exsr rplhpn;
+             if (o_errId <> '');
+                leavesr;
+             endif;
+
              text = '''' + %trimr(text) + '''';
 
              o_cmd = %trimr(o_cmd) + text;
@@ -3172,6 +3422,10 @@ srccssid=  "00273">
 
              text = %subst(rtvm0400: rtvm0400.ofsMsgHlp+1: rtvm0400.lenMsgHlpR);
              exsr rplhpn;
+             if (o_errId <> '');
+                leavesr;
+             endif;
+
              text = '''' + %trimr(text) + '''';
 
              o_cmd = %trimr(o_cmd) + text;
@@ -3325,23 +3579,25 @@ srccssid=  "00273">
              if (i > 0);
 
                 i = i + 1;
-                if (i <= 1024);
+                if (i <= %size(tempText));
                    tempText = %subst(text: i);
                 else;
                    //  "ASSERT"
-                   sds.msgId = 'CPF9897';
-                   sds.msgDta = 'i > 1024';
-                   exsr *pssr;
+                   o_errId = 'USR0008'; // Buffer overflow for field: &1
+                   o_errData = 'tempText (' +
+                               %char(i) + ' > ' + %char(%size(tempText)) + ')';
+                   leavesr;
                 endif;
 
                 %subst(text: i: 1) = '''';
-                if (i <= 1024);
+                if (i <= %size(text));
                    text = %subst(text: 1: i) + tempText;
                 else;
                    //  "ASSERT"
-                   sds.msgId = 'CPF9897';
-                   sds.msgDta = 'i > 1024';
-                   exsr *pssr;
+                   o_errId = 'USR0008'; // Buffer overflow for field: &1
+                   o_errData = 'text (' +
+                               %char(i) + ' > ' + %char(%size(text)) + ')';
+                   leavesr;
                 endif;
 
                 i = i + 1;
@@ -3381,9 +3637,8 @@ srccssid=  "00273">
              substVar.type <> '*CHAR'  and
              substVar.type <> '*DEC'  and
              substVar.type <> '*HEX');
-             o_errId = 'CPF9897';
-             o_errData = 'MSG-ID: ' + rtvm0400.MSGID + 'Unerlaubter Typ: ' +
-                         substVar.type;
+             o_errId = 'USR0005';
+             o_errData = substVar.type;
           endif;
 
        endsr;
@@ -3482,13 +3737,11 @@ srccssid=  "00273">
        //                                                                     *
        // =================================================================== *
        // >>PRE-COMPILER<<                                                    *
-       //   >>CRTCMD<< CRTBNDRPG    PGM(&LI/&OB) +                            *
+       //   >>CRTCMD<< CRTRPGMOD    MODULE(&LI/&OB) +                         *
        //                           SRCFILE(&SL/&SF) SRCMBR(&SM);             *
        //   >>IMPORTANT<<                                                     *
        //     >>PARM<< DBGVIEW(*LIST);                                        *
        //     >>PARM<< TRUNCNBR(*NO);                                         *
-       //     >>PARM<< DFTACTGRP(*NO);                                        *
-       //     >>PARM<< ACTGRP(*NEW);                                          *
        //     >>PARM<< OPTION(*EVENTF);                                       *
        //   >>END-IMPORTANT<<                                                 *
        //   >>EXECUTE<<                                                       *
@@ -3501,7 +3754,7 @@ srccssid=  "00273">
       /copy qdupmsgd,qmhrtvm
       /copy qdupmsgd,fderrcode
 
-     D rtvm0300        DS                  likeds(rtvm0300_t) inz
+     D rtvm0400        DS                  likeds(rtvm0400_t) inz
 
      D qMsgF           DS                  qualified
      D name                          10a   inz
@@ -3540,19 +3793,25 @@ srccssid=  "00273">
        clear errCode;
        errCode.bytPrv = %size(errCode);
 
-       Callp(e) QMHRTVM(rtvm0300: %size(rtvm0300): 'RTVM0300': i_msgId
+       Callp(e) QMHRTVM(rtvm0400: %size(rtvm0400): 'RTVM0400': i_msgId
                         : qMsgF: '': 0: '*NO': '*NO': errCode
                         : i_rtvOpt: 0: 0);
 
        if (%error());
-          o_errId = 'CPF9897';
-          o_errData = 'QMHRTVM returned an error';
+          o_errId = 'USR0006'; // Unexpected error in QMHRTVM API. Check job log.
+          o_errData = '*N';
        else;
-          if (errCode.bytAvl > 0);
-             o_errId = errCode.excId;
-             o_errData = errCode.excDta;
+          if (errCode.bytAvl > *zero);
+             qMsgF.name = 'QCPFMSG';
+             qMsgF.lib = '*LIBL';
+             QMHRTVM(rtvm0400: %size(rtvm0400): 'RTVM0400'
+                     : errCode.excID: qMsgF
+                     : errCode.excDta: %len(%trimr(errCode.excDta))
+                     : '*YES': '*NO': errCode);
+             o_errId = 'USR0007'; // QMHRTVM API ended with error: &1
+             o_errData = %subst(rtvm0400: rtvm0400.ofsMsg+1: rtvm0400.lenMsgR);
           else;
-             o_rtnMsgId = rtvm0300.msgId;
+             o_rtnMsgId = rtvm0400.msgId;
           endif;
        endif;
 

@@ -55,6 +55,30 @@
              CHGVAR     VAR(&SRCLIB) VALUE(&TOLIB   )
 
      /* -------------------------------- */
+     /*  Delete old objects (prior v1.2) */
+     /* -------------------------------- */
+             DLTPGM     PGM(&TOLIB/DUPMSGDC)
+             MONMSG     MSGID(CPF2105)
+
+             DLTPGM     PGM(&TOLIB/DUPMSGDR1)
+             MONMSG     MSGID(CPF2105)
+
+             DLTPGM     PGM(&TOLIB/DUPMSGDR2)
+             MONMSG     MSGID(CPF2105)
+
+             DLTMSGF    MSGF(&TOLIB/DUPMSGD)
+             MONMSG     MSGID(CPF2105)
+
+             DLTMSGF    MSGF(&TOLIB/DUPMSGDE)
+             MONMSG     MSGID(CPF2105)
+
+             DLTPNLGRP  PNLGRP(&TOLIB/DUPMSGDP)
+             MONMSG     MSGID(CPF2105)
+
+             DLTPNLGRP  PNLGRP(&TOLIB/DUPMSGDPE)
+             MONMSG     MSGID(CPF2105)
+
+     /* -------------------------------- */
      /*  Delete old objects              */
      /* -------------------------------- */
              DLTCMD     CMD(&TOLIB/DUPMSGD)

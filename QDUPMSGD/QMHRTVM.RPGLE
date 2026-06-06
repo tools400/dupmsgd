@@ -1,285 +1,290 @@
-      /if not defined(QMHRTVM)
-      /define QMHRTVM
-      *
-      *  Retrieve Message (QMHRTVM) API
-     d QMHRTVM...
-     d                 pr                  extpgm('QMHRTVM')
-     d  o_msgInf                  65535a          options(*varsize)
-     d  i_msgInfLen                  10i 0 const
-     d  i_format                      8a   const
-     d  i_msgID                       7a   const
-     d  i_qMsgF                      20A   const
-     d  i_rplData                 65535a   const  options(*varsize )
-     d  i_rpldataLen                 10i 0 const
-     d  i_rplVars                    10a   const
-     d  i_rtnCtrlChrs                10a   const
-     d  io_ErrCode                65535a          options(*varsize )
-     d  i_rtvOpt                     10a   const  options(*nopass  )            | OptGrp 1
-     d  i_toCcsid                    10i 0 const  options(*nopass  )            |
-     d  i_ccsidRplDta                10i 0 const  options(*nopass  )            |
-      *
-      /if not defined(rtvm0100_t)
-      /define rtvm0100_t
-     d rtvm0100_t      ds                  qualified           based(pDummy)
-      *  Bytes returned
-     d  BYTRET                        9B 0
-      *  Bytes available
-     d  BYTAVL                        9B 0
-      *  Length of message returned
-     d  LENMSGRET                     9B 0
-      *  Length of message available
-     d  LENMSGAVL                     9B 0
-      *  Length of msg help returned
-     d  LENHLPRET                     9B 0
-      *  Length of msg help available
-     d  LENHLPAVL                     9B 0
-      *  Msg text and data of varying length!
-     d  DATA                       2048A
-      *
-      /endif
-      /if not defined(rtvm0200_t)
-      /define rtvm0200_t
-     d rtvm0200_t      ds                  qualified           based(pDummy)
-      *  Bytes returned
-     d  bytRet                       10i 0
-      *  Bytes available
-     d  bytAvl                       10i 0
-      *  Message severity
-     d  msgSev                       10i 0
-      *  Alert index
-     d  altIdx                       10i 0
-      * Alert Option
-     d  altOpt                        9a
-      * Log indicator
-     d  logInd                        1a
-      * Reserved
-     d  reserved_1                    2a
-      * Length of default reply ret.
-     d  lenDftRpyR                   10i 0
-      * Length of default reply avl.
-     d  lenDftRpyA                   10i 0
-      * Length of message returned
-     d  lenMsgR                      10i 0
-      * Length of message available
-     d  lenMsgA                      10i 0
-      * Length of message help ret.
-     d  lenMsgHlpR                   10i 0
-      * Length of message help avl.
-     d  lenMsgHlpA                   10i 0
-      *                       CHAR(*)  Default reply
-      *                       CHAR(*)  Message
-      *                       CHAR(*)  Message help
-      *
-      /endif
-      /if not defined(rtvm0300_t)
-      /define rtvm0300_t
-     d rtvm0300_t      ds                  qualified           based(pDummy)
-      *  Bytes returned
-     d  bytRet                       10i 0
-      *  Bytes available
-     d  bytAvl                       10i 0
-      *  Message severity
-     d  msgSev                       10i 0
-      *  Alert index
-     d  altIdx                       10i 0
-      * Alert Option
-     d  altOpt                        9a
-      * Log indicator
-     d  logInd                        1a
-      * Message ID
-     d  msgID                         7a
-      * Reserved
-     d  reserved_01                   3a
-      * Nbr. of subst. var. formats
-     d  numVarFmt                    10i 0
-      * CCSID conv. stat. ind. text
-     d  csIndTxt                     10i 0
-      * CCSID conv. stat. ind. data
-     d  csIndDta                     10i 0
-      * CCSID of Text returned
-     d  ccsidTxt                     10i 0
-      * Offset of default reply
-     d  ofsDftR                      10i 0
-      * Length of default reply ret.
-     d  lenDftRpyR                   10i 0
-      * Length of default reply avl.
-     d  lenDftRpyA                   10i 0
-      * Offset of message
-     d  ofsMsg                       10i 0
-      * Length of message returned
-     d  lenMsgR                      10i 0
-      * Length of message available
-     d  lenMsgA                      10i 0
-      * Offset of message help
-     d  ofsMsgHlp                    10i 0
-      * Length of message help ret.
-     d  lenMsgHlpR                   10i 0
-      * Length of message help avl.
-     d  lenMsgHlpA                   10i 0
-      * Ofs. of subst. var. formats
-     d  ofsVarFmt                    10i 0
-      * Length subst. var. fmt. ret.
-     d  lenVarFmtR                   10i 0
-      * Length subst. var. fmt. avl.
-     d  lenVarFmtA                   10i 0
-      * Length subst. var. element
-     d  lenVarFmtE                   10i 0
-      * Data
-     d  data                       4096A
-      *                       CHAR(*)  Default reply
-      *                       CHAR(*)  Message
-      *                       CHAR(*)  Message help
-      *                       CHAR(*)  Substitution variable formats
-      *
-      /endif
-      /if not defined(rtvm0400_t)
-      /define rtvm0400_t
-     d rtvm0400_t      ds                  qualified           based(pDummy)
-      *  Bytes returned
-     d  bytRet                       10i 0
-      *  Bytes available
-     d  bytAvl                       10i 0
-      *  Message severity
-     d  msgSev                       10i 0
-      *  Alert index
-     d  altIdx                       10i 0
-      * Alert Option
-     d  altOpt                        9a
-      * Log indicator
-     d  logInd                        1a
-      * Message ID
-     d  msgID                         7a
-      * Reserved
-     d  reserved_01                   3a
-      * Nbr. of subst. var. formats
-     d  numVarFmt                    10i 0
-      * CCSID conv. stat. ind. text
-     d  csIndTxt                     10i 0
-      * CCSID conv. stat. ind. data
-     d  csIndDta                     10i 0
-      * CCSID of Text returned
-     d  ccsidTxt                     10i 0
-      * Offset of default reply
-     d  ofsDftR                      10i 0
-      * Length of default reply ret.
-     d  lenDftRpyR                   10i 0
-      * Length of default reply avl.
-     d  lenDftRpyA                   10i 0
-      * Offset of message
-     d  ofsMsg                       10i 0
-      * Length of message returned
-     d  lenMsgR                      10i 0
-      * Length of message available
-     d  lenMsgA                      10i 0
-      * Offset of message
-     d  ofsMsgHlp                    10i 0
-      * Length of message help ret.
-     d  lenMsgHlpR                   10i 0
-      * Length of message help avl.
-     d  lenMsgHlpA                   10i 0
-      * Ofs. of subst. var. formats
-     d  ofsVarFmt                    10i 0
-      * Length subst. var. fmt. ret.
-     d  lenVarFmtR                   10i 0
-      * Length subst. var. fmt. avl.
-     d  lenVarFmtA                   10i 0
-      * Length subst. var. element
-     d  lenVarFmtE                   10i 0
-      * Reply type
-     d  rpyType                      10a
-      * Reserved
-     d  reserved_02                   2a
-      * Maximum reply length
-     d  maxRpyLen                    10i 0
-      * Maximum reply decimal positions
-     d  maxRpyDecPos                 10i 0
-      * Offset of valid reply value entries
-     d  ofsRpyE                      10i 0
-      * Number of valid reply values entries returned
-     d  numRpyER                     10i 0
-      * Length of valid reply value entries returned
-     d  lenRpyER                     10i 0
-      * Length of valid reply value entries available
-     d  lenRpyEA                     10i 0
-      * Length of valid reply value entry
-     d  lenRpyE                      10i 0
-      * Offset of special reply value entries
-     d  ofsSpcRpyE                   10i 0
-      * Number of special reply values returned
-     d  numSpcRpyER                  10i 0
-      * Length of special reply value entries returned
-     d  lenSpcRpyER                  10i 0
-      * Length of special reply value entries available
-     d  lenSpcRpyEA                  10i 0
-      * Length of special reply value entry
-     d  lenSpcRpyE                   10i 0
-      * Offset of lower range reply value
-     d  ofsLowRpyE                   10i 0
-      * Length of lower range reply value returned
-     d  lenLowRpyER                  10i 0
-      * Length of lower range reply value available
-     d  lenLowRpyEA                  10i 0
-      * Offset of upper range reply value
-     d  ofsUpRpyE                    10i 0
-      * Length of upper range reply value returned
-     d  ofsUpRpyER                   10i 0
-      * Length of upper range reply value available
-     d  ofsUpRpyEA                   10i 0
-      * Offset of relational test entry
-     d  ofsRelTestE                  10i 0
-      * Length of relational test entry returned
-     d  lenRelTestER                 10i 0
-      * Length of relational test entry available
-     d  lenRelTestEA                 10i 0
-      * Message creation date
-     d  crtDate                       7a
-      * Reserved
-     d  reserved_03                   1a
-      * Message creation level number
-     d  crtLvlNbr                    10i 0
-      * Message modification date
-     d  modDate                       7a
-      * Reserved
-     d  reserved_04                   1a
-      * Message modification level number
-     d  modLvlNbr                    10i 0
-      * Stored CCSID of message
-     d  storedCCSID                  10i 0
-      * Offset of dump list entries
-     d  ofsDmpListE                  10i 0
-      * Number of dump list entries returned
-     d  numDmpListER                 10i 0
-      * Length of dump list entries returned
-     d  lenDmpListER                 10i 0
-      * Length of dump list entries available
-     d  lenDmpListEA                 10i 0
-      * Default program name
-     d  dftPgmName                   10a
-      * Default program library name
-     d  dftPgmLib                    10a
-      * Data
-     d  data                       4096A
-      *                       CHAR(*)  Default reply
-      *                       CHAR(*)  Message
-      *                       CHAR(*)  Message help
-      *                       CHAR(*)  Substitution variable formats
-      *                       CHAR(*)  Valid reply value entries
-      *                       CHAR(*)  Special reply value entries
-      *                       CHAR(*)  Lower range reply value
-      *                       CHAR(*)  Upper range reply value
-      *                       CHAR(*)  Relational test entry
-      *                       CHAR(*)  Dump list entries
-      *
-      /endif
-      /if not defined(qmhrtvm_substVarFmt_t)
-      /define qmhrtvm_substVarFmt_t
-     d qmhrtvm_substVarFmt_t...
-     d                 ds                  qualified           based(pDummy)
-     d  length                 1      4i 0
-     d  sizeOrDecPos           5      8i 0
-     d  size                         10i 0 overlay(sizeOrDecPos)
-     d  decPos                       10i 0 overlay(sizeOrDecPos)
-     d  type                   9     18a
-      *                       CHAR(*)  Reserved
-      /endif
-      /endif
+**free
+/if not defined(QMHRTVM)
+/define QMHRTVM
+
+//  Retrieve Message (QMHRTVM) API
+dcl-pr QMHRTVM extpgm('QMHRTVM');
+  o_msgInf      char(65535) options(*varsize);
+  i_msgInfLen   int(10) const;
+  i_format      char(8) const;
+  i_msgID       char(7) const;
+  i_qMsgF       char(20) const;
+  i_rplData     char(65535) options(*varsize) const;
+  i_rpldataLen  int(10) const;
+  i_rplVars     char(10) const;
+  i_rtnCtrlChrs char(10) const;
+  io_ErrCode    char(65535) options(*varsize);
+  i_rtvOpt      char(10) options(*nopass) const; // OptGrp 1
+  i_toCcsid     int(10) options(*nopass) const;
+  i_ccsidRplDta int(10) options(*nopass) const;
+end-pr;
+
+/if not defined(rtvm0100_t)
+/define rtvm0100_t
+dcl-ds rtvm0100_t qualified based(pDummy);
+  //  Bytes returned
+  BYTRET    bindec(9);
+  //  Bytes available
+  BYTAVL    bindec(9);
+  //  Length of message returned
+  LENMSGRET bindec(9);
+  //  Length of message available
+  LENMSGAVL bindec(9);
+  //  Length of msg help returned
+  LENHLPRET bindec(9);
+  //  Length of msg help available
+  LENHLPAVL bindec(9);
+  //  Msg text and data of varying length!
+  DATA      char(2048);
+end-ds;
+
+/endif
+/if not defined(rtvm0200_t)
+/define rtvm0200_t
+dcl-ds rtvm0200_t qualified based(pDummy);
+  //  Bytes returned
+  bytRet     int(10);
+  //  Bytes available
+  bytAvl     int(10);
+  //  Message severity
+  msgSev     int(10);
+  //  Alert index
+  altIdx     int(10);
+  // Alert Option
+  altOpt     char(9);
+  // Log indicator
+  logInd     char(1);
+  // Reserved
+  reserved_1 char(2);
+  // Length of default reply ret.
+  lenDftRpyR int(10);
+  // Length of default reply avl.
+  lenDftRpyA int(10);
+  // Length of message returned
+  lenMsgR    int(10);
+  // Length of message available
+  lenMsgA    int(10);
+  // Length of message help ret.
+  lenMsgHlpR int(10);
+  // Length of message help avl.
+  lenMsgHlpA int(10);
+end-ds;
+//                       CHAR(*)  Default reply
+//                       CHAR(*)  Message
+//                       CHAR(*)  Message help
+
+/endif
+/if not defined(rtvm0300_t)
+/define rtvm0300_t
+dcl-ds rtvm0300_t qualified based(pDummy);
+  //  Bytes returned
+  bytRet      int(10);
+  //  Bytes available
+  bytAvl      int(10);
+  //  Message severity
+  msgSev      int(10);
+  //  Alert index
+  altIdx      int(10);
+  // Alert Option
+  altOpt      char(9);
+  // Log indicator
+  logInd      char(1);
+  // Message ID
+  msgID       char(7);
+  // Reserved
+  reserved_01 char(3);
+  // Nbr. of subst. var. formats
+  numVarFmt   int(10);
+  // CCSID conv. stat. ind. text
+  csIndTxt    int(10);
+  // CCSID conv. stat. ind. data
+  csIndDta    int(10);
+  // CCSID of Text returned
+  ccsidTxt    int(10);
+  // Offset of default reply
+  ofsDftR     int(10);
+  // Length of default reply ret.
+  lenDftRpyR  int(10);
+  // Length of default reply avl.
+  lenDftRpyA  int(10);
+  // Offset of message
+  ofsMsg      int(10);
+  // Length of message returned
+  lenMsgR     int(10);
+  // Length of message available
+  lenMsgA     int(10);
+  // Offset of message help
+  ofsMsgHlp   int(10);
+  // Length of message help ret.
+  lenMsgHlpR  int(10);
+  // Length of message help avl.
+  lenMsgHlpA  int(10);
+  // Ofs. of subst. var. formats
+  ofsVarFmt   int(10);
+  // Length subst. var. fmt. ret.
+  lenVarFmtR  int(10);
+  // Length subst. var. fmt. avl.
+  lenVarFmtA  int(10);
+  // Length subst. var. element
+  lenVarFmtE  int(10);
+  // Data
+  data        char(4096);
+end-ds;
+//                       CHAR(*)  Default reply
+//                       CHAR(*)  Message
+//                       CHAR(*)  Message help
+//                       CHAR(*)  Substitution variable formats
+
+/endif
+/if not defined(rtvm0400_t)
+/define rtvm0400_t
+dcl-ds rtvm0400_t qualified based(pDummy);
+  //  Bytes returned
+  bytRet       int(10);
+  //  Bytes available
+  bytAvl       int(10);
+  //  Message severity
+  msgSev       int(10);
+  //  Alert index
+  altIdx       int(10);
+  // Alert Option
+  altOpt       char(9);
+  // Log indicator
+  logInd       char(1);
+  // Message ID
+  msgID        char(7);
+  // Reserved
+  reserved_01  char(3);
+  // Nbr. of subst. var. formats
+  numVarFmt    int(10);
+  // CCSID conv. stat. ind. text
+  csIndTxt     int(10);
+  // CCSID conv. stat. ind. data
+  csIndDta     int(10);
+  // CCSID of Text returned
+  ccsidTxt     int(10);
+  // Offset of default reply
+  ofsDftR      int(10);
+  // Length of default reply ret.
+  lenDftRpyR   int(10);
+  // Length of default reply avl.
+  lenDftRpyA   int(10);
+  // Offset of message
+  ofsMsg       int(10);
+  // Length of message returned
+  lenMsgR      int(10);
+  // Length of message available
+  lenMsgA      int(10);
+  // Offset of message
+  ofsMsgHlp    int(10);
+  // Length of message help ret.
+  lenMsgHlpR   int(10);
+  // Length of message help avl.
+  lenMsgHlpA   int(10);
+  // Ofs. of subst. var. formats
+  ofsVarFmt    int(10);
+  // Length subst. var. fmt. ret.
+  lenVarFmtR   int(10);
+  // Length subst. var. fmt. avl.
+  lenVarFmtA   int(10);
+  // Length subst. var. element
+  lenVarFmtE   int(10);
+  // Reply type
+  rpyType      char(10);
+  // Reserved
+  reserved_02  char(2);
+  // Maximum reply length
+  maxRpyLen    int(10);
+  // Maximum reply decimal positions
+  maxRpyDecPos int(10);
+  // Offset of valid reply value entries
+  ofsRpyE      int(10);
+  // Number of valid reply values entries returned
+  numRpyER     int(10);
+  // Length of valid reply value entries returned
+  lenRpyER     int(10);
+  // Length of valid reply value entries available
+  lenRpyEA     int(10);
+  // Length of valid reply value entry
+  lenRpyE      int(10);
+  // Offset of special reply value entries
+  ofsSpcRpyE   int(10);
+  // Number of special reply values returned
+  numSpcRpyER  int(10);
+  // Length of special reply value entries returned
+  lenSpcRpyER  int(10);
+  // Length of special reply value entries available
+  lenSpcRpyEA  int(10);
+  // Length of special reply value entry
+  lenSpcRpyE   int(10);
+  // Offset of lower range reply value
+  ofsLowRpyE   int(10);
+  // Length of lower range reply value returned
+  lenLowRpyER  int(10);
+  // Length of lower range reply value available
+  lenLowRpyEA  int(10);
+  // Offset of upper range reply value
+  ofsUpRpyE    int(10);
+  // Length of upper range reply value returned
+  ofsUpRpyER   int(10);
+  // Length of upper range reply value available
+  ofsUpRpyEA   int(10);
+  // Offset of relational test entry
+  ofsRelTestE  int(10);
+  // Length of relational test entry returned
+  lenRelTestER int(10);
+  // Length of relational test entry available
+  lenRelTestEA int(10);
+  // Message creation date
+  crtDate      char(7);
+  // Reserved
+  reserved_03  char(1);
+  // Message creation level number
+  crtLvlNbr    int(10);
+  // Message modification date
+  modDate      char(7);
+  // Reserved
+  reserved_04  char(1);
+  // Message modification level number
+  modLvlNbr    int(10);
+  // Stored CCSID of message
+  storedCCSID  int(10);
+  // Offset of dump list entries
+  ofsDmpListE  int(10);
+  // Number of dump list entries returned
+  numDmpListER int(10);
+  // Length of dump list entries returned
+  lenDmpListER int(10);
+  // Length of dump list entries available
+  lenDmpListEA int(10);
+  // Default program name
+  dftPgmName   char(10);
+  // Default program library name
+  dftPgmLib    char(10);
+  // Data
+  data         char(4096);
+end-ds;
+//                       CHAR(*)  Default reply
+//                       CHAR(*)  Message
+//                       CHAR(*)  Message help
+//                       CHAR(*)  Substitution variable formats
+//                       CHAR(*)  Valid reply value entries
+//                       CHAR(*)  Special reply value entries
+//                       CHAR(*)  Lower range reply value
+//                       CHAR(*)  Upper range reply value
+//                       CHAR(*)  Relational test entry
+//                       CHAR(*)  Dump list entries
+
+/endif
+/if not defined(qmhrtvm_substVarFmt_t)
+/define qmhrtvm_substVarFmt_t
+dcl-ds qmhrtvm_substVarFmt_t qualified based(pDummy);
+  length       int(10) pos(1);
+  sizeOrDecPos int(10) pos(5);
+  size         int(10) overlay(sizeOrDecPos);
+  decPos       int(10) overlay(sizeOrDecPos);
+  type         char(10) pos(9);
+end-ds;
+//                       CHAR(*)  Reserved
+/endif
+/endif

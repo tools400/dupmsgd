@@ -21,7 +21,7 @@
 .*=====================================================================*
 .*  History:                                                           *
 .*                                                                     *
-.*  Datum       Name          Änderung                                 *
+.*  Datum       Name          Ã„ndereung                                 *
 .*  ----------  ------------  ---------------------------------------  *
 .*                                                                     *
 .*=====================================================================*
@@ -43,14 +43,14 @@
 :IMHELP name='DUPMSGD/REPLACE   '.
 :EHELP.
 .*--------------------------------------------------------------------
-.* Hilfetext für den Befehl
+.* Hilfetext fÃ¼r den Befehl
 .*--------------------------------------------------------------------
 :HELP NAME='DUPMSGD'.
 Nachrichtenbeschr. duplizieren (DUPMSGD) - Hilfe
 :P.
 Der Befehl DUPMSGD dupliziert Nachrichtenbeschreibungen. Hierbei
-werden eine Vielzahl der vorhandenen Parameter übernommen. Leider
-können nicht alle Parameter eine Nachrichtenbeschreibung über die
+werden eine Vielzahl der vorhandenen Parameter Ã¼bernommen. Leider
+kÃ¶nnen nicht alle Parameter eine Nachrichtenbeschreibung Ã¼ber die
 API abgerufen werden.
 :P.
 Folgende Parameter der Nachrichtenbeschreibung werden kopiert:
@@ -69,7 +69,7 @@ Folgende Parameter der Nachrichtenbeschreibung werden kopiert:
 :EHELP.
 .*
 .*--------------------------------------------------------------------
-.* Hilfetext für Schlüsselwort RANGE
+.* Hilfetext fÃ¼r SchlÃ¼sselwort RANGE
 .*--------------------------------------------------------------------
 :HELP name='DUPMSGD/RANGE     '.
 Bereich der Nachrichten-IDs - Hilfe
@@ -78,7 +78,7 @@ Bereich der Nachrichten-IDs - Hilfe
 Gibt den Bereich der Nachrichten-IDs in der angegebenen Nachrichtendatei
 an, die verarbeitet werden. Alle Nachrichtenbeschreibungen
 in der bei :HP2.Nachrichtendatei:EHP2. (Parameter FROMMSGF)
-angebenen Nachrichtendatei können durch die Angabe *ALL bei
+angebenen Nachrichtendatei kÃ¶nnen durch die Angabe *ALL bei
 diesem Parameter verarbeitet werden.
 :P.
 Ist keine Anfangsnachrichten-ID angegeben, beginnt die Verarbeitung
@@ -133,7 +133,7 @@ Parameters angegeben werden.
 :EHELP.
 .*
 .*--------------------------------------------------------------------
-.* Hilfetext für Schlüsselwort FROMMSGF
+.* Hilfetext fÃ¼r SchlÃ¼sselwort FROMMSGF
 .*--------------------------------------------------------------------
 :HELP name='DUPMSGD/FROMMSGF'.
 Von Nachrichtendatei - Hilfe
@@ -153,15 +153,15 @@ QCPFMSG.
 Nachrichtenbeschreibungen stammen.
 :EPARML.
 :P.
-Gültige Bibliothekswerte sind:
+GÃ¼ltige Bibliothekswerte sind:
 :P.
 :PARML.
 :PT.:PK DEF.*LIBL:EPK.
 :PD.Alle Bibliotheken in der Bibliotheksliste des Jobs werden
-durchsucht, bis die erste Übereinstimmung gefunden wird.
+durchsucht, bis die erste Ãœbereinstimmung gefunden wird.
 :PT.:PV.*CURLIB:EPV.
-:PD.Die Nachrichtendatei wird in der aktuellen Bibliothek für den Job
-gesucht. Enthält die Bibliotheksliste keinen aktuellen
+:PD.Die Nachrichtendatei wird in der aktuellen Bibliothek fÃ¼r den Job
+gesucht. EnthÃ¤lt die Bibliotheksliste keinen aktuellen
 Bibliothekseintrag, wird QGPL benutzt.
 :PT.:PV.Bibliotheksname:EPV.
 :PD.Bibliothek angeben, in der sich die Nachrichtendatei befindet.
@@ -170,7 +170,7 @@ Bibliothekseintrag, wird QGPL benutzt.
 :EHELP.
 .*
 .*--------------------------------------------------------------------
-.* Hilfetext für Schlüsselwort TOMSGID
+.* Hilfetext fÃ¼r SchlÃ¼sselwort TOMSGID
 .*--------------------------------------------------------------------
 :HELP name='DUPMSGD/TOMSGID'.
 Nach Nachrichten-ID - Hilfe
@@ -182,9 +182,9 @@ Gibt die Nachrichten-ID der neuen Nachrichtenbeschreibung an.
 .*
 :PARML.
 :PT.:PK DEF.*FROMID:EPK.
-:PD.Die neue Nachrichtenbeschreibung erhält die gleiche Nachrichten-ID
+:PD.Die neue Nachrichtenbeschreibung erhÃ¤lt die gleiche Nachrichten-ID
 wie die Von-Nachrichtenbeschreibung. *FROMID kann nur dann angegeben werden,
-wenn für :HP2.Nach Nachrichtendatei:EHP2. (Parameter TOMSGF) nicht *FROMMSGF
+wenn fÃ¼r :HP2.Nach Nachrichtendatei:EHP2. (Parameter TOMSGF) nicht *FROMMSGF
 angegeben wird.
 :PT.:PV.Name der Nachrichtendatei:EPV.
 :PD.Angeben, in welche Nachrichtendatei die Nachrichten-ID kopiert werden soll.
@@ -193,7 +193,7 @@ angegeben wird.
 :EHELP.
 .*
 .*--------------------------------------------------------------------
-.* Hilfetext für Schlüsselwort TOMSGF
+.* Hilfetext fÃ¼r SchlÃ¼sselwort TOMSGF
 .*--------------------------------------------------------------------
 :HELP name='DUPMSGD/TOMSGF'.
 Nach Nachrichtendatei - Hilfe
@@ -214,15 +214,15 @@ Nachrichtendatei kopiert.
 Nachrichtenbeschreibungen kopiert werden sollen.
 :EPARML.
 :P.
-Gültige Bibliothekswerte sind:
+GÃ¼ltige Bibliothekswerte sind:
 :P.
 :PARML.
 :PT.:PK DEF.*LIBL:EPK.
 :PD.Alle Bibliotheken in der Bibliotheksliste des Jobs werden
-durchsucht, bis die erste Übereinstimmung gefunden wird.
+durchsucht, bis die erste Ãœbereinstimmung gefunden wird.
 :PT.:PV.*CURLIB:EPV.
-:PD.Die Nachrichtendatei wird in der aktuellen Bibliothek für den Job
-gesucht. Enthält die Bibliotheksliste keinen aktuellen
+:PD.Die Nachrichtendatei wird in der aktuellen Bibliothek fÃ¼r den Job
+gesucht. EnthÃ¤lt die Bibliotheksliste keinen aktuellen
 Bibliothekseintrag, wird QGPL benutzt.
 :PT.:PV.Bibliotheksname:EPV.
 :PD.Bibliothek angeben, in der sich die Nachrichtendatei befindet.
@@ -231,7 +231,7 @@ Bibliothekseintrag, wird QGPL benutzt.
 :EHELP.
 .*
 .*--------------------------------------------------------------------
-.* Hilfetext für Schlüsselwort REPLACE
+.* Hilfetext fÃ¼r SchlÃ¼sselwort REPLACE
 .*--------------------------------------------------------------------
 :HELP name='DUPMSGD/REPLACE'.
 Nachrichtenbeschr. ersetzen - Hilfe
@@ -281,7 +281,7 @@ Dieser Parameter ist optional.
 .*=====================================
 :HELP NAME='COM/VALUES'.
 :P.
-Mögliche Werte sind:
+MÃ¶gliche Werte sind:
 :EHELP.
 .*
 :EPNLGRP.

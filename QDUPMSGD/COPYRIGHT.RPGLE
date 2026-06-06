@@ -1,8 +1,7 @@
-      /if not defined(COPYRIGHT_DSPEC)
-     h copyright('V1.2 - 05.02.2019 - mailto:thomas.raddatz@tools400.de')
-      /eof
-      /endif
-     D DUPMSGD_VERSION...
-     D                 C                   '1.2'
-     D DUPMSGD_DATE...
-     D                 C                   '05.02.2019'
+**free
+/if not defined(COPYRIGHT_DSPEC)
+ctl-opt copyright('V1.3 - 06.06.2026 - mailto: thomas.raddatz@tools400.de');
+/eof
+/endif
+dcl-c DUPMSGD_VERSION '1.3';
+dcl-c DUPMSGD_DATE '06.06.2026';

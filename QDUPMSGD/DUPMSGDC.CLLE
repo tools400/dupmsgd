@@ -21,7 +21,7 @@
 /* =================================================================== */
 /*  History:                                                           */
 /*                                                                     */
-/*  Datum       Name          Änderung                                 */
+/*  Datum       Name          Ã„ndereung                                 */
 /*  ----------  ------------  ---------------------------------------  */
 /*                                                                     */
 /* =================================================================== */
@@ -122,7 +122,7 @@
                ENDDO
 
 /* ---------------------------- */
-/* Prüfen der Sonderwerte       */
+/* PrÃ¼fen der Sonderwerte       */
 /* ---------------------------- */
              IF         COND(&FROMIDHIGH *NE '*ONLY'     +
                         *AND &TOID       *NE '*FROMID')  THEN(DO)
@@ -159,7 +159,7 @@
              ENDDO
 
 /* ... Ersetzen "von-ID"    */
-/*     durch gültige Msg-ID */
+/*     durch gÃ¼ltige Msg-ID */
              IF         COND(&FROMIDLOW *NE '       ') THEN(DO)
                RTVMSG     MSGID(&FROMIDLOW) MSGF(&FROMLIB/&FROMFILE)
                MONMSG     MSGID(CPF2419) EXEC(DO)
@@ -175,7 +175,7 @@
                ENDDO
              ENDDO
 
-/* ... prüfen auf Fehler    */
+/* ... prÃ¼fen auf Fehler    */
              IF         COND(&ERRID *NE ' ') THEN(DO)
                SNDPGMMSG  MSGID(&ERRID) MSGF(&MSGF) MSGDTA(&ERRDT) +
                           TOPGMQ(*PRV (*PGMBDY)) +
@@ -201,7 +201,7 @@
              ENDDO
 
 /* ---------------------------- */
-/* prüfen, Msg Datei vorhanden  */
+/* prÃ¼fen, Msg Datei vorhanden  */
 /* ---------------------------- */
              CHKOBJ     OBJ(&FROMLIB/&FROMFILE) OBJTYPE(*MSGF)
              CHKOBJ     OBJ(&TOLIB/&TOFILE    ) OBJTYPE(*MSGF)
@@ -220,7 +220,7 @@
 /* ---------------------------- */
 LOOP:
 
-/* ... prüfen Schleifenende */
+/* ... prÃ¼fen Schleifenende */
                IF         COND(&FROMIDLOW *NE ' ') THEN(DO)
                  IF         COND(&FROMIDLOW *GT &FROMIDHIGH) THEN(DO)
                    CHGVAR     VAR(&FROMIDLOW) VALUE(' ')
@@ -250,7 +250,7 @@ LOOP:
                                               &ERRID     +
                                               &ERRDT     )
 
-/* ... prüfen auf Fehler    */
+/* ... prÃ¼fen auf Fehler    */
                IF         COND(&ERRID *NE ' ') THEN(DO)
                  SNDPGMMSG  MSGID(&ERRID) MSGF(&MSGF) MSGDTA(&ERRDT) +
                             TOPGMQ(*PRV (*PGMBDY)) +
@@ -284,7 +284,7 @@ LOOP:
  DUPERR:
                ENDDO
 
-/* ... nächste MsgID        */
+/* ... nÃ¤chste MsgID        */
                CHGVAR     VAR(&MSGID     ) VALUE(&FROMIDLOW)
                CHGVAR     VAR(&RETRIEVEOP) VALUE('*NEXT  ')
                CALLPRC    PRC(DUPMSGDR2) PARM(&FROMLIB    +
@@ -295,7 +295,7 @@ LOOP:
                                               &ERRID      +
                                               &ERRDT      )
 
-/* ... prüfen auf Fehler    */
+/* ... prÃ¼fen auf Fehler    */
                IF         COND(&ERRID *NE ' ') THEN(DO)
                  SNDPGMMSG  MSGID(&ERRID) MSGF(&MSGF) MSGDTA(&ERRDT) +
                             TOPGMQ(*PRV (*PGMBDY)) +

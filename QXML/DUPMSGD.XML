@@ -51,7 +51,7 @@
       appblddate CDATA #REQUIRED
      >
      ]>
-<upload  appname="DUPMSGD"  appauthor="Thomas Raddatz"  appblddate=" 2/07/2019">
+<upload  appname="DUPMSGD"  appauthor="Thomas Raddatz"  appblddate=" 6/06/2026">
 <install_instructions><![CDATA[
      *----------------------------------------------------------------      ------
      *  1. Upload entire XML to your AS/400 to a source file 112 long, into any mbr
@@ -1289,7 +1289,7 @@ mbrtext =  "DUPMSGD - Installer                               "
 srcfile =  "QDUPMSGD  "
 srclib  =  "selected  "
 srclen  =  "00112"
-srccssid=  "00273">
+srccssid=  "01141">
 <copysrc><![CDATA[
      /* =================================================================== */
      /*                                                                     */
@@ -1315,7 +1315,7 @@ srccssid=  "00273">
      /* =================================================================== */
      /*  History:                                                           */
      /*                                                                     */
-     /*  Datum       Name          Änderung                                 */
+     /*  Datum       Name           nderung                                 */
      /*  ----------  ------------  ---------------------------------------  */
      /*                                                                     */
      /* =================================================================== */
@@ -1502,10 +1502,10 @@ mbrtext =  "MSG: USR0001 - USR0003                            "
 srcfile =  "QDUPMSGD  "
 srclib  =  "selected  "
 srclen  =  "00112"
-srccssid=  "00273">
+srccssid=  "01141">
 <copysrc><![CDATA[
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0001                    */
+     /*   Cmd-ADDMSGD f r Message-ID :   USR0001                    */
      /* Only *FROMID allowed if a range is specified.               */
      /* ----------------------------------------------------------- */
 
@@ -1529,7 +1529,7 @@ srccssid=  "00273">
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0002                    */
+     /*   Cmd-ADDMSGD f r Message-ID :   USR0002                    */
      /* *FROMID/*FROMMSGF can not be specified at the same time.    */
      /* ----------------------------------------------------------- */
 
@@ -1549,7 +1549,7 @@ srccssid=  "00273">
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0003                    */
+     /*   Cmd-ADDMSGD f r Message-ID :   USR0003                    */
      /* Message description &3 in file &2/&1 already exists.        */
      /* ----------------------------------------------------------- */
 
@@ -1573,7 +1573,7 @@ srccssid=  "00273">
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0004                    */
+     /*   Cmd-ADDMSGD f r Message-ID :   USR0004                    */
      /* Message description &3 in file &2/&1 created.               */
      /* ----------------------------------------------------------- */
 
@@ -1597,7 +1597,7 @@ srccssid=  "00273">
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0005                    */
+     /*   Cmd-ADDMSGD f r Message-ID :   USR0005                    */
      /* Data type not supported: &1                                 */
      /* ----------------------------------------------------------- */
 
@@ -1619,7 +1619,7 @@ srccssid=  "00273">
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0006                    */
+     /*   Cmd-ADDMSGD f r Message-ID :   USR0006                    */
      /* Unexpected error in QMHRTVM API. Check job log.             */
      /* ----------------------------------------------------------- */
 
@@ -1639,7 +1639,7 @@ srccssid=  "00273">
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0007                    */
+     /*   Cmd-ADDMSGD f r Message-ID :   USR0007                    */
      /* QMHRTVM API ended with error: &1                            */
      /* ----------------------------------------------------------- */
 
@@ -1661,7 +1661,7 @@ srccssid=  "00273">
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0008                    */
+     /*   Cmd-ADDMSGD f r Message-ID :   USR0008                    */
      /* Buffer overflow for field: &1                               */
      /* ----------------------------------------------------------- */
 
@@ -1696,11 +1696,11 @@ mbrtext =  "MSG: USR0001 - USR0003                            "
 srcfile =  "QDUPMSGD  "
 srclib  =  "selected  "
 srclen  =  "00112"
-srccssid=  "00273">
+srccssid=  "01141">
 <copysrc><![CDATA[
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0001                    */
-     /* Bei Angabe eines Bereichs ist nur *FROMID zulässig.         */
+     /*   Cmd-ADDMSGD f r Message-ID :   USR0001                    */
+     /* Bei Angabe eines Bereichs ist nur *FROMID zul ssig.         */
      /* ----------------------------------------------------------- */
 
              PGM        PARM(&LI)
@@ -1714,7 +1714,7 @@ srccssid=  "00273">
                 MSGID(USR0001) +
                 MSGF(&LI/DUPMSGD ) +
                 MSG(+
-'Bei Angabe eines Bereichs ist nur *FROMID zulässig.'                 +
+'Bei Angabe eines Bereichs ist nur *FROMID zul ssig.'                 +
                 ) +
                 SEV(00) +
      /*   Keine Ersatzvariablen definiert!                          */ +
@@ -1723,8 +1723,8 @@ srccssid=  "00273">
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0002                    */
-     /* Kombination *FROMID/*FROMMSGF nicht zulässig.               */
+     /*   Cmd-ADDMSGD f r Message-ID :   USR0002                    */
+     /* Kombination *FROMID/*FROMMSGF nicht zul ssig.               */
      /* ----------------------------------------------------------- */
 
              RMVMSGD MSGID(USR0002) MSGF(&LI/DUPMSGD )
@@ -1734,7 +1734,7 @@ srccssid=  "00273">
                 MSGID(USR0002) +
                 MSGF(&LI/DUPMSGD ) +
                 MSG(+
-'Kombination *FROMID/*FROMMSGF nicht zulässig.'                       +
+'Kombination *FROMID/*FROMMSGF nicht zul ssig.'                       +
                 ) +
                 SEV(00) +
      /*   Keine Ersatzvariablen definiert!                          */ +
@@ -1743,7 +1743,7 @@ srccssid=  "00273">
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0003                    */
+     /*   Cmd-ADDMSGD f r Message-ID :   USR0003                    */
      /* Nachrichtenbeschreibung &3 in Datei &2/&1 ist bereits vorha */
      /* ----------------------------------------------------------- */
 
@@ -1767,7 +1767,7 @@ srccssid=  "00273">
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0004                    */
+     /*   Cmd-ADDMSGD f r Message-ID :   USR0004                    */
      /* Nachrichtenbeschreibung &3 in Datei &2/&1 erstellt.         */
      /* ----------------------------------------------------------- */
 
@@ -1791,8 +1791,8 @@ srccssid=  "00273">
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0005                    */
-     /* Nicht unterstützter Datentyp: &1                            */
+     /*   Cmd-ADDMSGD f r Message-ID :   USR0005                    */
+     /* Nicht unterst tzter Datentyp: &1                            */
      /* ----------------------------------------------------------- */
 
              RMVMSGD MSGID(USR0005) MSGF(&LI/DUPMSGD )
@@ -1802,7 +1802,7 @@ srccssid=  "00273">
                 MSGID(USR0005) +
                 MSGF(&LI/DUPMSGD ) +
                 MSG(+
-'Nicht unterstützter Datentyp: &1'                                    +
+'Nicht unterst tzter Datentyp: &1'                                    +
                 ) +
                 SEV(00) +
                 FMT( +
@@ -1813,8 +1813,8 @@ srccssid=  "00273">
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0006                    */
-     /* Unerwarterer Fehler in der QMHRTVM API. Jobprotokoll prüfen.*/
+     /*   Cmd-ADDMSGD f r Message-ID :   USR0006                    */
+     /* Unerwarterer Fehler in der QMHRTVM API. Jobprotokoll pr fen.*/
      /* ----------------------------------------------------------- */
 
              RMVMSGD MSGID(USR0006) MSGF(&LI/DUPMSGD )
@@ -1824,7 +1824,7 @@ srccssid=  "00273">
                 MSGID(USR0006) +
                 MSGF(&LI/DUPMSGD ) +
                 MSG(+
-'Unerwarterer Fehler in der QMHRTVM API.job log. Jobprotokoll prüfen.'+
+'Unerwarterer Fehler in der QMHRTVM API.job log. Jobprotokoll pr fen.'+
                 ) +
                 SEV(00) +
      /*   Keine Ersatzvariablen definiert!                          */ +
@@ -1833,7 +1833,7 @@ srccssid=  "00273">
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0007                    */
+     /*   Cmd-ADDMSGD f r Message-ID :   USR0007                    */
      /* QMHRTVM API fehlerhaft beendet: &1                          */
      /* ----------------------------------------------------------- */
 
@@ -1855,8 +1855,8 @@ srccssid=  "00273">
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0008                    */
-     /* Feldüberlauf für Feld: &1                                   */
+     /*   Cmd-ADDMSGD f r Message-ID :   USR0008                    */
+     /* Feld berlauf f r Feld: &1                                   */
      /* ----------------------------------------------------------- */
 
              RMVMSGD MSGID(USR0008) MSGF(&LI/DUPMSGD )
@@ -1866,7 +1866,7 @@ srccssid=  "00273">
                 MSGID(USR0008) +
                 MSGF(&LI/DUPMSGD ) +
                 MSG(+
-'Feldüberlauf für Feld: &1'                                           +
+'Feld berlauf f r Feld: &1'                                           +
                 ) +
                 SEV(00) +
                 FMT( +
@@ -1890,7 +1890,7 @@ mbrtext =  "DUPMSGD - Readme                                  "
 srcfile =  "QDUPMSGD  "
 srclib  =  "selected  "
 srclen  =  "00112"
-srccssid=  "00273">
+srccssid=  "01141">
 <copysrc><![CDATA[
 DUPMSGD - A Tools/400 Utility
 -----------------------------
@@ -1927,16 +1927,15 @@ mbrtext =  "Copyright information                             "
 srcfile =  "QDUPMSGD  "
 srclib  =  "selected  "
 srclen  =  "00112"
-srccssid=  "00273">
+srccssid=  "01141">
 <copysrc><![CDATA[
-      /if not defined(COPYRIGHT_DSPEC)
-     h copyright('V1.2 - 05.02.2019 - mailto:thomas.raddatz@tools400.de')
-      /eof
-      /endif
-     D DUPMSGD_VERSION...
-     D                 C                   '1.2'
-     D DUPMSGD_DATE...
-     D                 C                   '05.02.2019'
+**free
+/if not defined(COPYRIGHT_DSPEC)
+ctl-opt copyright('V1.3 - 06.06.2026 - mailto: thomas.raddatz@tools400.de');
+/eof
+/endif
+dcl-c DUPMSGD_VERSION '1.3';
+dcl-c DUPMSGD_DATE '06.06.2026';
 ]]>  </copysrc>
 </mbr>
 <sendmsg  sendmsgid="CPF9897" sendmsgtype = "*STATUS   "><![CDATA[
@@ -1950,7 +1949,7 @@ mbrtext =  "Tool: DUPMSGD (Duplicate Message Description) CPP "
 srcfile =  "QDUPMSGD  "
 srclib  =  "selected  "
 srclen  =  "00112"
-srccssid=  "00273">
+srccssid=  "01141">
 <copysrc><![CDATA[
 /* =================================================================== */
 /*                                                                     */
@@ -1975,7 +1974,7 @@ srccssid=  "00273">
 /* =================================================================== */
 /*  History:                                                           */
 /*                                                                     */
-/*  Datum       Name          Änderung                                 */
+/*  Datum       Name           nderung                                 */
 /*  ----------  ------------  ---------------------------------------  */
 /*                                                                     */
 /* =================================================================== */
@@ -2003,7 +2002,7 @@ mbrtext =  "Tool: DUPMSGD    (Duplicate MessageD ) CPP        "
 srcfile =  "QDUPMSGD  "
 srclib  =  "selected  "
 srclen  =  "00112"
-srccssid=  "00273">
+srccssid=  "01141">
 <copysrc><![CDATA[
 /* =================================================================== */
 /*                                                                     */
@@ -2028,7 +2027,7 @@ srccssid=  "00273">
 /* =================================================================== */
 /*  History:                                                           */
 /*                                                                     */
-/*  Datum       Name          Änderung                                 */
+/*  Datum       Name           nderung                                 */
 /*  ----------  ------------  ---------------------------------------  */
 /*                                                                     */
 /* =================================================================== */
@@ -2129,7 +2128,7 @@ srccssid=  "00273">
                ENDDO
 
 /* ---------------------------- */
-/* Prüfen der Sonderwerte       */
+/* Pr fen der Sonderwerte       */
 /* ---------------------------- */
              IF         COND(&FROMIDHIGH *NE '*ONLY'     +
                         *AND &TOID       *NE '*FROMID')  THEN(DO)
@@ -2166,7 +2165,7 @@ srccssid=  "00273">
              ENDDO
 
 /* ... Ersetzen "von-ID"    */
-/*     durch gültige Msg-ID */
+/*     durch g ltige Msg-ID */
              IF         COND(&FROMIDLOW *NE '       ') THEN(DO)
                RTVMSG     MSGID(&FROMIDLOW) MSGF(&FROMLIB/&FROMFILE)
                MONMSG     MSGID(CPF2419) EXEC(DO)
@@ -2182,7 +2181,7 @@ srccssid=  "00273">
                ENDDO
              ENDDO
 
-/* ... prüfen auf Fehler    */
+/* ... pr fen auf Fehler    */
              IF         COND(&ERRID *NE ' ') THEN(DO)
                SNDPGMMSG  MSGID(&ERRID) MSGF(&MSGF) MSGDTA(&ERRDT) +
                           TOPGMQ(*PRV (*PGMBDY)) +
@@ -2208,7 +2207,7 @@ srccssid=  "00273">
              ENDDO
 
 /* ---------------------------- */
-/* prüfen, Msg Datei vorhanden  */
+/* pr fen, Msg Datei vorhanden  */
 /* ---------------------------- */
              CHKOBJ     OBJ(&FROMLIB/&FROMFILE) OBJTYPE(*MSGF)
              CHKOBJ     OBJ(&TOLIB/&TOFILE    ) OBJTYPE(*MSGF)
@@ -2227,7 +2226,7 @@ srccssid=  "00273">
 /* ---------------------------- */
 LOOP:
 
-/* ... prüfen Schleifenende */
+/* ... pr fen Schleifenende */
                IF         COND(&FROMIDLOW *NE ' ') THEN(DO)
                  IF         COND(&FROMIDLOW *GT &FROMIDHIGH) THEN(DO)
                    CHGVAR     VAR(&FROMIDLOW) VALUE(' ')
@@ -2257,7 +2256,7 @@ LOOP:
                                               &ERRID     +
                                               &ERRDT     )
 
-/* ... prüfen auf Fehler    */
+/* ... pr fen auf Fehler    */
                IF         COND(&ERRID *NE ' ') THEN(DO)
                  SNDPGMMSG  MSGID(&ERRID) MSGF(&MSGF) MSGDTA(&ERRDT) +
                             TOPGMQ(*PRV (*PGMBDY)) +
@@ -2291,7 +2290,7 @@ LOOP:
  DUPERR:
                ENDDO
 
-/* ... nächste MsgID        */
+/* ... n chste MsgID        */
                CHGVAR     VAR(&MSGID     ) VALUE(&FROMIDLOW)
                CHGVAR     VAR(&RETRIEVEOP) VALUE('*NEXT  ')
                CALLPRC    PRC(DUPMSGDR2) PARM(&FROMLIB    +
@@ -2302,7 +2301,7 @@ LOOP:
                                               &ERRID      +
                                               &ERRDT      )
 
-/* ... prüfen auf Fehler    */
+/* ... pr fen auf Fehler    */
                IF         COND(&ERRID *NE ' ') THEN(DO)
                  SNDPGMMSG  MSGID(&ERRID) MSGF(&MSGF) MSGDTA(&ERRDT) +
                             TOPGMQ(*PRV (*PGMBDY)) +
@@ -2359,7 +2358,7 @@ mbrtext =  "Tool: DUPMSGD    (Duplicate MessageD ) Eng        "
 srcfile =  "QDUPMSGD  "
 srclib  =  "selected  "
 srclen  =  "00112"
-srccssid=  "00273">
+srccssid=  "01141">
 <copysrc><![CDATA[
 /* =================================================================== */
 /*                                                                     */
@@ -2384,7 +2383,7 @@ srccssid=  "00273">
 /* =================================================================== */
 /*  History:                                                           */
 /*                                                                     */
-/*  Datum       Name          Änderung                                 */
+/*  Datum       Name           nderung                                 */
 /*  ----------  ------------  ---------------------------------------  */
 /*                                                                     */
 /* =================================================================== */
@@ -2485,7 +2484,7 @@ mbrtext =  "Tool: DUPMSGD    (Duplicate MessageD ) Ger        "
 srcfile =  "QDUPMSGD  "
 srclib  =  "selected  "
 srclen  =  "00112"
-srccssid=  "00273">
+srccssid=  "01141">
 <copysrc><![CDATA[
 /* =================================================================== */
 /*                                                                     */
@@ -2510,7 +2509,7 @@ srccssid=  "00273">
 /* =================================================================== */
 /*  History:                                                           */
 /*                                                                     */
-/*  Datum       Name          Änderung                                 */
+/*  Datum       Name           nderung                                 */
 /*  ----------  ------------  ---------------------------------------  */
 /*                                                                     */
 /* =================================================================== */
@@ -2611,7 +2610,7 @@ mbrtext =  "Tool: DUPMSGD    (Duplicate MessageD ) Eng        "
 srcfile =  "QDUPMSGD  "
 srclib  =  "selected  "
 srclen  =  "00112"
-srccssid=  "00273">
+srccssid=  "01141">
 <copysrc><![CDATA[
 .*=====================================================================*
 .*                                                                     *
@@ -2636,7 +2635,7 @@ srccssid=  "00273">
 .*=====================================================================*
 .*  History:                                                           *
 .*                                                                     *
-.*  Datum       Name          Änderung                                 *
+.*  Datum       Name           nderung                                 *
 .*  ----------  ------------  ---------------------------------------  *
 .*                                                                     *
 .*=====================================================================*
@@ -2658,7 +2657,7 @@ srccssid=  "00273">
 :IMHELP name='DUPMSGD/REPLACE   '.
 :EHELP.
 .*--------------------------------------------------------------------
-.* Hilfetext für den Befehl
+.* Hilfetext f r den Befehl
 .*--------------------------------------------------------------------
 :HELP NAME='DUPMSGD'.
 Duplicate Message Description (DUPMSGD) - Help
@@ -2684,7 +2683,7 @@ The following parameters are carried over:
 :EHELP.
 .*
 .*--------------------------------------------------------------------
-.* Hilfetext für Schlüsselwort RANGE
+.* Hilfetext f r Schl sselwort RANGE
 .*--------------------------------------------------------------------
 :HELP name='DUPMSGD/RANGE     '.
 Range of message identifiers - Help
@@ -2751,7 +2750,7 @@ element of this parameter.
 :EHELP.
 .*
 .*--------------------------------------------------------------------
-.* Hilfetext für Schlüsselwort FROMMSGF
+.* Hilfetext f r Schl sselwort FROMMSGF
 .*--------------------------------------------------------------------
 :HELP name='DUPMSGD/FROMMSGF'.
 From message file - Help
@@ -2787,7 +2786,7 @@ the library list, QGPL is used.
 :EHELP.
 .*
 .*--------------------------------------------------------------------
-.* Hilfetext für Schlüsselwort TOMSGID
+.* Hilfetext f r Schl sselwort TOMSGID
 .*--------------------------------------------------------------------
 :HELP name='DUPMSGD/TOMSGID'.
 To message description - Help
@@ -2812,7 +2811,7 @@ message description.
 :EHELP.
 .*
 .*--------------------------------------------------------------------
-.* Hilfetext für Schlüsselwort TOMSGF
+.* Hilfetext f r Schl sselwort TOMSGF
 .*--------------------------------------------------------------------
 :HELP name='DUPMSGD/TOMSGF'.
 To message file - Help
@@ -2848,7 +2847,7 @@ the library list, QGPL is used.
 :EHELP.
 .*
 .*--------------------------------------------------------------------
-.* Hilfetext für Schlüsselwort REPLACE
+.* Hilfetext f r Schl sselwort REPLACE
 .*--------------------------------------------------------------------
 :HELP name='DUPMSGD/REPLACE'.
 Replace message description - Help
@@ -2917,7 +2916,7 @@ mbrtext =  "Tool: DUPMSGD    (Duplicate MessageD ) Ger        "
 srcfile =  "QDUPMSGD  "
 srclib  =  "selected  "
 srclen  =  "00112"
-srccssid=  "00273">
+srccssid=  "01141">
 <copysrc><![CDATA[
 .*=====================================================================*
 .*                                                                     *
@@ -2942,7 +2941,7 @@ srccssid=  "00273">
 .*=====================================================================*
 .*  History:                                                           *
 .*                                                                     *
-.*  Datum       Name          Änderung                                 *
+.*  Datum       Name           nderung                                 *
 .*  ----------  ------------  ---------------------------------------  *
 .*                                                                     *
 .*=====================================================================*
@@ -2964,14 +2963,14 @@ srccssid=  "00273">
 :IMHELP name='DUPMSGD/REPLACE   '.
 :EHELP.
 .*--------------------------------------------------------------------
-.* Hilfetext für den Befehl
+.* Hilfetext f r den Befehl
 .*--------------------------------------------------------------------
 :HELP NAME='DUPMSGD'.
 Nachrichtenbeschr. duplizieren (DUPMSGD) - Hilfe
 :P.
 Der Befehl DUPMSGD dupliziert Nachrichtenbeschreibungen. Hierbei
-werden eine Vielzahl der vorhandenen Parameter übernommen. Leider
-können nicht alle Parameter eine Nachrichtenbeschreibung über die
+werden eine Vielzahl der vorhandenen Parameter  bernommen. Leider
+k nnen nicht alle Parameter eine Nachrichtenbeschreibung  ber die
 API abgerufen werden.
 :P.
 Folgende Parameter der Nachrichtenbeschreibung werden kopiert:
@@ -2990,7 +2989,7 @@ Folgende Parameter der Nachrichtenbeschreibung werden kopiert:
 :EHELP.
 .*
 .*--------------------------------------------------------------------
-.* Hilfetext für Schlüsselwort RANGE
+.* Hilfetext f r Schl sselwort RANGE
 .*--------------------------------------------------------------------
 :HELP name='DUPMSGD/RANGE     '.
 Bereich der Nachrichten-IDs - Hilfe
@@ -2999,7 +2998,7 @@ Bereich der Nachrichten-IDs - Hilfe
 Gibt den Bereich der Nachrichten-IDs in der angegebenen Nachrichtendatei
 an, die verarbeitet werden. Alle Nachrichtenbeschreibungen
 in der bei :HP2.Nachrichtendatei:EHP2. (Parameter FROMMSGF)
-angebenen Nachrichtendatei können durch die Angabe *ALL bei
+angebenen Nachrichtendatei k nnen durch die Angabe *ALL bei
 diesem Parameter verarbeitet werden.
 :P.
 Ist keine Anfangsnachrichten-ID angegeben, beginnt die Verarbeitung
@@ -3054,7 +3053,7 @@ Parameters angegeben werden.
 :EHELP.
 .*
 .*--------------------------------------------------------------------
-.* Hilfetext für Schlüsselwort FROMMSGF
+.* Hilfetext f r Schl sselwort FROMMSGF
 .*--------------------------------------------------------------------
 :HELP name='DUPMSGD/FROMMSGF'.
 Von Nachrichtendatei - Hilfe
@@ -3074,15 +3073,15 @@ QCPFMSG.
 Nachrichtenbeschreibungen stammen.
 :EPARML.
 :P.
-Gültige Bibliothekswerte sind:
+G ltige Bibliothekswerte sind:
 :P.
 :PARML.
 :PT.:PK DEF.*LIBL:EPK.
 :PD.Alle Bibliotheken in der Bibliotheksliste des Jobs werden
-durchsucht, bis die erste Übereinstimmung gefunden wird.
+durchsucht, bis die erste  bereinstimmung gefunden wird.
 :PT.:PV.*CURLIB:EPV.
-:PD.Die Nachrichtendatei wird in der aktuellen Bibliothek für den Job
-gesucht. Enthält die Bibliotheksliste keinen aktuellen
+:PD.Die Nachrichtendatei wird in der aktuellen Bibliothek f r den Job
+gesucht. Enth lt die Bibliotheksliste keinen aktuellen
 Bibliothekseintrag, wird QGPL benutzt.
 :PT.:PV.Bibliotheksname:EPV.
 :PD.Bibliothek angeben, in der sich die Nachrichtendatei befindet.
@@ -3091,7 +3090,7 @@ Bibliothekseintrag, wird QGPL benutzt.
 :EHELP.
 .*
 .*--------------------------------------------------------------------
-.* Hilfetext für Schlüsselwort TOMSGID
+.* Hilfetext f r Schl sselwort TOMSGID
 .*--------------------------------------------------------------------
 :HELP name='DUPMSGD/TOMSGID'.
 Nach Nachrichten-ID - Hilfe
@@ -3103,9 +3102,9 @@ Gibt die Nachrichten-ID der neuen Nachrichtenbeschreibung an.
 .*
 :PARML.
 :PT.:PK DEF.*FROMID:EPK.
-:PD.Die neue Nachrichtenbeschreibung erhält die gleiche Nachrichten-ID
+:PD.Die neue Nachrichtenbeschreibung erh lt die gleiche Nachrichten-ID
 wie die Von-Nachrichtenbeschreibung. *FROMID kann nur dann angegeben werden,
-wenn für :HP2.Nach Nachrichtendatei:EHP2. (Parameter TOMSGF) nicht *FROMMSGF
+wenn f r :HP2.Nach Nachrichtendatei:EHP2. (Parameter TOMSGF) nicht *FROMMSGF
 angegeben wird.
 :PT.:PV.Name der Nachrichtendatei:EPV.
 :PD.Angeben, in welche Nachrichtendatei die Nachrichten-ID kopiert werden soll.
@@ -3114,7 +3113,7 @@ angegeben wird.
 :EHELP.
 .*
 .*--------------------------------------------------------------------
-.* Hilfetext für Schlüsselwort TOMSGF
+.* Hilfetext f r Schl sselwort TOMSGF
 .*--------------------------------------------------------------------
 :HELP name='DUPMSGD/TOMSGF'.
 Nach Nachrichtendatei - Hilfe
@@ -3135,15 +3134,15 @@ Nachrichtendatei kopiert.
 Nachrichtenbeschreibungen kopiert werden sollen.
 :EPARML.
 :P.
-Gültige Bibliothekswerte sind:
+G ltige Bibliothekswerte sind:
 :P.
 :PARML.
 :PT.:PK DEF.*LIBL:EPK.
 :PD.Alle Bibliotheken in der Bibliotheksliste des Jobs werden
-durchsucht, bis die erste Übereinstimmung gefunden wird.
+durchsucht, bis die erste  bereinstimmung gefunden wird.
 :PT.:PV.*CURLIB:EPV.
-:PD.Die Nachrichtendatei wird in der aktuellen Bibliothek für den Job
-gesucht. Enthält die Bibliotheksliste keinen aktuellen
+:PD.Die Nachrichtendatei wird in der aktuellen Bibliothek f r den Job
+gesucht. Enth lt die Bibliotheksliste keinen aktuellen
 Bibliothekseintrag, wird QGPL benutzt.
 :PT.:PV.Bibliotheksname:EPV.
 :PD.Bibliothek angeben, in der sich die Nachrichtendatei befindet.
@@ -3152,7 +3151,7 @@ Bibliothekseintrag, wird QGPL benutzt.
 :EHELP.
 .*
 .*--------------------------------------------------------------------
-.* Hilfetext für Schlüsselwort REPLACE
+.* Hilfetext f r Schl sselwort REPLACE
 .*--------------------------------------------------------------------
 :HELP name='DUPMSGD/REPLACE'.
 Nachrichtenbeschr. ersetzen - Hilfe
@@ -3202,7 +3201,7 @@ Dieser Parameter ist optional.
 .*=====================================
 :HELP NAME='COM/VALUES'.
 :P.
-Mögliche Werte sind:
+M gliche Werte sind:
 :EHELP.
 .*
 :EPNLGRP.
@@ -3219,476 +3218,478 @@ mbrtext =  "Tool: DUPMSGD    (Duplicate MessageD )            "
 srcfile =  "QDUPMSGD  "
 srclib  =  "selected  "
 srclen  =  "00112"
-srccssid=  "00273">
+srccssid=  "01141">
 <copysrc><![CDATA[
-       // =================================================================== *
-       //                                                                     *
-       //  Kurzdokumentation :                                                *
-       //                                                                     *
-       //  Bereich . . . : DUPMSGD                                            *
-       //  Objekt  . . . : DUPMSGDR1                                          *
-       //  Beschreibung  : Tool: DUPMSGD    (Duplicate MessageD )             *
-       //  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      *
-       //  Datum . . . . : ?                                                  *
-       //                                                                     *
-       //=====================================================================*
-       //                                                                     *
-       //  This software is free software, you can redistribute it and/or     *
-       //  modify it under the terms of the GNU General Public License (GPL)  *
-       //  as published by the Free Software Foundation.                      *
-       //                                                                     *
-       //  See GNU General Public License for details.                        *
-       //          http://www.opensource.org                                  *
-       //          http://www.opensource.org/licenses/gpl-license.html        *
-       //                                                                     *
-       //=====================================================================*
-       //  History:                                                           *
-       //                                                                     *
-       //  Datum       Name          Änderung                                 *
-       //  ----------  ------------  ---------------------------------------  *
-       //  16.12.2002  Th.Raddatz    Changed '§msgid' to 'sds_msgid' and      *
-       //                                    '§msgdt' to 'sds_msgdt'.         *
-       //                            Changed all occurences where '§' was     *
-       //                            used: §l, §s, §errcd.                    *
-       //                            Added parameters:                        *
-       //                               LOGPRB()                              *
-       //                               DFT()                                 *
-       //                               TYPE()                                *
-       //  05.02.2019  Th.Raddatz    Converted to /free.                      *
-       //                                                                     *
-       // =================================================================== *
-       // >>PRE-COMPILER<<                                                    *
-       //   >>CRTCMD<< CRTRPGMOD    MODULE(&LI/&OB) +                         *
-       //                           SRCFILE(&SL/&SF) SRCMBR(&SM);             *
-       //   >>IMPORTANT<<                                                     *
-       //     >>PARM<< DBGVIEW(*LIST);                                        *
-       //     >>PARM<< TRUNCNBR(*NO);                                         *
-       //     >>PARM<< OPTION(*EVENTF);                                       *
-       //   >>END-IMPORTANT<<                                                 *
-       //   >>EXECUTE<<                                                       *
-       // >>END-PRE-COMPILER<<                                                *
-       // =================================================================== *
-       //                                                                     *
-       //  Attention: If you have applied one of the PTFs listed              *
-       //             below or if you are running V4R3 or above               *
-       //             you should set constant OFS to 1.                       *
-       //             Otherwise you should set OFS to 0.                      *
-       //                                                                     *
-       //             V3R1M0 - SF51811                                        *
-       //             V3R2M0 - SF51812                                        *
-       //             V3R6M0 - SF51813                                        *
-       //             V3R7M0 - SF51814                                        *
-       //             V4R1M0 - SF51815                                        *
-       //             V4R2M0 - SF51817                                        *
-       //                                                                     *
-       // =================================================================== *
-     H debug decedit('0,') datedit(*dmy.)
-      /copy qdupmsgd,copyright
-       // =================================================================== *
-
-      /copy qdupmsgd,qmhrtvm
-      /copy qdupmsgd,fderrcode
-
-     D rtvm0400        ds                  likeds(rtvm0400_t) inz
-     D substVar        ds                  likeds(qmhrtvm_substVarFmt_t)
-     D                                     based(pSubstVar)
-     D errCode         ds                  likeds(errCode_t)
-
-     D qMsgF           ds                  qualified
-     D name                          10a   inz
-     D lib                           10a   inz
-
-     D fldDef          ds                  qualified
-     D  length                       10i 0 inz
-     D  decPos                       10i 0 inz
-     D  hasDecPos                      n   inz
-     D  orgType                      20a   inz varying
-
-     D dateISO         s               d   inz
-     D dateJob         s             10a   inz
-
-     D tempText        ds         16384
-     D text            ds         16384
-
-       //  Program information data structure
-     D sds            sds                  qualified
-     D msgId                  40     46
-     D msgDta                 91    170
-
-     D i               s             10i 0
-     D x               s             10i 0
-     D numVars         s             10i 0
-
-     D DUPMSGDR2...
-     D                 pr                  extpgm('DUPMSGDR1')
-     D  i_frmLib                     10a   const
-     D  i_frmMsgF                    10a   const
-     D  i_frmMsgId                    7a   const
-     D  i_toLib                      10a   const
-     D  i_toMsgF                     10a   const
-     D  i_toMsgId                     7a   const
-     D  o_cmd                     16384a
-     D  o_errId                       7a
-     D  o_errData                    80a
-
-     D DUPMSGDR2...
-     D                 pi
-     D  i_frmLib                     10a   const
-     D  i_frmMsgF                    10a   const
-     D  i_frmMsgId                    7a   const
-     D  i_toLib                      10a   const
-     D  i_toMsgF                     10a   const
-     D  i_toMsgId                     7a   const
-     D  o_cmd                     16384a
-     D  o_errId                       7a
-     D  o_errData                    80a
-      /free
-
-       o_errId = *blanks;
-       o_errData = *blanks;
-
-       qMsgF.name = i_frmMsgF;
-       qMsgF.lib = i_frmLib;
-
-       clear errCode;
-       errCode.bytPrv = %size(errCode);
-
-       callp(e) QMHRTVM(rtvm0400: %size(rtvm0400): 'RTVM0400'
-                        : i_frmMsgId: qMsgF: '': 0: '*NO': '*NO': errCode);
-
-       if (%error());
-          o_errId = 'USR0006'; // Unexpected error in QMHRTVM API. Check job log.
-          o_errData = '*N';
-       else;
-          if (errCode.bytAvl > *zero);
-             qMsgF.name = 'QCPFMSG';
-             qMsgF.lib = '*LIBL';
-             QMHRTVM(rtvm0400: %size(rtvm0400): 'RTVM0400'
-                     : errCode.excID: qMsgF
-                     : errCode.excDta: %len(%trimr(errCode.excDta))
-                     : '*YES': '*NO': errCode);
-             o_errId = 'USR0007'; // QMHRTVM API ended with error: &1
-             o_errData = %subst(rtvm0400: rtvm0400.ofsMsg+1: rtvm0400.lenMsgR);
-          else;
-             exsr prdCmd;
-          endif;
-       endif;
-
-       return;
-
-       //*****************************************************
-       // Produce ADDMSGD command
-       //*****************************************************
-
-       begsr prdCmd;
-
-          // ADDMSGD
-          o_cmd = 'ADDMSGD';
-
-          // MSGID()
-          o_cmd = %trimr(o_cmd) + ' ' + 'MSGID';
-          exsr opnbrk;
-          o_cmd = %trimr(o_cmd) + i_toMsgId;
-          exsr clsbrk;
-
-          // MSGF()
-          o_cmd = %trimr(o_cmd) + ' ' + 'MSGF';
-          exsr opnbrk;
-          o_cmd = %trimr(o_cmd) + %trim(i_toLib) + '/' + %trim(i_toMsgF);
-          exsr clsbrk;
-
-          // MSG()
-          if (rtvm0400.LENMSGR > *zeros);
-             o_cmd = %trimr(o_cmd) + ' ' + 'MSG';
-             exsr opnbrk;
-
-             text = %subst(rtvm0400: rtvm0400.OFSMSG + 1: rtvm0400.lenMsgR);
-
-             exsr rplhpn;
-             if (o_errId <> '');
-                leavesr;
-             endif;
-
-             text = '''' + %trimr(text) + '''';
-
-             o_cmd = %trimr(o_cmd) + text;
-             exsr clsbrk;
-          endif;
-
-          // SECLVL()
-          if (rtvm0400.lenMsgHlpR > 0);
-             o_cmd = %trimr(o_cmd) + ' ' + 'SECLVL';
-             exsr opnbrk;
-
-             text = %subst(rtvm0400: rtvm0400.ofsMsgHlp+1: rtvm0400.lenMsgHlpR);
-             exsr rplhpn;
-             if (o_errId <> '');
-                leavesr;
-             endif;
-
-             text = '''' + %trimr(text) + '''';
-
-             o_cmd = %trimr(o_cmd) + text;
-             exsr clsbrk;
-          endif;
-
-          // SEV()
-          o_cmd = %trimr(o_cmd) + ' ' + 'SEV';
-          exsr opnbrk;
-          o_cmd = %trimr(o_cmd) + %char(rtvm0400.msgSev);
-          exsr clsbrk;
-
-          // Compute number of replacement variables
-          if (rtvm0400.lenVarFmtR > 0);
-             numVars = rtvm0400.lenVarFmtR / rtvm0400.lenVarFmtE;
-          else;
-             numVars = *zeros;
-          endif;
-
-          // FMT()
-          if (numVars > *zeros);
-             o_cmd = %trimr(o_cmd) + ' ' + 'FMT';
-             exsr opnbrk;
-          endif;
-
-          for x = 1 to numVars;
-
-             o_cmd = %trimr(o_cmd) + ' ' + '(';
-
-             // Get next replacement variable
-             if (x = 1);
-                pSubstVar = %addr(rtvm0400) + rtvm0400.ofsVarFmt;
-             else;
-                pSubstVar = pSubstVar + rtvm0400.lenVarFmtE;
-             endif;
-
-             // Check field type
-             exsr chktyp;
-             if (o_errId <> '');
-                Leavesr;
-             endif;
-
-             // Get field definition
-             exsr getFldDef;
-             o_cmd = %trimr(o_cmd) + fldDef.orgType;
-
-             // ... Field length
-             o_cmd = %trimr(o_cmd) + ' ' + %char(fldDef.length);
-
-             // ... Fraction
-             if (fldDef.hasDecPos);
-                o_cmd = %trimr(o_cmd) + ' ' + %char(fldDef.decPos);
-             endif;
-
-             exsr clsbrk;
-          endfor;
-
-          if (numVars > *zeros);
-             exsr clsbrk;
-          endif;
-
-          // ALROPT()
-          o_cmd = %trimr(o_cmd) + ' ' + 'ALROPT';
-          exsr opnbrk;
-          o_cmd = %trimr(o_cmd) + rtvm0400.ALTOPT;
-          if (rtvm0400.ALTIDX >= 1 and rtvm0400.ALTIDX <= 99);
-             o_cmd = %trimr(o_cmd) + ' ' + %char(rtvm0400.altIdx);
-          endif;
-          exsr clsbrk;
-
-          // LOGPRB()
-          o_cmd = %trimr(o_cmd) + ' ' + 'LOGPRB';
-          exsr opnbrk;
-          If rtvm0400.LOGIND = 'Y';
-             o_cmd = %trimr(o_cmd) + '*YES';
-          else;
-             o_cmd = %trimr(o_cmd) + '*NO';
-          endif;
-          exsr clsbrk;
-
-          // CCSID()
-          o_cmd = %trimr(o_cmd) + ' ' + 'CCSID';
-          exsr opnbrk;
-          o_cmd = %trimr(o_cmd) + %char(rtvm0400.ccsidTxt);
-          exsr clsbrk;
-
-          // DFT()
-          if (rtvm0400.lenDftRpyR > 0);
-             o_cmd = %trimr(o_cmd) + ' ' + 'DFT';
-             exsr opnbrk;
-             o_cmd = %trimr(o_cmd) +
-                     %subst(rtvm0400.data:rtvm0400.ofsDftR:rtvm0400.lenDftRpyA);
-             exsr clsbrk;
-          endif;
-
-          // TYPE()
-          o_cmd = %trimr(o_cmd) + ' ' + 'TYPE';
-          exsr opnbrk;
-          o_cmd = %trimr(o_cmd) + rtvm0400.rpyType;
-          exsr clsbrk;
-
-          // LEN()
-          o_cmd = %trimr(o_cmd) + ' ' + 'LEN';
-          exsr opnbrk;
-          If rtvm0400.RPYTYPE = '*NONE';
-             o_cmd = %trimr(o_cmd) + '*NONE';
-          else;
-             If rtvm0400.MAXRPYLEN > 0;
-                o_cmd = %trimr(o_cmd) + %char(rtvm0400.maxRpyLen);
-                If rtvm0400.RPYTYPE = '*DEC';
-                   o_cmd = %trimr(o_cmd) + ' ' + %char(rtvm0400.maxRpyDecPos);
-                endif;
-             else;
-                o_cmd = %trimr(o_cmd) + '*TYPE';
-             endif;
-          endif;
-          exsr clsbrk;
-
-          // VALUES()
-
-          // SPCVAL()
-
-          // RANGE()
-
-          // REL()
-
-          // LVL()
-          o_cmd = %trimr(o_cmd) + ' ' + 'LVL';
-          exsr opnbrk;
-          dateISO = %date(rtvm0400.modDate: *cymd0);
-          dateJob = %char(dateISO: *jobrun);
-          o_cmd = %trimr(o_cmd) + ''''
-                                + %trim(dateJob)
-                                + ''''
-                                + ' ' + %char(rtvm0400.crtLvlNbr);
-          exsr clsbrk;
-
-       endsr;
-
-       //*****************************************************
-       // Double hyphens
-       //*****************************************************
-
-       begsr rplhpn;
-
-          i = 1;
-
-          dou (i = 0);
-
-             i = %scan('''': text: i);
-             if (i > 0);
-
-                i = i + 1;
-                if (i <= %size(tempText));
-                   tempText = %subst(text: i);
-                else;
-                   //  "ASSERT"
-                   o_errId = 'USR0008'; // Buffer overflow for field: &1
-                   o_errData = 'tempText (' +
-                               %char(i) + ' > ' + %char(%size(tempText)) + ')';
-                   leavesr;
-                endif;
-
-                %subst(text: i: 1) = '''';
-                if (i <= %size(text));
-                   text = %subst(text: 1: i) + tempText;
-                else;
-                   //  "ASSERT"
-                   o_errId = 'USR0008'; // Buffer overflow for field: &1
-                   o_errData = 'text (' +
-                               %char(i) + ' > ' + %char(%size(text)) + ')';
-                   leavesr;
-                endif;
-
-                i = i + 1;
-             endif;
-
-          enddo;
-
-       endsr;
-
-       //*****************************************************
-       // Add opening bracket
-       //*****************************************************
-
-       begsr opnbrk;
-
-          o_cmd = %trimr(o_cmd) + '(';
-
-       Endsr;
-
-       //*****************************************************
-       // Add closing bracket
-       //*****************************************************
-
-       begsr clsbrk;
-
-          o_cmd = %trimr(o_cmd) + ')';
-
-       endsr;
-
-       //*****************************************************
-       // Check data type of replacement variable
-       //*****************************************************
-
-       begsr chktyp;
-
-          if (substVar.type <> '*QTDCHAR'  and
-             substVar.type <> '*CHAR'  and
-             substVar.type <> '*DEC'  and
-             substVar.type <> '*HEX');
-             o_errId = 'USR0005';
-             o_errData = substVar.type;
-          endif;
-
-       endsr;
-
-       //*****************************************************
-       // Get field definition of replacement variable
-       //*****************************************************
-
-       begsr getFldDef;
-
-          select;
-          when (substVar.type = '*QTDCHAR');
-             fldDef.length = substVar.length;
-             fldDef.decPos = -1;
-             fldDef.hasDecPos = *off;
-             fldDef.orgType = substVar.type;
-
-          when (substVar.type = '*CHAR');
-             fldDef.length = substVar.length;
-             fldDef.decPos = -1;
-             fldDef.hasDecPos = *off;
-             fldDef.orgType = substVar.type;
-
-          when (substVar.type = '*HEX');
-             fldDef.length = substVar.length;
-             fldDef.decPos = -1;
-             fldDef.hasDecPos = *off;
-             fldDef.orgType = substVar.type;
-
-          when (substVar.type = '*DEC');
-             fldDef.length = substVar.length;
-             fldDef.decPos = substVar.decPos;
-             fldDef.hasDecPos = *on;
-             fldDef.orgType = substVar.type;
-
-          endsl;
-
-       endsr;
-
-       //*****************************************************
-       // Error handler
-       //*****************************************************
-
-       begsr *pssr;
-
-          Dump;
-
-       endsr '*CANCL';
-
-      /end-free
+**free
+// =================================================================== *
+//                                                                     *
+//  Kurzdokumentation :                                                *
+//                                                                     *
+//  Bereich . . . : DUPMSGD                                            *
+//  Objekt  . . . : DUPMSGDR1                                          *
+//  Beschreibung  : Tool: DUPMSGD    (Duplicate MessageD )             *
+//  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      *
+//  Datum . . . . : ?                                                  *
+//                                                                     *
+//=====================================================================*
+//                                                                     *
+//  This software is free software, you can redistribute it and/or     *
+//  modify it under the terms of the GNU General Public License (GPL)  *
+//  as published by the Free Software Foundation.                      *
+//                                                                     *
+//  See GNU General Public License for details.                        *
+//          http://www.opensource.org                                  *
+//          http://www.opensource.org/licenses/gpl-license.html        *
+//                                                                     *
+//=====================================================================*
+//  History:                                                           *
+//                                                                     *
+//  Datum       Name           nderung                                 *
+//  ----------  ------------  ---------------------------------------  *
+//  16.12.2002  Th.Raddatz    Changed ' msgid' to 'sds_msgid' and      *
+//                                    ' msgdt' to 'sds_msgdt'.         *
+//                            Changed all occurences where ' ' was     *
+//                            used:  l,  s,  errcd.                    *
+//                            Added parameters:                        *
+//                               LOGPRB()                              *
+//                               DFT()                                 *
+//                               TYPE()                                *
+//  05.02.2019  Th.Raddatz    Converted to /free.                      *
+//                                                                     *
+// =================================================================== *
+// >>PRE-COMPILER<<                                                    *
+//   >>CRTCMD<< CRTRPGMOD    MODULE(&LI/&OB) +                         *
+//                           SRCFILE(&SL/&SF) SRCMBR(&SM);             *
+//   >>IMPORTANT<<                                                     *
+//     >>PARM<< DBGVIEW(*LIST);                                        *
+//     >>PARM<< TRUNCNBR(*NO);                                         *
+//     >>PARM<< OPTION(*EVENTF);                                       *
+//   >>END-IMPORTANT<<                                                 *
+//   >>EXECUTE<<                                                       *
+// >>END-PRE-COMPILER<<                                                *
+// =================================================================== *
+//                                                                     *
+//  Attention: If you have applied one of the PTFs listed              *
+//             below or if you are running V4R3 or above               *
+//             you should set constant OFS to 1.                       *
+//             Otherwise you should set OFS to 0.                      *
+//                                                                     *
+//             V3R1M0 - SF51811                                        *
+//             V3R2M0 - SF51812                                        *
+//             V3R6M0 - SF51813                                        *
+//             V3R7M0 - SF51814                                        *
+//             V4R1M0 - SF51815                                        *
+//             V4R2M0 - SF51817                                        *
+//                                                                     *
+// =================================================================== *
+ctl-opt debug decedit('0,') datedit(*dmy.);
+/copy qdupmsgd,copyright
+// =================================================================== *
+
+/copy qdupmsgd,qmhrtvm
+/copy qdupmsgd,fderrcode
+
+dcl-ds rtvm0400 likeds(rtvm0400_t) inz;
+dcl-ds substVar likeds(qmhrtvm_substVarFmt_t) based(pSubstVar);
+dcl-ds errCode likeds(errCode_t);
+
+dcl-ds qMsgF qualified;
+  name char(10) inz;
+  lib  char(10) inz;
+end-ds;
+
+dcl-ds fldDef qualified;
+  length    int(10) inz;
+  decPos    int(10) inz;
+  hasDecPos ind inz;
+  orgType   varchar(20) inz;
+end-ds;
+
+dcl-s dateISO date inz;
+dcl-s dateJob char(10) inz;
+
+dcl-ds tempText len(16384);
+end-ds;
+dcl-ds text len(16384);
+end-ds;
+
+//  Program information data structure
+dcl-ds sds qualified psds;
+  msgId  char(7) pos(40);
+  msgDta char(80) pos(91);
+end-ds;
+
+dcl-s i int(10);
+dcl-s x int(10);
+dcl-s numVars int(10);
+
+dcl-pr DUPMSGDR2 extpgm('DUPMSGDR1');
+  i_frmLib   char(10) const;
+  i_frmMsgF  char(10) const;
+  i_frmMsgId char(7) const;
+  i_toLib    char(10) const;
+  i_toMsgF   char(10) const;
+  i_toMsgId  char(7) const;
+  o_cmd      char(16384);
+  o_errId    char(7);
+  o_errData  char(80);
+end-pr;
+dcl-pi DUPMSGDR2;
+  i_frmLib   char(10) const;
+  i_frmMsgF  char(10) const;
+  i_frmMsgId char(7) const;
+  i_toLib    char(10) const;
+  i_toMsgF   char(10) const;
+  i_toMsgId  char(7) const;
+  o_cmd      char(16384);
+  o_errId    char(7);
+  o_errData  char(80);
+end-pi;
+
+o_errId = *blanks;
+o_errData = *blanks;
+
+qMsgF.name = i_frmMsgF;
+qMsgF.lib = i_frmLib;
+
+clear errCode;
+errCode.bytPrv = %size(errCode);
+
+callp(e) QMHRTVM(rtvm0400: %size(rtvm0400): 'RTVM0400'
+                 : i_frmMsgId: qMsgF: '': 0: '*NO': '*NO': errCode);
+
+if (%error());
+  o_errId = 'USR0006'; // Unexpected error in QMHRTVM API. Check job log.
+  o_errData = '*N';
+else;
+  if (errCode.bytAvl > *zero);
+    qMsgF.name = 'QCPFMSG';
+    qMsgF.lib = '*LIBL';
+    QMHRTVM(rtvm0400: %size(rtvm0400): 'RTVM0400'
+            : errCode.excID: qMsgF
+            : errCode.excDta: %len(%trimr(errCode.excDta))
+            : '*YES': '*NO': errCode);
+    o_errId = 'USR0007'; // QMHRTVM API ended with error: &1
+    o_errData = %subst(rtvm0400: rtvm0400.ofsMsg+1: rtvm0400.lenMsgR);
+  else;
+    exsr prdCmd;
+  endif;
+endif;
+
+return;
+
+//*****************************************************
+// Produce ADDMSGD command
+//*****************************************************
+
+begsr prdCmd;
+
+  // ADDMSGD
+  o_cmd = 'ADDMSGD';
+
+  // MSGID()
+  o_cmd = %trimr(o_cmd) + ' ' + 'MSGID';
+  exsr opnbrk;
+  o_cmd = %trimr(o_cmd) + i_toMsgId;
+  exsr clsbrk;
+
+  // MSGF()
+  o_cmd = %trimr(o_cmd) + ' ' + 'MSGF';
+  exsr opnbrk;
+  o_cmd = %trimr(o_cmd) + %trim(i_toLib) + '/' + %trim(i_toMsgF);
+  exsr clsbrk;
+
+  // MSG()
+  if (rtvm0400.LENMSGR > *zeros);
+    o_cmd = %trimr(o_cmd) + ' ' + 'MSG';
+    exsr opnbrk;
+
+    text = %subst(rtvm0400: rtvm0400.OFSMSG + 1: rtvm0400.lenMsgR);
+
+    exsr rplhpn;
+    if (o_errId <> '');
+      leavesr;
+    endif;
+
+    text = '''' + %trimr(text) + '''';
+
+    o_cmd = %trimr(o_cmd) + text;
+    exsr clsbrk;
+  endif;
+
+  // SECLVL()
+  if (rtvm0400.lenMsgHlpR > 0);
+    o_cmd = %trimr(o_cmd) + ' ' + 'SECLVL';
+    exsr opnbrk;
+
+    text = %subst(rtvm0400: rtvm0400.ofsMsgHlp+1: rtvm0400.lenMsgHlpR);
+    exsr rplhpn;
+    if (o_errId <> '');
+      leavesr;
+    endif;
+
+    text = '''' + %trimr(text) + '''';
+
+    o_cmd = %trimr(o_cmd) + text;
+    exsr clsbrk;
+  endif;
+
+  // SEV()
+  o_cmd = %trimr(o_cmd) + ' ' + 'SEV';
+  exsr opnbrk;
+  o_cmd = %trimr(o_cmd) + %char(rtvm0400.msgSev);
+  exsr clsbrk;
+
+  // Compute number of replacement variables
+  if (rtvm0400.lenVarFmtR > 0);
+    numVars = rtvm0400.lenVarFmtR / rtvm0400.lenVarFmtE;
+  else;
+    numVars = *zeros;
+  endif;
+
+  // FMT()
+  if (numVars > *zeros);
+    o_cmd = %trimr(o_cmd) + ' ' + 'FMT';
+    exsr opnbrk;
+  endif;
+
+  for x = 1 to numVars;
+
+    o_cmd = %trimr(o_cmd) + ' ' + '(';
+
+    // Get next replacement variable
+    if (x = 1);
+      pSubstVar = %addr(rtvm0400) + rtvm0400.ofsVarFmt;
+    else;
+      pSubstVar = pSubstVar + rtvm0400.lenVarFmtE;
+    endif;
+
+    // Check field type
+    exsr chktyp;
+    if (o_errId <> '');
+      Leavesr;
+    endif;
+
+    // Get field definition
+    exsr getFldDef;
+    o_cmd = %trimr(o_cmd) + fldDef.orgType;
+
+    // ... Field length
+    o_cmd = %trimr(o_cmd) + ' ' + %char(fldDef.length);
+
+    // ... Fraction
+    if (fldDef.hasDecPos);
+      o_cmd = %trimr(o_cmd) + ' ' + %char(fldDef.decPos);
+    endif;
+
+    exsr clsbrk;
+  endfor;
+
+  if (numVars > *zeros);
+    exsr clsbrk;
+  endif;
+
+  // ALROPT()
+  o_cmd = %trimr(o_cmd) + ' ' + 'ALROPT';
+  exsr opnbrk;
+  o_cmd = %trimr(o_cmd) + rtvm0400.ALTOPT;
+  if (rtvm0400.ALTIDX >= 1 and rtvm0400.ALTIDX <= 99);
+    o_cmd = %trimr(o_cmd) + ' ' + %char(rtvm0400.altIdx);
+  endif;
+  exsr clsbrk;
+
+  // LOGPRB()
+  o_cmd = %trimr(o_cmd) + ' ' + 'LOGPRB';
+  exsr opnbrk;
+  If rtvm0400.LOGIND = 'Y';
+    o_cmd = %trimr(o_cmd) + '*YES';
+  else;
+    o_cmd = %trimr(o_cmd) + '*NO';
+  endif;
+  exsr clsbrk;
+
+  // CCSID()
+  o_cmd = %trimr(o_cmd) + ' ' + 'CCSID';
+  exsr opnbrk;
+  o_cmd = %trimr(o_cmd) + %char(rtvm0400.ccsidTxt);
+  exsr clsbrk;
+
+  // DFT()
+  if (rtvm0400.lenDftRpyR > 0);
+    o_cmd = %trimr(o_cmd) + ' ' + 'DFT';
+    exsr opnbrk;
+    o_cmd = %trimr(o_cmd) +
+            %subst(rtvm0400.data:rtvm0400.ofsDftR:rtvm0400.lenDftRpyA);
+    exsr clsbrk;
+  endif;
+
+  // TYPE()
+  o_cmd = %trimr(o_cmd) + ' ' + 'TYPE';
+  exsr opnbrk;
+  o_cmd = %trimr(o_cmd) + rtvm0400.rpyType;
+  exsr clsbrk;
+
+  // LEN()
+  o_cmd = %trimr(o_cmd) + ' ' + 'LEN';
+  exsr opnbrk;
+  If rtvm0400.RPYTYPE = '*NONE';
+    o_cmd = %trimr(o_cmd) + '*NONE';
+  else;
+    If rtvm0400.MAXRPYLEN > 0;
+      o_cmd = %trimr(o_cmd) + %char(rtvm0400.maxRpyLen);
+      If rtvm0400.RPYTYPE = '*DEC';
+        o_cmd = %trimr(o_cmd) + ' ' + %char(rtvm0400.maxRpyDecPos);
+      endif;
+    else;
+      o_cmd = %trimr(o_cmd) + '*TYPE';
+    endif;
+  endif;
+  exsr clsbrk;
+
+  // VALUES()
+
+  // SPCVAL()
+
+  // RANGE()
+
+  // REL()
+
+  // LVL()
+  o_cmd = %trimr(o_cmd) + ' ' + 'LVL';
+  exsr opnbrk;
+  dateISO = %date(rtvm0400.modDate: *cymd0);
+  dateJob = %char(dateISO: *jobrun);
+  o_cmd = %trimr(o_cmd) + ''''
+                        + %trim(dateJob)
+                        + ''''
+                        + ' ' + %char(rtvm0400.crtLvlNbr);
+  exsr clsbrk;
+
+endsr;
+
+//*****************************************************
+// Double hyphens
+//*****************************************************
+
+begsr rplhpn;
+
+  i = 1;
+
+  dou (i = 0);
+
+    i = %scan('''': text: i);
+    if (i > 0);
+
+      i = i + 1;
+      if (i <= %size(tempText));
+        tempText = %subst(text: i);
+      else;
+        //  "ASSERT"
+        o_errId = 'USR0008'; // Buffer overflow for field: &1
+        o_errData = 'tempText (' +
+                    %char(i) + ' > ' + %char(%size(tempText)) + ')';
+        leavesr;
+      endif;
+
+      %subst(text: i: 1) = '''';
+      if (i <= %size(text));
+        text = %subst(text: 1: i) + tempText;
+      else;
+        //  "ASSERT"
+        o_errId = 'USR0008'; // Buffer overflow for field: &1
+        o_errData = 'text (' +
+                    %char(i) + ' > ' + %char(%size(text)) + ')';
+        leavesr;
+      endif;
+
+      i = i + 1;
+    endif;
+
+  enddo;
+
+endsr;
+
+//*****************************************************
+// Add opening bracket
+//*****************************************************
+
+begsr opnbrk;
+
+  o_cmd = %trimr(o_cmd) + '(';
+
+Endsr;
+
+//*****************************************************
+// Add closing bracket
+//*****************************************************
+
+begsr clsbrk;
+
+  o_cmd = %trimr(o_cmd) + ')';
+
+endsr;
+
+//*****************************************************
+// Check data type of replacement variable
+//*****************************************************
+
+begsr chktyp;
+
+  if (substVar.type <> '*QTDCHAR'  and
+     substVar.type <> '*CHAR'  and
+     substVar.type <> '*DEC'  and
+     substVar.type <> '*HEX');
+    o_errId = 'USR0005';
+    o_errData = substVar.type;
+  endif;
+
+endsr;
+
+//*****************************************************
+// Get field definition of replacement variable
+//*****************************************************
+
+begsr getFldDef;
+
+  select;
+  when (substVar.type = '*QTDCHAR');
+    fldDef.length = substVar.length;
+    fldDef.decPos = -1;
+    fldDef.hasDecPos = *off;
+    fldDef.orgType = substVar.type;
+
+  when (substVar.type = '*CHAR');
+    fldDef.length = substVar.length;
+    fldDef.decPos = -1;
+    fldDef.hasDecPos = *off;
+    fldDef.orgType = substVar.type;
+
+  when (substVar.type = '*HEX');
+    fldDef.length = substVar.length;
+    fldDef.decPos = -1;
+    fldDef.hasDecPos = *off;
+    fldDef.orgType = substVar.type;
+
+  when (substVar.type = '*DEC');
+    fldDef.length = substVar.length;
+    fldDef.decPos = substVar.decPos;
+    fldDef.hasDecPos = *on;
+    fldDef.orgType = substVar.type;
+
+  endsl;
+
+endsr;
+
+//*****************************************************
+// Error handler
+//*****************************************************
+
+begsr *pssr;
+
+  Dump;
+
+endsr '*CANCL';
+
 ]]>  </copysrc>
 </mbr>
 <sendmsg  sendmsgid="CPF9897" sendmsgtype = "*STATUS   "><![CDATA[
@@ -3702,122 +3703,121 @@ mbrtext =  "Tool: DUPMSGD    (Duplicate MessageD )            "
 srcfile =  "QDUPMSGD  "
 srclib  =  "selected  "
 srclen  =  "00112"
-srccssid=  "00273">
+srccssid=  "01141">
 <copysrc><![CDATA[
-       // =================================================================== *
-       //                                                                     *
-       //  Kurzdokumentation :                                                *
-       //                                                                     *
-       //  Bereich . . . : DUPMSGD                                            *
-       //  Objekt  . . . : DUPMSGDR2                                          *
-       //  Beschreibung  : Tool: DUPMSGD    (Duplicate MessageD )             *
-       //  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      *
-       //  Datum . . . . : ?                                                  *
-       //                                                                     *
-       //=====================================================================*
-       //                                                                     *
-       //  This software is free software, you can redistribute it and/or     *
-       //  modify it under the terms of the GNU General Public License (GPL)  *
-       //  as published by the Free Software Foundation.                      *
-       //                                                                     *
-       //  See GNU General Public License for details.                        *
-       //          http://www.opensource.org                                  *
-       //          http://www.opensource.org/licenses/gpl-license.html        *
-       //                                                                     *
-       //=====================================================================*
-       //  History:                                                           *
-       //                                                                     *
-       //  Datum       Name          Änderung                                 *
-       //  ----------  ------------  ---------------------------------------  *
-       //  16.01.2002  Th.Raddatz    Changed output parameter name 'xmsg'     *
-       //                            to 'xmsgId'.                             *
-       //                            Removed *INZSR.                          *
-       //  10.01.2003  Th.Raddatz    Removed special character § from source. *
-       //  05.02.2019  Th.Raddatz    Converted to /free.                      *
-       //                                                                     *
-       // =================================================================== *
-       // >>PRE-COMPILER<<                                                    *
-       //   >>CRTCMD<< CRTRPGMOD    MODULE(&LI/&OB) +                         *
-       //                           SRCFILE(&SL/&SF) SRCMBR(&SM);             *
-       //   >>IMPORTANT<<                                                     *
-       //     >>PARM<< DBGVIEW(*LIST);                                        *
-       //     >>PARM<< TRUNCNBR(*NO);                                         *
-       //     >>PARM<< OPTION(*EVENTF);                                       *
-       //   >>END-IMPORTANT<<                                                 *
-       //   >>EXECUTE<<                                                       *
-       // >>END-PRE-COMPILER<<                                                *
-       // =================================================================== *
-     H debug decedit('0,') datedit(*dmy.)
-      /copy qdupmsgd,copyright
-       // =================================================================== *
+**free
+// =================================================================== *
+//                                                                     *
+//  Kurzdokumentation :                                                *
+//                                                                     *
+//  Bereich . . . : DUPMSGD                                            *
+//  Objekt  . . . : DUPMSGDR2                                          *
+//  Beschreibung  : Tool: DUPMSGD    (Duplicate MessageD )             *
+//  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      *
+//  Datum . . . . : ?                                                  *
+//                                                                     *
+//=====================================================================*
+//                                                                     *
+//  This software is free software, you can redistribute it and/or     *
+//  modify it under the terms of the GNU General Public License (GPL)  *
+//  as published by the Free Software Foundation.                      *
+//                                                                     *
+//  See GNU General Public License for details.                        *
+//          http://www.opensource.org                                  *
+//          http://www.opensource.org/licenses/gpl-license.html        *
+//                                                                     *
+//=====================================================================*
+//  History:                                                           *
+//                                                                     *
+//  Datum       Name           nderung                                 *
+//  ----------  ------------  ---------------------------------------  *
+//  16.01.2002  Th.Raddatz    Changed output parameter name 'xmsg'     *
+//                            to 'xmsgId'.                             *
+//                            Removed *INZSR.                          *
+//  10.01.2003  Th.Raddatz    Removed special character   from source. *
+//  05.02.2019  Th.Raddatz    Converted to /free.                      *
+//                                                                     *
+// =================================================================== *
+// >>PRE-COMPILER<<                                                    *
+//   >>CRTCMD<< CRTRPGMOD    MODULE(&LI/&OB) +                         *
+//                           SRCFILE(&SL/&SF) SRCMBR(&SM);             *
+//   >>IMPORTANT<<                                                     *
+//     >>PARM<< DBGVIEW(*LIST);                                        *
+//     >>PARM<< TRUNCNBR(*NO);                                         *
+//     >>PARM<< OPTION(*EVENTF);                                       *
+//   >>END-IMPORTANT<<                                                 *
+//   >>EXECUTE<<                                                       *
+// >>END-PRE-COMPILER<<                                                *
+// =================================================================== *
+ctl-opt debug decedit('0,') datedit(*dmy.);
+/copy qdupmsgd,copyright
+// =================================================================== *
 
-      /copy qdupmsgd,qmhrtvm
-      /copy qdupmsgd,fderrcode
+/copy qdupmsgd,qmhrtvm
+/copy qdupmsgd,fderrcode
 
-     D rtvm0400        DS                  likeds(rtvm0400_t) inz
+dcl-ds rtvm0400 likeds(rtvm0400_t) inz;
 
-     D qMsgF           DS                  qualified
-     D name                          10a   inz
-     D lib                           10a   inz
+dcl-ds qMsgF qualified;
+  name char(10) inz;
+  lib  char(10) inz;
+end-ds;
 
-     D errCode         DS                  likeds(errCode_t) inz
+dcl-ds errCode likeds(errCode_t) inz;
 
-     D DUPMSGDR2...
-     D                 PR                  extpgm('DUPMSGDR2')
-     D  i_lib                        10a   const
-     D  i_msgF                       10a   const
-     D  i_msgId                       7a   const
-     D  i_rtvOpt                      7a   const
-     D  o_rtnMsgId                    7a
-     D  o_errId                       7a
-     D  o_errData                    80a
+dcl-pr DUPMSGDR2 extpgm('DUPMSGDR2');
+  i_lib      char(10) const;
+  i_msgF     char(10) const;
+  i_msgId    char(7) const;
+  i_rtvOpt   char(7) const;
+  o_rtnMsgId char(7);
+  o_errId    char(7);
+  o_errData  char(80);
+end-pr;
+dcl-pi DUPMSGDR2;
+  i_lib      char(10) const;
+  i_msgF     char(10) const;
+  i_msgId    char(7) const;
+  i_rtvOpt   char(7) const;
+  o_rtnMsgId char(7);
+  o_errId    char(7);
+  o_errData  char(80);
+end-pi;
 
-     D DUPMSGDR2...
-     D                 PI
-     D  i_lib                        10a   const
-     D  i_msgF                       10a   const
-     D  i_msgId                       7a   const
-     D  i_rtvOpt                      7a   const
-     D  o_rtnMsgId                    7a
-     D  o_errId                       7a
-     D  o_errData                    80a
-      /free
+o_rtnMsgId = '';
+o_errId = '';
+o_errData = '';
 
-       o_rtnMsgId = '';
-       o_errId = '';
-       o_errData = '';
+qMsgF.name = i_msgF;
+qMsgF.lib = i_lib;
 
-       qMsgF.name = i_msgF;
-       qMsgF.lib = i_lib;
+clear errCode;
+errCode.bytPrv = %size(errCode);
 
-       clear errCode;
-       errCode.bytPrv = %size(errCode);
+Callp(e) QMHRTVM(rtvm0400: %size(rtvm0400): 'RTVM0400': i_msgId
+                 : qMsgF: '': 0: '*NO': '*NO': errCode
+                 : i_rtvOpt: 0: 0);
 
-       Callp(e) QMHRTVM(rtvm0400: %size(rtvm0400): 'RTVM0400': i_msgId
-                        : qMsgF: '': 0: '*NO': '*NO': errCode
-                        : i_rtvOpt: 0: 0);
+if (%error());
+  o_errId = 'USR0006'; // Unexpected error in QMHRTVM API. Check job log.
+  o_errData = '*N';
+else;
+  if (errCode.bytAvl > *zero);
+    qMsgF.name = 'QCPFMSG';
+    qMsgF.lib = '*LIBL';
+    QMHRTVM(rtvm0400: %size(rtvm0400): 'RTVM0400'
+            : errCode.excID: qMsgF
+            : errCode.excDta: %len(%trimr(errCode.excDta))
+            : '*YES': '*NO': errCode);
+    o_errId = 'USR0007'; // QMHRTVM API ended with error: &1
+    o_errData = %subst(rtvm0400: rtvm0400.ofsMsg+1: rtvm0400.lenMsgR);
+  else;
+    o_rtnMsgId = rtvm0400.msgId;
+  endif;
+endif;
 
-       if (%error());
-          o_errId = 'USR0006'; // Unexpected error in QMHRTVM API. Check job log.
-          o_errData = '*N';
-       else;
-          if (errCode.bytAvl > *zero);
-             qMsgF.name = 'QCPFMSG';
-             qMsgF.lib = '*LIBL';
-             QMHRTVM(rtvm0400: %size(rtvm0400): 'RTVM0400'
-                     : errCode.excID: qMsgF
-                     : errCode.excDta: %len(%trimr(errCode.excDta))
-                     : '*YES': '*NO': errCode);
-             o_errId = 'USR0007'; // QMHRTVM API ended with error: &1
-             o_errData = %subst(rtvm0400: rtvm0400.ofsMsg+1: rtvm0400.lenMsgR);
-          else;
-             o_rtnMsgId = rtvm0400.msgId;
-          endif;
-       endif;
+return;
 
-       return;
-
-      /end-free
 ]]>  </copysrc>
 </mbr>
 <sendmsg  sendmsgid="CPF9897" sendmsgtype = "*STATUS   "><![CDATA[
@@ -3831,21 +3831,23 @@ mbrtext =  "cpybk   : API error code                          "
 srcfile =  "QDUPMSGD  "
 srclib  =  "selected  "
 srclen  =  "00112"
-srccssid=  "00273">
+srccssid=  "01141">
 <copysrc><![CDATA[
-      /if not defined(errCode_t )
-      /define errCode_t
-      *===============================================================*
-      *  API error code                                               *
-      *===============================================================*
-     d errCode_t       ds                  qualified           based(pDummy)
-     d  bytPrv                       10i 0
-     d  bytAvl                       10i 0
-     d  excID                         7a
-     d  reserved_1                    1a
-     d  excDta                      256a
-      *
-      /endif
+**free
+/if not defined(errCode_t)
+/define errCode_t
+//===============================================================*
+//  API error code                                               *
+//===============================================================*
+dcl-ds errCode_t qualified based(pDummy);
+  bytPrv     int(10);
+  bytAvl     int(10);
+  excID      char(7);
+  reserved_1 char(1);
+  excDta     char(256);
+end-ds;
+
+/endif
 ]]>  </copysrc>
 </mbr>
 <sendmsg  sendmsgid="CPF9897" sendmsgtype = "*STATUS   "><![CDATA[
@@ -3859,293 +3861,298 @@ mbrtext =  "Retrieve Message (QMHRTVM) API                    "
 srcfile =  "QDUPMSGD  "
 srclib  =  "selected  "
 srclen  =  "00112"
-srccssid=  "00273">
+srccssid=  "01141">
 <copysrc><![CDATA[
-      /if not defined(QMHRTVM)
-      /define QMHRTVM
-      *
-      *  Retrieve Message (QMHRTVM) API
-     d QMHRTVM...
-     d                 pr                  extpgm('QMHRTVM')
-     d  o_msgInf                  65535a          options(*varsize)
-     d  i_msgInfLen                  10i 0 const
-     d  i_format                      8a   const
-     d  i_msgID                       7a   const
-     d  i_qMsgF                      20A   const
-     d  i_rplData                 65535a   const  options(*varsize )
-     d  i_rpldataLen                 10i 0 const
-     d  i_rplVars                    10a   const
-     d  i_rtnCtrlChrs                10a   const
-     d  io_ErrCode                65535a          options(*varsize )
-     d  i_rtvOpt                     10a   const  options(*nopass  )            | OptGrp 1
-     d  i_toCcsid                    10i 0 const  options(*nopass  )            |
-     d  i_ccsidRplDta                10i 0 const  options(*nopass  )            |
-      *
-      /if not defined(rtvm0100_t)
-      /define rtvm0100_t
-     d rtvm0100_t      ds                  qualified           based(pDummy)
-      *  Bytes returned
-     d  BYTRET                        9B 0
-      *  Bytes available
-     d  BYTAVL                        9B 0
-      *  Length of message returned
-     d  LENMSGRET                     9B 0
-      *  Length of message available
-     d  LENMSGAVL                     9B 0
-      *  Length of msg help returned
-     d  LENHLPRET                     9B 0
-      *  Length of msg help available
-     d  LENHLPAVL                     9B 0
-      *  Msg text and data of varying length!
-     d  DATA                       2048A
-      *
-      /endif
-      /if not defined(rtvm0200_t)
-      /define rtvm0200_t
-     d rtvm0200_t      ds                  qualified           based(pDummy)
-      *  Bytes returned
-     d  bytRet                       10i 0
-      *  Bytes available
-     d  bytAvl                       10i 0
-      *  Message severity
-     d  msgSev                       10i 0
-      *  Alert index
-     d  altIdx                       10i 0
-      * Alert Option
-     d  altOpt                        9a
-      * Log indicator
-     d  logInd                        1a
-      * Reserved
-     d  reserved_1                    2a
-      * Length of default reply ret.
-     d  lenDftRpyR                   10i 0
-      * Length of default reply avl.
-     d  lenDftRpyA                   10i 0
-      * Length of message returned
-     d  lenMsgR                      10i 0
-      * Length of message available
-     d  lenMsgA                      10i 0
-      * Length of message help ret.
-     d  lenMsgHlpR                   10i 0
-      * Length of message help avl.
-     d  lenMsgHlpA                   10i 0
-      *                       CHAR(*)  Default reply
-      *                       CHAR(*)  Message
-      *                       CHAR(*)  Message help
-      *
-      /endif
-      /if not defined(rtvm0300_t)
-      /define rtvm0300_t
-     d rtvm0300_t      ds                  qualified           based(pDummy)
-      *  Bytes returned
-     d  bytRet                       10i 0
-      *  Bytes available
-     d  bytAvl                       10i 0
-      *  Message severity
-     d  msgSev                       10i 0
-      *  Alert index
-     d  altIdx                       10i 0
-      * Alert Option
-     d  altOpt                        9a
-      * Log indicator
-     d  logInd                        1a
-      * Message ID
-     d  msgID                         7a
-      * Reserved
-     d  reserved_01                   3a
-      * Nbr. of subst. var. formats
-     d  numVarFmt                    10i 0
-      * CCSID conv. stat. ind. text
-     d  csIndTxt                     10i 0
-      * CCSID conv. stat. ind. data
-     d  csIndDta                     10i 0
-      * CCSID of Text returned
-     d  ccsidTxt                     10i 0
-      * Offset of default reply
-     d  ofsDftR                      10i 0
-      * Length of default reply ret.
-     d  lenDftRpyR                   10i 0
-      * Length of default reply avl.
-     d  lenDftRpyA                   10i 0
-      * Offset of message
-     d  ofsMsg                       10i 0
-      * Length of message returned
-     d  lenMsgR                      10i 0
-      * Length of message available
-     d  lenMsgA                      10i 0
-      * Offset of message help
-     d  ofsMsgHlp                    10i 0
-      * Length of message help ret.
-     d  lenMsgHlpR                   10i 0
-      * Length of message help avl.
-     d  lenMsgHlpA                   10i 0
-      * Ofs. of subst. var. formats
-     d  ofsVarFmt                    10i 0
-      * Length subst. var. fmt. ret.
-     d  lenVarFmtR                   10i 0
-      * Length subst. var. fmt. avl.
-     d  lenVarFmtA                   10i 0
-      * Length subst. var. element
-     d  lenVarFmtE                   10i 0
-      * Data
-     d  data                       4096A
-      *                       CHAR(*)  Default reply
-      *                       CHAR(*)  Message
-      *                       CHAR(*)  Message help
-      *                       CHAR(*)  Substitution variable formats
-      *
-      /endif
-      /if not defined(rtvm0400_t)
-      /define rtvm0400_t
-     d rtvm0400_t      ds                  qualified           based(pDummy)
-      *  Bytes returned
-     d  bytRet                       10i 0
-      *  Bytes available
-     d  bytAvl                       10i 0
-      *  Message severity
-     d  msgSev                       10i 0
-      *  Alert index
-     d  altIdx                       10i 0
-      * Alert Option
-     d  altOpt                        9a
-      * Log indicator
-     d  logInd                        1a
-      * Message ID
-     d  msgID                         7a
-      * Reserved
-     d  reserved_01                   3a
-      * Nbr. of subst. var. formats
-     d  numVarFmt                    10i 0
-      * CCSID conv. stat. ind. text
-     d  csIndTxt                     10i 0
-      * CCSID conv. stat. ind. data
-     d  csIndDta                     10i 0
-      * CCSID of Text returned
-     d  ccsidTxt                     10i 0
-      * Offset of default reply
-     d  ofsDftR                      10i 0
-      * Length of default reply ret.
-     d  lenDftRpyR                   10i 0
-      * Length of default reply avl.
-     d  lenDftRpyA                   10i 0
-      * Offset of message
-     d  ofsMsg                       10i 0
-      * Length of message returned
-     d  lenMsgR                      10i 0
-      * Length of message available
-     d  lenMsgA                      10i 0
-      * Offset of message
-     d  ofsMsgHlp                    10i 0
-      * Length of message help ret.
-     d  lenMsgHlpR                   10i 0
-      * Length of message help avl.
-     d  lenMsgHlpA                   10i 0
-      * Ofs. of subst. var. formats
-     d  ofsVarFmt                    10i 0
-      * Length subst. var. fmt. ret.
-     d  lenVarFmtR                   10i 0
-      * Length subst. var. fmt. avl.
-     d  lenVarFmtA                   10i 0
-      * Length subst. var. element
-     d  lenVarFmtE                   10i 0
-      * Reply type
-     d  rpyType                      10a
-      * Reserved
-     d  reserved_02                   2a
-      * Maximum reply length
-     d  maxRpyLen                    10i 0
-      * Maximum reply decimal positions
-     d  maxRpyDecPos                 10i 0
-      * Offset of valid reply value entries
-     d  ofsRpyE                      10i 0
-      * Number of valid reply values entries returned
-     d  numRpyER                     10i 0
-      * Length of valid reply value entries returned
-     d  lenRpyER                     10i 0
-      * Length of valid reply value entries available
-     d  lenRpyEA                     10i 0
-      * Length of valid reply value entry
-     d  lenRpyE                      10i 0
-      * Offset of special reply value entries
-     d  ofsSpcRpyE                   10i 0
-      * Number of special reply values returned
-     d  numSpcRpyER                  10i 0
-      * Length of special reply value entries returned
-     d  lenSpcRpyER                  10i 0
-      * Length of special reply value entries available
-     d  lenSpcRpyEA                  10i 0
-      * Length of special reply value entry
-     d  lenSpcRpyE                   10i 0
-      * Offset of lower range reply value
-     d  ofsLowRpyE                   10i 0
-      * Length of lower range reply value returned
-     d  lenLowRpyER                  10i 0
-      * Length of lower range reply value available
-     d  lenLowRpyEA                  10i 0
-      * Offset of upper range reply value
-     d  ofsUpRpyE                    10i 0
-      * Length of upper range reply value returned
-     d  ofsUpRpyER                   10i 0
-      * Length of upper range reply value available
-     d  ofsUpRpyEA                   10i 0
-      * Offset of relational test entry
-     d  ofsRelTestE                  10i 0
-      * Length of relational test entry returned
-     d  lenRelTestER                 10i 0
-      * Length of relational test entry available
-     d  lenRelTestEA                 10i 0
-      * Message creation date
-     d  crtDate                       7a
-      * Reserved
-     d  reserved_03                   1a
-      * Message creation level number
-     d  crtLvlNbr                    10i 0
-      * Message modification date
-     d  modDate                       7a
-      * Reserved
-     d  reserved_04                   1a
-      * Message modification level number
-     d  modLvlNbr                    10i 0
-      * Stored CCSID of message
-     d  storedCCSID                  10i 0
-      * Offset of dump list entries
-     d  ofsDmpListE                  10i 0
-      * Number of dump list entries returned
-     d  numDmpListER                 10i 0
-      * Length of dump list entries returned
-     d  lenDmpListER                 10i 0
-      * Length of dump list entries available
-     d  lenDmpListEA                 10i 0
-      * Default program name
-     d  dftPgmName                   10a
-      * Default program library name
-     d  dftPgmLib                    10a
-      * Data
-     d  data                       4096A
-      *                       CHAR(*)  Default reply
-      *                       CHAR(*)  Message
-      *                       CHAR(*)  Message help
-      *                       CHAR(*)  Substitution variable formats
-      *                       CHAR(*)  Valid reply value entries
-      *                       CHAR(*)  Special reply value entries
-      *                       CHAR(*)  Lower range reply value
-      *                       CHAR(*)  Upper range reply value
-      *                       CHAR(*)  Relational test entry
-      *                       CHAR(*)  Dump list entries
-      *
-      /endif
-      /if not defined(qmhrtvm_substVarFmt_t)
-      /define qmhrtvm_substVarFmt_t
-     d qmhrtvm_substVarFmt_t...
-     d                 ds                  qualified           based(pDummy)
-     d  length                 1      4i 0
-     d  sizeOrDecPos           5      8i 0
-     d  size                         10i 0 overlay(sizeOrDecPos)
-     d  decPos                       10i 0 overlay(sizeOrDecPos)
-     d  type                   9     18a
-      *                       CHAR(*)  Reserved
-      /endif
-      /endif
+**free
+/if not defined(QMHRTVM)
+/define QMHRTVM
+
+//  Retrieve Message (QMHRTVM) API
+dcl-pr QMHRTVM extpgm('QMHRTVM');
+  o_msgInf      char(65535) options(*varsize);
+  i_msgInfLen   int(10) const;
+  i_format      char(8) const;
+  i_msgID       char(7) const;
+  i_qMsgF       char(20) const;
+  i_rplData     char(65535) options(*varsize) const;
+  i_rpldataLen  int(10) const;
+  i_rplVars     char(10) const;
+  i_rtnCtrlChrs char(10) const;
+  io_ErrCode    char(65535) options(*varsize);
+  i_rtvOpt      char(10) options(*nopass) const; // OptGrp 1
+  i_toCcsid     int(10) options(*nopass) const;
+  i_ccsidRplDta int(10) options(*nopass) const;
+end-pr;
+
+/if not defined(rtvm0100_t)
+/define rtvm0100_t
+dcl-ds rtvm0100_t qualified based(pDummy);
+  //  Bytes returned
+  BYTRET    bindec(9);
+  //  Bytes available
+  BYTAVL    bindec(9);
+  //  Length of message returned
+  LENMSGRET bindec(9);
+  //  Length of message available
+  LENMSGAVL bindec(9);
+  //  Length of msg help returned
+  LENHLPRET bindec(9);
+  //  Length of msg help available
+  LENHLPAVL bindec(9);
+  //  Msg text and data of varying length!
+  DATA      char(2048);
+end-ds;
+
+/endif
+/if not defined(rtvm0200_t)
+/define rtvm0200_t
+dcl-ds rtvm0200_t qualified based(pDummy);
+  //  Bytes returned
+  bytRet     int(10);
+  //  Bytes available
+  bytAvl     int(10);
+  //  Message severity
+  msgSev     int(10);
+  //  Alert index
+  altIdx     int(10);
+  // Alert Option
+  altOpt     char(9);
+  // Log indicator
+  logInd     char(1);
+  // Reserved
+  reserved_1 char(2);
+  // Length of default reply ret.
+  lenDftRpyR int(10);
+  // Length of default reply avl.
+  lenDftRpyA int(10);
+  // Length of message returned
+  lenMsgR    int(10);
+  // Length of message available
+  lenMsgA    int(10);
+  // Length of message help ret.
+  lenMsgHlpR int(10);
+  // Length of message help avl.
+  lenMsgHlpA int(10);
+end-ds;
+//                       CHAR(*)  Default reply
+//                       CHAR(*)  Message
+//                       CHAR(*)  Message help
+
+/endif
+/if not defined(rtvm0300_t)
+/define rtvm0300_t
+dcl-ds rtvm0300_t qualified based(pDummy);
+  //  Bytes returned
+  bytRet      int(10);
+  //  Bytes available
+  bytAvl      int(10);
+  //  Message severity
+  msgSev      int(10);
+  //  Alert index
+  altIdx      int(10);
+  // Alert Option
+  altOpt      char(9);
+  // Log indicator
+  logInd      char(1);
+  // Message ID
+  msgID       char(7);
+  // Reserved
+  reserved_01 char(3);
+  // Nbr. of subst. var. formats
+  numVarFmt   int(10);
+  // CCSID conv. stat. ind. text
+  csIndTxt    int(10);
+  // CCSID conv. stat. ind. data
+  csIndDta    int(10);
+  // CCSID of Text returned
+  ccsidTxt    int(10);
+  // Offset of default reply
+  ofsDftR     int(10);
+  // Length of default reply ret.
+  lenDftRpyR  int(10);
+  // Length of default reply avl.
+  lenDftRpyA  int(10);
+  // Offset of message
+  ofsMsg      int(10);
+  // Length of message returned
+  lenMsgR     int(10);
+  // Length of message available
+  lenMsgA     int(10);
+  // Offset of message help
+  ofsMsgHlp   int(10);
+  // Length of message help ret.
+  lenMsgHlpR  int(10);
+  // Length of message help avl.
+  lenMsgHlpA  int(10);
+  // Ofs. of subst. var. formats
+  ofsVarFmt   int(10);
+  // Length subst. var. fmt. ret.
+  lenVarFmtR  int(10);
+  // Length subst. var. fmt. avl.
+  lenVarFmtA  int(10);
+  // Length subst. var. element
+  lenVarFmtE  int(10);
+  // Data
+  data        char(4096);
+end-ds;
+//                       CHAR(*)  Default reply
+//                       CHAR(*)  Message
+//                       CHAR(*)  Message help
+//                       CHAR(*)  Substitution variable formats
+
+/endif
+/if not defined(rtvm0400_t)
+/define rtvm0400_t
+dcl-ds rtvm0400_t qualified based(pDummy);
+  //  Bytes returned
+  bytRet       int(10);
+  //  Bytes available
+  bytAvl       int(10);
+  //  Message severity
+  msgSev       int(10);
+  //  Alert index
+  altIdx       int(10);
+  // Alert Option
+  altOpt       char(9);
+  // Log indicator
+  logInd       char(1);
+  // Message ID
+  msgID        char(7);
+  // Reserved
+  reserved_01  char(3);
+  // Nbr. of subst. var. formats
+  numVarFmt    int(10);
+  // CCSID conv. stat. ind. text
+  csIndTxt     int(10);
+  // CCSID conv. stat. ind. data
+  csIndDta     int(10);
+  // CCSID of Text returned
+  ccsidTxt     int(10);
+  // Offset of default reply
+  ofsDftR      int(10);
+  // Length of default reply ret.
+  lenDftRpyR   int(10);
+  // Length of default reply avl.
+  lenDftRpyA   int(10);
+  // Offset of message
+  ofsMsg       int(10);
+  // Length of message returned
+  lenMsgR      int(10);
+  // Length of message available
+  lenMsgA      int(10);
+  // Offset of message
+  ofsMsgHlp    int(10);
+  // Length of message help ret.
+  lenMsgHlpR   int(10);
+  // Length of message help avl.
+  lenMsgHlpA   int(10);
+  // Ofs. of subst. var. formats
+  ofsVarFmt    int(10);
+  // Length subst. var. fmt. ret.
+  lenVarFmtR   int(10);
+  // Length subst. var. fmt. avl.
+  lenVarFmtA   int(10);
+  // Length subst. var. element
+  lenVarFmtE   int(10);
+  // Reply type
+  rpyType      char(10);
+  // Reserved
+  reserved_02  char(2);
+  // Maximum reply length
+  maxRpyLen    int(10);
+  // Maximum reply decimal positions
+  maxRpyDecPos int(10);
+  // Offset of valid reply value entries
+  ofsRpyE      int(10);
+  // Number of valid reply values entries returned
+  numRpyER     int(10);
+  // Length of valid reply value entries returned
+  lenRpyER     int(10);
+  // Length of valid reply value entries available
+  lenRpyEA     int(10);
+  // Length of valid reply value entry
+  lenRpyE      int(10);
+  // Offset of special reply value entries
+  ofsSpcRpyE   int(10);
+  // Number of special reply values returned
+  numSpcRpyER  int(10);
+  // Length of special reply value entries returned
+  lenSpcRpyER  int(10);
+  // Length of special reply value entries available
+  lenSpcRpyEA  int(10);
+  // Length of special reply value entry
+  lenSpcRpyE   int(10);
+  // Offset of lower range reply value
+  ofsLowRpyE   int(10);
+  // Length of lower range reply value returned
+  lenLowRpyER  int(10);
+  // Length of lower range reply value available
+  lenLowRpyEA  int(10);
+  // Offset of upper range reply value
+  ofsUpRpyE    int(10);
+  // Length of upper range reply value returned
+  ofsUpRpyER   int(10);
+  // Length of upper range reply value available
+  ofsUpRpyEA   int(10);
+  // Offset of relational test entry
+  ofsRelTestE  int(10);
+  // Length of relational test entry returned
+  lenRelTestER int(10);
+  // Length of relational test entry available
+  lenRelTestEA int(10);
+  // Message creation date
+  crtDate      char(7);
+  // Reserved
+  reserved_03  char(1);
+  // Message creation level number
+  crtLvlNbr    int(10);
+  // Message modification date
+  modDate      char(7);
+  // Reserved
+  reserved_04  char(1);
+  // Message modification level number
+  modLvlNbr    int(10);
+  // Stored CCSID of message
+  storedCCSID  int(10);
+  // Offset of dump list entries
+  ofsDmpListE  int(10);
+  // Number of dump list entries returned
+  numDmpListER int(10);
+  // Length of dump list entries returned
+  lenDmpListER int(10);
+  // Length of dump list entries available
+  lenDmpListEA int(10);
+  // Default program name
+  dftPgmName   char(10);
+  // Default program library name
+  dftPgmLib    char(10);
+  // Data
+  data         char(4096);
+end-ds;
+//                       CHAR(*)  Default reply
+//                       CHAR(*)  Message
+//                       CHAR(*)  Message help
+//                       CHAR(*)  Substitution variable formats
+//                       CHAR(*)  Valid reply value entries
+//                       CHAR(*)  Special reply value entries
+//                       CHAR(*)  Lower range reply value
+//                       CHAR(*)  Upper range reply value
+//                       CHAR(*)  Relational test entry
+//                       CHAR(*)  Dump list entries
+
+/endif
+/if not defined(qmhrtvm_substVarFmt_t)
+/define qmhrtvm_substVarFmt_t
+dcl-ds qmhrtvm_substVarFmt_t qualified based(pDummy);
+  length       int(10) pos(1);
+  sizeOrDecPos int(10) pos(5);
+  size         int(10) overlay(sizeOrDecPos);
+  decPos       int(10) overlay(sizeOrDecPos);
+  type         char(10) pos(9);
+end-ds;
+//                       CHAR(*)  Reserved
+/endif
+/endif
 ]]>  </copysrc>
 </mbr>
 <qcmdexc condition="*NONE" release="*CURRENT" dltsplf="A_INSTALL"><![CDATA[
@@ -4153,7 +4160,7 @@ CRTBNDCL PGM(&tolib/A_INSTALL) SRCFILE(&tolib/QDUPMSGD) SRCMBR(*PGM) DFTACTGRP(*
 VIEW(*LIST)
 ]]>  </qcmdexc>
 <qcmdexc condition="*NONE" release="*CURRENT" dltsplf="*NONE"><![CDATA[
-CALL PGM(&tolib/A_INSTALL) PARM('&TGTRLS' '&SRCFILE' '&tolib' '&LANG')
+CALL PGM(&tolib/A_INSTALL) PARM(('&TGTRLS') ('&SRCFILE') ('&tolib') ('&LANG'))
 ]]>  </qcmdexc>
 <qcmdexc condition="*NONE" release="*CURRENT" dltsplf="*NONE"><![CDATA[
 DLTPGM PGM(&tolib/A_INSTALL)

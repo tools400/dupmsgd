@@ -1,5 +1,5 @@
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0001                    */
+     /*   Cmd-ADDMSGD fÃ¼r Message-ID :   USR0001                    */
      /* Only *FROMID allowed if a range is specified.               */
      /* ----------------------------------------------------------- */
 
@@ -23,7 +23,7 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0002                    */
+     /*   Cmd-ADDMSGD fÃ¼r Message-ID :   USR0002                    */
      /* *FROMID/*FROMMSGF can not be specified at the same time.    */
      /* ----------------------------------------------------------- */
 
@@ -43,7 +43,7 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0003                    */
+     /*   Cmd-ADDMSGD fÃ¼r Message-ID :   USR0003                    */
      /* Message description &3 in file &2/&1 already exists.        */
      /* ----------------------------------------------------------- */
 
@@ -67,7 +67,7 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0004                    */
+     /*   Cmd-ADDMSGD fÃ¼r Message-ID :   USR0004                    */
      /* Message description &3 in file &2/&1 created.               */
      /* ----------------------------------------------------------- */
 
@@ -91,7 +91,7 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0005                    */
+     /*   Cmd-ADDMSGD fÃ¼r Message-ID :   USR0005                    */
      /* Data type not supported: &1                                 */
      /* ----------------------------------------------------------- */
 
@@ -113,7 +113,7 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0006                    */
+     /*   Cmd-ADDMSGD fÃ¼r Message-ID :   USR0006                    */
      /* Unexpected error in QMHRTVM API. Check job log.             */
      /* ----------------------------------------------------------- */
 
@@ -133,7 +133,7 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0007                    */
+     /*   Cmd-ADDMSGD fÃ¼r Message-ID :   USR0007                    */
      /* QMHRTVM API ended with error: &1                            */
      /* ----------------------------------------------------------- */
 
@@ -155,7 +155,7 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0008                    */
+     /*   Cmd-ADDMSGD fÃ¼r Message-ID :   USR0008                    */
      /* Buffer overflow for field: &1                               */
      /* ----------------------------------------------------------- */
 

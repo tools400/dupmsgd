@@ -21,7 +21,7 @@
 .*=====================================================================*
 .*  History:                                                           *
 .*                                                                     *
-.*  Datum       Name          Änderung                                 *
+.*  Datum       Name          Ã„ndereung                                 *
 .*  ----------  ------------  ---------------------------------------  *
 .*                                                                     *
 .*=====================================================================*
@@ -43,7 +43,7 @@
 :IMHELP name='DUPMSGD/REPLACE   '.
 :EHELP.
 .*--------------------------------------------------------------------
-.* Hilfetext für den Befehl
+.* Hilfetext fÃ¼r den Befehl
 .*--------------------------------------------------------------------
 :HELP NAME='DUPMSGD'.
 Duplicate Message Description (DUPMSGD) - Help
@@ -69,7 +69,7 @@ The following parameters are carried over:
 :EHELP.
 .*
 .*--------------------------------------------------------------------
-.* Hilfetext für Schlüsselwort RANGE
+.* Hilfetext fÃ¼r SchlÃ¼sselwort RANGE
 .*--------------------------------------------------------------------
 :HELP name='DUPMSGD/RANGE     '.
 Range of message identifiers - Help
@@ -136,7 +136,7 @@ element of this parameter.
 :EHELP.
 .*
 .*--------------------------------------------------------------------
-.* Hilfetext für Schlüsselwort FROMMSGF
+.* Hilfetext fÃ¼r SchlÃ¼sselwort FROMMSGF
 .*--------------------------------------------------------------------
 :HELP name='DUPMSGD/FROMMSGF'.
 From message file - Help
@@ -172,7 +172,7 @@ the library list, QGPL is used.
 :EHELP.
 .*
 .*--------------------------------------------------------------------
-.* Hilfetext für Schlüsselwort TOMSGID
+.* Hilfetext fÃ¼r SchlÃ¼sselwort TOMSGID
 .*--------------------------------------------------------------------
 :HELP name='DUPMSGD/TOMSGID'.
 To message description - Help
@@ -197,7 +197,7 @@ message description.
 :EHELP.
 .*
 .*--------------------------------------------------------------------
-.* Hilfetext für Schlüsselwort TOMSGF
+.* Hilfetext fÃ¼r SchlÃ¼sselwort TOMSGF
 .*--------------------------------------------------------------------
 :HELP name='DUPMSGD/TOMSGF'.
 To message file - Help
@@ -233,7 +233,7 @@ the library list, QGPL is used.
 :EHELP.
 .*
 .*--------------------------------------------------------------------
-.* Hilfetext für Schlüsselwort REPLACE
+.* Hilfetext fÃ¼r SchlÃ¼sselwort REPLACE
 .*--------------------------------------------------------------------
 :HELP name='DUPMSGD/REPLACE'.
 Replace message description - Help

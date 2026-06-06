@@ -1,6 +1,6 @@
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0001                    */
-     /* Bei Angabe eines Bereichs ist nur *FROMID zulässig.         */
+     /*   Cmd-ADDMSGD fÃ¼r Message-ID :   USR0001                    */
+     /* Bei Angabe eines Bereichs ist nur *FROMID zulÃ¤ssig.         */
      /* ----------------------------------------------------------- */
 
              PGM        PARM(&LI)
@@ -14,7 +14,7 @@
                 MSGID(USR0001) +
                 MSGF(&LI/DUPMSGD ) +
                 MSG(+
-'Bei Angabe eines Bereichs ist nur *FROMID zulässig.'                 +
+'Bei Angabe eines Bereichs ist nur *FROMID zulÃ¤ssig.'                 +
                 ) +
                 SEV(00) +
      /*   Keine Ersatzvariablen definiert!                          */ +
@@ -23,8 +23,8 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0002                    */
-     /* Kombination *FROMID/*FROMMSGF nicht zulässig.               */
+     /*   Cmd-ADDMSGD fÃ¼r Message-ID :   USR0002                    */
+     /* Kombination *FROMID/*FROMMSGF nicht zulÃ¤ssig.               */
      /* ----------------------------------------------------------- */
 
              RMVMSGD MSGID(USR0002) MSGF(&LI/DUPMSGD )
@@ -34,7 +34,7 @@
                 MSGID(USR0002) +
                 MSGF(&LI/DUPMSGD ) +
                 MSG(+
-'Kombination *FROMID/*FROMMSGF nicht zulässig.'                       +
+'Kombination *FROMID/*FROMMSGF nicht zulÃ¤ssig.'                       +
                 ) +
                 SEV(00) +
      /*   Keine Ersatzvariablen definiert!                          */ +
@@ -43,7 +43,7 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0003                    */
+     /*   Cmd-ADDMSGD fÃ¼r Message-ID :   USR0003                    */
      /* Nachrichtenbeschreibung &3 in Datei &2/&1 ist bereits vorha */
      /* ----------------------------------------------------------- */
 
@@ -67,7 +67,7 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0004                    */
+     /*   Cmd-ADDMSGD fÃ¼r Message-ID :   USR0004                    */
      /* Nachrichtenbeschreibung &3 in Datei &2/&1 erstellt.         */
      /* ----------------------------------------------------------- */
 
@@ -91,8 +91,8 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0005                    */
-     /* Nicht unterstützter Datentyp: &1                            */
+     /*   Cmd-ADDMSGD fÃ¼r Message-ID :   USR0005                    */
+     /* Nicht unterstÃ¼tzter Datentyp: &1                            */
      /* ----------------------------------------------------------- */
 
              RMVMSGD MSGID(USR0005) MSGF(&LI/DUPMSGD )
@@ -102,7 +102,7 @@
                 MSGID(USR0005) +
                 MSGF(&LI/DUPMSGD ) +
                 MSG(+
-'Nicht unterstützter Datentyp: &1'                                    +
+'Nicht unterstÃ¼tzter Datentyp: &1'                                    +
                 ) +
                 SEV(00) +
                 FMT( +
@@ -113,8 +113,8 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0006                    */
-     /* Unerwarterer Fehler in der QMHRTVM API. Jobprotokoll prüfen.*/
+     /*   Cmd-ADDMSGD fÃ¼r Message-ID :   USR0006                    */
+     /* Unerwarterer Fehler in der QMHRTVM API. Jobprotokoll prÃ¼fen.*/
      /* ----------------------------------------------------------- */
 
              RMVMSGD MSGID(USR0006) MSGF(&LI/DUPMSGD )
@@ -124,7 +124,7 @@
                 MSGID(USR0006) +
                 MSGF(&LI/DUPMSGD ) +
                 MSG(+
-'Unerwarterer Fehler in der QMHRTVM API.job log. Jobprotokoll prüfen.'+
+'Unerwarterer Fehler in der QMHRTVM API.job log. Jobprotokoll prÃ¼fen.'+
                 ) +
                 SEV(00) +
      /*   Keine Ersatzvariablen definiert!                          */ +
@@ -133,7 +133,7 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0007                    */
+     /*   Cmd-ADDMSGD fÃ¼r Message-ID :   USR0007                    */
      /* QMHRTVM API fehlerhaft beendet: &1                          */
      /* ----------------------------------------------------------- */
 
@@ -155,8 +155,8 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0008                    */
-     /* Feldüberlauf für Feld: &1                                   */
+     /*   Cmd-ADDMSGD fÃ¼r Message-ID :   USR0008                    */
+     /* FeldÃ¼berlauf fÃ¼r Feld: &1                                   */
      /* ----------------------------------------------------------- */
 
              RMVMSGD MSGID(USR0008) MSGF(&LI/DUPMSGD )
@@ -166,7 +166,7 @@
                 MSGID(USR0008) +
                 MSGF(&LI/DUPMSGD ) +
                 MSG(+
-'Feldüberlauf für Feld: &1'                                           +
+'FeldÃ¼berlauf fÃ¼r Feld: &1'                                           +
                 ) +
                 SEV(00) +
                 FMT( +
